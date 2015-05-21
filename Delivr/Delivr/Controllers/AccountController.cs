@@ -35,7 +35,7 @@ namespace Delivr.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -79,8 +79,22 @@ namespace Delivr.Controllers
                 // Tentative d'inscription de l'utilisateur
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    //WebSecurity.CreateUserAndAccount(
+                    //    model.Email, 
+                    //    model.Password, 
+                    //    new Dictionary<string, object>{
+                    //        { "Nom", model.Nom}, 
+                    //        { "Prenom", model.Prenom},
+                    //        { "Telephone", model.Telephone },
+                    //        { "Rue", model.Rue },
+                    //        { "CodeCivique", model.CodeCivique },
+                    //        { "CodePostale", model.CodePostale }});
+
+                    WebSecurity.CreateUserAndAccount(
+                        model.Email,
+                        model.Password,
+                        propertyValues: new { email = model.Email, Nom = model.Nom, Prenom = model.Prenom, Rue = model.Rue, CodeCivique = model.CodeCivique, CodePostale = model.CodePostale, Telephone = model.Telephone });
+                    WebSecurity.Login(model.Email, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
@@ -299,6 +313,23 @@ namespace Delivr.Controllers
             return View();
         }
 
+        public ActionResult IsEmailAvailble(string email)
+        {
+
+            using (UsersContext db = new UsersContext())
+            {
+                try
+                {
+                    var tag = db.UserProfiles.Single(m => m.Email == email);
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception)
+                {
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
         [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
@@ -372,7 +403,7 @@ namespace Delivr.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "Le nom d'utilisateur existe déjà. Entrez un nom d'utilisateur différent.";
+                    return "L'adresse courriel existe déjà. Entrez une adresse différente.";
 
                 case MembershipCreateStatus.DuplicateEmail:
                     return "Un nom d'utilisateur pour cette adresse de messagerie existe déjà. Entrez une adresse de messagerie différente.";
