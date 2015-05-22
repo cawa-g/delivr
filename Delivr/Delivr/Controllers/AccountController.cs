@@ -82,12 +82,20 @@ namespace Delivr.Controllers
                 // Tentative d'inscription de l'utilisateur
                 try
                 {
-                    
+
                     WebSecurity.CreateUserAndAccount(
                         model.Email,
                         model.Password,
-                        propertyValues: new { email = model.Email, Nom = model.Nom, Prenom = model.Prenom, Rue = model.Rue, CodeCivique = model.CodeCivique, CodePostale = model.CodePostale, Telephone = model.Telephone });
+                        propertyValues: new { email = model.Email,
+                                              Nom = model.Nom, 
+                                              Prenom = model.Prenom, 
+                                              Rue = model.Rue, 
+                                              CodeCivique = model.CodeCivique, 
+                                              CodePostale = model.CodePostale, 
+                                              Telephone = model.Telephone });
+
                     WebSecurity.Login(model.Email, model.Password);
+
                     return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> CodeCivique = " + model.CodeCivique.ToString() + " <br> CodePostale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
@@ -124,7 +132,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Account/Message
+        // POST: /Account/Edit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -139,7 +147,7 @@ namespace Delivr.Controllers
             user.Telephone = edit.Telephone;
             TryUpdateModel(user);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> CodeCivique = " + edit.CodeCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
             
                 }
             catch (MembershipCreateUserException e)

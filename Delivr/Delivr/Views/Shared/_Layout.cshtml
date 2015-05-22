@@ -13,7 +13,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("votre logo ici", "Index", "Home")</p>
+                    <a class="site-title">@Html.ActionLink("votre logo ici", "Index", "Home", null, new { @class = "logo" })</a>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -24,8 +24,6 @@
                             <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                             <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Restos", "Index", "Restaurant")</li>
-                            <li>@Html.ActionLink("CreerResto", "Create", "Restaurant")</li>
                         </ul>
                     </nav>
                 </div>
