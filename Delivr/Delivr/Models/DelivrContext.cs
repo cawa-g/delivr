@@ -6,8 +6,14 @@ using System.Web;
 
 namespace Delivr.Models
 {
-    public class DelivrDbContext: DbContext
+    public class DelivrContext : DbContext
     {
+        public DelivrContext()
+            : base("DefaultConnection")
+        {
+        }
+
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
     }
 }

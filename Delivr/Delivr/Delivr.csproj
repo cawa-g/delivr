@@ -189,8 +189,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\DelivrDbContext.cs" />
-    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\DelivrContext.cs" />
+    <Compile Include="Models\RestaurantModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

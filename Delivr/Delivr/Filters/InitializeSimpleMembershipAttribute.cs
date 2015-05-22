@@ -25,11 +25,11 @@ namespace Delivr.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<DelivrContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new DelivrContext())
                     {
                         if (!context.Database.Exists())
                         {

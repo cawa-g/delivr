@@ -18,7 +18,7 @@ namespace Delivr.Controllers
     public class AccountController : Controller
     {
 
-        private UsersContext db = new UsersContext();
+        private DelivrContext db = new DelivrContext();
         //
         // GET: /Account/Login
 
@@ -92,11 +92,12 @@ namespace Delivr.Controllers
                                               Rue = model.Rue, 
                                               CodeCivique = model.CodeCivique, 
                                               CodePostale = model.CodePostale, 
-                                              Telephone = model.Telephone });
+                                              Telephone = model.Telephone,
+                                              DateNaissance = model.DateNaissance});
 
                     WebSecurity.Login(model.Email, model.Password);
 
-                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> CodeCivique = " + model.CodeCivique.ToString() + " <br> CodePostale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <p>" });
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.CodeCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> Date de Naissance = " + model.DateNaissance.ToString("d MMM yyyy") + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -119,7 +120,7 @@ namespace Delivr.Controllers
             }
             int id = WebSecurity.GetUserId(userName);
             UserProfile user = db.UserProfiles.Find(id);
-            EditModel edit = new EditModel();
+            EditUserModel edit = new EditUserModel();
             edit.Rue = user.Rue;
             edit.CodeCivique = user.CodeCivique;
             edit.CodePostale = user.CodePostale;
@@ -136,7 +137,7 @@ namespace Delivr.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EditModel edit)
+        public ActionResult Edit(EditUserModel edit)
         {
             try
                 {
@@ -340,7 +341,7 @@ namespace Delivr.Controllers
             if (ModelState.IsValid)
             {
                 // Insérer un nouvel utilisateur dans la base de données
-                using (UsersContext db = new UsersContext())
+                using (DelivrContext db = new DelivrContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Vérifier si l'utilisateur n'existe pas déjà
@@ -379,7 +380,7 @@ namespace Delivr.Controllers
         public ActionResult IsEmailAvailble(string email)
         {
 
-            using (UsersContext db = new UsersContext())
+            using (DelivrContext db = new DelivrContext())
             {
                 try
                 {
