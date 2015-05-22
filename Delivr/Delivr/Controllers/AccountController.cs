@@ -72,6 +72,7 @@ namespace Delivr.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -79,23 +80,13 @@ namespace Delivr.Controllers
                 // Tentative d'inscription de l'utilisateur
                 try
                 {
-                    //WebSecurity.CreateUserAndAccount(
-                    //    model.Email, 
-                    //    model.Password, 
-                    //    new Dictionary<string, object>{
-                    //        { "Nom", model.Nom}, 
-                    //        { "Prenom", model.Prenom},
-                    //        { "Telephone", model.Telephone },
-                    //        { "Rue", model.Rue },
-                    //        { "CodeCivique", model.CodeCivique },
-                    //        { "CodePostale", model.CodePostale }});
-
+                    
                     WebSecurity.CreateUserAndAccount(
                         model.Email,
                         model.Password,
                         propertyValues: new { email = model.Email, Nom = model.Nom, Prenom = model.Prenom, Rue = model.Rue, CodeCivique = model.CodeCivique, CodePostale = model.CodePostale, Telephone = model.Telephone });
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> CodeCivique = " + model.CodeCivique.ToString() + " <br> CodePostale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -105,6 +96,17 @@ namespace Delivr.Controllers
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
+        }
+
+        //
+        // GET: /Account/Message
+
+        [AllowAnonymous]
+        [ValidateInput(false)]
+        public ActionResult Message(string chaine)
+        {
+            ViewBag.Chaine = chaine;
+            return View();
         }
 
         //
