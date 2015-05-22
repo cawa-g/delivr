@@ -4,7 +4,7 @@
     ViewBag.Title = "Se connecter";
 }
 
-<hgroup class="title">
+<hgroup>
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
@@ -40,7 +40,7 @@
 }
 </section>
 
-<section class="social" id="socialLoginForm">
+<section id="socialLoginForm">
     <h2>Utilisez un autre service pour vous connecter.</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>

@@ -6,9 +6,23 @@
             <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
         }
     </text>
-} else {
-    <ul>
-        <li>@Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+}
+else
+{
+    <li id="userMenu">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-expanded="true">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li>
+                    @Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                </li>
+                <li>
+                    @Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                </li>       
+            </ul>
+        </div>
+    </li>
 }

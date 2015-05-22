@@ -15,10 +15,10 @@
 
         @Html.HiddenFor(model => model.id)
 
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(model => model.nom)
         </div>
-        <div class="editor-field">
+        <div>
             @Html.EditorFor(model => model.nom)
             @Html.ValidationMessageFor(model => model.nom)
         </div>

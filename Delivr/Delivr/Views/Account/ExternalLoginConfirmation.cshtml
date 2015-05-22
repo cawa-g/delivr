@@ -3,7 +3,7 @@
     ViewBag.Title = "S'inscrire";
 }
 
-<hgroup class="title">
+<hgroup>
     <h1>@ViewBag.Title.</h1>
     <h2>Associez votre compte @ViewBag.ProviderDisplayName.</h2>
 </hgroup>
@@ -20,7 +20,7 @@
             la connexion.
         </p>
         <ol>
-            <li class="name">
+            <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
