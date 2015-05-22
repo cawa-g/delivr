@@ -1,0 +1,60 @@
+﻿@model Delivr.Models.EditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gérer votre compte</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EditModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telephone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telephone)
+            @Html.ValidationMessageFor(model => model.Telephone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rue)
+            @Html.ValidationMessageFor(model => model.Rue)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CodeCivique)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CodeCivique)
+            @Html.ValidationMessageFor(model => model.CodeCivique)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CodePostale)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CodePostale)
+            @Html.ValidationMessageFor(model => model.CodePostale)
+        </div>
+
+        <p>
+            <input type="submit" value="Sauvegarder" />
+        </p>
+
+        <h2>@Html.ActionLink("Modifier votre mot de passe", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })</h2>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -17,6 +17,8 @@ namespace Delivr.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+
+        private UsersContext db = new UsersContext();
         //
         // GET: /Account/Login
 
@@ -98,10 +100,59 @@ namespace Delivr.Controllers
             return View(model);
         }
 
+
+        //
+        // GET: /Account/Message
+        public ActionResult Edit(string userName)
+        {
+            if (userName == null)
+            {
+                userName = WebSecurity.CurrentUserName;
+            }
+            int id = WebSecurity.GetUserId(userName);
+            UserProfile user = db.UserProfiles.Find(id);
+            EditModel edit = new EditModel();
+            edit.Rue = user.Rue;
+            edit.CodeCivique = user.CodeCivique;
+            edit.CodePostale = user.CodePostale;
+            edit.Telephone = user.Telephone;
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(edit);
+        }
+
+        //
+        // POST: /Account/Message
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditModel edit)
+        {
+            try
+                {
+            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+            user.Rue = edit.Rue;
+            user.CodeCivique = edit.CodeCivique;
+            user.CodePostale = edit.CodePostale;
+            user.Telephone = edit.Telephone;
+            TryUpdateModel(user);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+            
+                }
+            catch (MembershipCreateUserException e)
+            {
+                ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+            }
+            return View(edit);
+        }
+
         //
         // GET: /Account/Message
 
-        [AllowAnonymous]
+       
         [ValidateInput(false)]
         public ActionResult Message(string chaine)
         {
@@ -138,6 +189,7 @@ namespace Delivr.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
+
         //
         // GET: /Account/Manage
 
@@ -160,6 +212,7 @@ namespace Delivr.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
+
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");

@@ -79,6 +79,31 @@ namespace Delivr.Models
         public bool RememberMe { get; set; }
     }
 
+    public class EditModel 
+    {
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone non valide, utilisez le format xxx-xxx-xxxx")]
+        [Display(Name = "Téléphone")]
+        public string Telephone { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 3)]
+        [Display(Name = "Rue")]
+        public string Rue { get; set; }
+
+        [Required]
+        [Display(Name = "Code Civique")]
+        public int CodeCivique { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale non valide, utilisez le format H1H 1H1")]
+        [Display(Name = "Code Postale")]
+        [DataType(DataType.PostalCode)]
+        public string CodePostale { get; set; }
+    }
+
+
     public class RegisterModel
     {
         [Required]
