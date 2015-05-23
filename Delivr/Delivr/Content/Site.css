@@ -2,92 +2,67 @@
    ne pas modifier les fichier bootstrap ni jasny */
 
 html, body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  padding: 0;
-  background-color: #F3C03E;
-  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0;
+    background-color: #F3C03E;
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+/* ---------------------  Section concernant le header/navbar ------------------------------ */
 
 #header {
-    margin-bottom:0px;
+    margin-bottom: 0px;
 }
 
-@media (max-width: 991px) and (min-width: 768px) {
+/*@media (max-width: 991px) and (min-width: 768px) {
     .section {
         height: 80%;
         overflow:hidden;
+        text-align:center;
     }
-}
-
-.section.index img#backfirst{
-    z-index:-1;
-    width:100vw;
-    transform: scaleX(-1);
-    opacity: 0.6;
-    filter: alpha(opacity=60); /* For IE8 and earlier */   
-}
-
-.parallax-window {
-    min-height: 400px;
-    background: transparent;
-}
+}*/
 
 #userMenu {
-    margin-top:9px;
-    margin-left:5px;
-}
-
-#logo {
-    padding: 0px;
-}
-
-#permFooter {
-    width:100%;
-    bottom:0;
-    position:fixed;
+    margin-top: 9px;
+    margin-left: 5px;
 }
 
 #collapseMenu {
-    margin-top:35px;
+    margin-top: 35px;
 }
 
-#navbar{
-    margin-top:35px;
+#navbar {
+    margin-top: 35px;
 }
 
-#navbar > ul {
-    margin-right:0px;
-}
-
-header[role="banner"] #logo-main {
-  display: block;
-  margin: 20px auto;
-}
+    #navbar > ul {
+        margin-right: 0px;
+    }
 
 #navbar-primary.navbar-default {
-  background: transparent;
-  border: none;
+    background: transparent;
+    border: none;
 }
 
-#navbar-primary.navbar-default .navbar-nav {
-  width: 100%;
-  text-align: center;
-}
+    #navbar-primary.navbar-default .navbar-nav {
+        width: 100%;
+        text-align: center;
+    }
 
-#navbar-primary.navbar-default .navbar-nav > li {
-  display: inline-block;
-  float: none;
-}
+        #navbar-primary.navbar-default .navbar-nav > li {
+            display: inline-block;
+            float: none;
+        }
 
-#navbar-primary.navbar-default .navbar-nav > li > a {
-  padding-left: 30px;
-  padding-right: 30px;
-}
+            #navbar-primary.navbar-default .navbar-nav > li > a {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
 
-.btn-custom>a:before {
+.btn-custom > a:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -102,196 +77,378 @@ header[role="banner"] #logo-main {
     transition: all 0.3s ease-in-out 0s;
 }
 
-.btn-custom:hover>a:before {
+.btn-custom:hover > a:before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
 }
+/* ---------------------------------------------------------------------------- */
+
+/* -----------------------------Footer (si besoin est) -----------------------*/
+
+#permFooter {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+
+/* ---------------------------------------------------------------------------*/
 
 /* --------------------------- Section liée au logo ------------------------ */
 
 .truck-logo {
-    max-width:150px;
-    height:auto;
-    display:inline-block;
+    max-width: 150px;
+    height: auto;
+    display: inline-block;
 }
 
-@-webkit-keyframes tilt
-{
-    15%
-    {
-        -webkit-transform: translateX(5px);
-        transform: translateX(5px);
-    }
-    30%
-    {
-        -webkit-transform: translateX(-5px);
-       transform: translateX(-5px);
-    } 
-    50%
-    {
-        -webkit-transform: translateX(3px);
-        transform: translateX(3px);
-    }
-    65%
-    {
-        -webkit-transform: translateX(-3px);
-        transform: translateX(-3px);
-    }
-    80%
-    {
-        -webkit-transform: translateX(2px);
-        transform: translateX(2px);
-    }
-    100%
-    {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
+#logo {
+    padding: 0px;
 }
-@keyframes tilt
-{
-    15%
-    {
+
+header[role="banner"] #logo-main {
+    display: block;
+    margin: 20px auto;
+}
+
+@-webkit-keyframes tilt {
+    15% {
         -webkit-transform: translateX(5px);
         transform: translateX(5px);
     }
-    30%
-    {
+
+    30% {
         -webkit-transform: translateX(-5px);
         transform: translateX(-5px);
     }
-    50%
-    {
+
+    50% {
         -webkit-transform: translateX(3px);
         transform: translateX(3px);
     }
-    65%
-    {
+
+    65% {
         -webkit-transform: translateX(-3px);
         transform: translateX(-3px);
     }
-    80%
-    {
+
+    80% {
         -webkit-transform: translateX(2px);
         transform: translateX(2px);
     }
-    100%
-    {
+
+    100% {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
 }
 
-.truck-logo:hover
-{
-        -webkit-animation: tilt 1s ease;
-        animation: tilt 1s ease;
-        -webkit-animation-iteration-count: 1;
-        animation-iteration-count: 1;
+@keyframes tilt {
+    15% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+
+    30% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+
+    50% {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+
+    65% {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+
+    80% {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
 }
 
-/* ------------------------------------------------------------------------ */
-
-/*#header-logo {
-    position:relative;
-    background-color:transparent;
+.truck-logo:hover {
+    -webkit-animation: tilt 1s ease;
+    animation: tilt 1s ease;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
 }
 
-#menu-main {
-    float:right;
-    padding:10px 15px;
-    margin:10px 0px;
-}
+/* -------------------------------------------------------------------------------- */
 
-#menu-main>ul {
-    list-style:none;
-    display:inline-block;
-}
+/* -----------------------------Section liée aux <section> -------------------------- */
 
-.navbar-toggle {
-  float: left;
-  margin-left: 15px;
-}
-
-#collapsemenu {
-    float:right;
-}
-
-#collapsemenu>span {
-    background-color:#000000;
-}
-
-#collapsemenu:hover>.icon-bar {
-    background-color:#F9EEEE;
-}
-
-#collapsemenu:focus>.icon-bar {
-    background-color:#F9EEEE;
-}
-
-#collapsemenu:hover {
-    background-color:transparent;
-}
-
-#collapsemenu:focus {
-    background-color:transparent;
-}
-
-.noborder {
-    border:none;
-}
-
-.btn-custom {
-    background-color:transparent;
-    border:none;
-}
-
-.btn-custom>a {
-    position:relative;
-    color:#000000;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-.btn-custom:hover {
-    background-color:transparent;
-}
-
-.btn-custom>a:before {
-    content: "";
+section.page1 {
     position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background-color: #F9EEEE;
-    visibility: hidden;
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transition: all 0.3s ease-in-out 0s;
-    transition: all 0.3s ease-in-out 0s;
+    left: 0px;
+    top: 100%;
+    background: #F4D03F;
 }
 
-.btn-custom:hover>a:before {
-    visibility: visible;
-    -webkit-transform: scaleX(1);
-    transform: scaleX(1);
+section.page2 {
+    background-color: #2ECC71;
 }
 
-@media (min-width: 0) {
-  .navbar-toggle {
-    display: block; /* force showing the toggle */
-  }
+section.page3 {
+    text-align: center;
+    background-color: #52B3D9;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding: 0;
-  }
-  .navbar {
-    right: auto;
-    background: none;
+section.page3 small {
+    color: #FFFFFF;
+}
+
+.floating-label-right {
+    float: right;
+}
+
+.floating-label-left {
+    float: left;
+}
+
+section .floating-label-left, section .floating-label-right {
+    top: -30vw;
+}
+
+section.page4 #signupBtn {
+    margin-top:20px;
+}
+
+section.page4 #signupBtn a {
+    text-decoration:none;
+    color:#FFFFFF;
+}
+
+/* ----------------------------- Pour très grandes dimensions -------------------------- */
+
+@media (min-width: 1500px) {
+    #burger {
+        width: 60vw;
+        position: relative;
+        top: 1vw;
+        left: -20vw;
+        z-index: 99;
+    }
+
+    #clock {
+        width: 50vw;
+        position: relative;
+        top: 1vw;
+        right: -26vw;
+        z-index: 99;
+    }
+
+    #signup {
+        width: 50vw;
+        position: relative;
+        top: 1vw;
+        z-index: 99;
+    }
+
+    section.page1 .floating-label-left {
+        left: 5vw;
+    }
+
+    section.page2 .floating-label-left {
+        top: 15vw;
+        left: 10vw;
+    }
+
+    section.page4 .floating-label-right {
+        top: 15vw;
+    }
+}
+
+/* ----------------------------- Pour grandes dimensions -------------------------- */
+
+@media (min-width: 991px) and (max-width: 1500px) {
+    #burger {
+        width: 75vw;
+        position: relative;
+        top: 5vw;
+        left: -35vw;
+        z-index: 99;
+    }
+
+    #clock {
+        width: 50vw;
+        position: relative;
+        top: 5vw;
+        right: -27vw;
+        z-index: 99;
+    }
+
+    #signup {
+        width: 60vw;
+        position: relative;
+        bottom: -10vw;
+        z-index: 99;
+    }
+
+    section.page2 .floating-label-left {
+        top: 20vw;
+        left: 10vw;
+    }
+}
+
+/* ----------------------------- Pour moyennes dimensions -------------------------- */
+
+@media (max-width: 991px) and (min-width: 768px) {
+    #burger {
+        width: 80vw;
+        position: relative;
+        top: 10vw;
+        left: -35vw;
+        z-index: 99;
+    }
+
+    #clock {
+        width: 60vw;
+        position: relative;
+        top: 5vw;
+        right: -25vw;
+        z-index: 99;
+    }
+
+    #signup {
+        width: 75vw;
+        position: relative;
+        bottom: -15vw;
+        right: 10vw;
+        z-index: 99;
+    }
+
+    section.page2 .floating-label-left {
+        top: 25vw;
+        left: 10vw;
+    }
+
+    section.page4 .floating-label-right {
+        top: -40vw;
+    }
+
+    section.page4 div {
+        z-index:100;
+    }
+}
+
+/* ----------------------------- Pour petites dimensions -------------------------- */
+
+@media (max-width: 768px) {
+    #burger {
+        width: 70vw;
+        position: relative;
+        top: 10vw;
+        left: -25vw;
+        z-index: 99;
+    }
+
+    #clock {
+        width: 55vw;
+        position: relative;
+        top: 10vw;
+        right: -15vw;
+        z-index: 99;
+    }
+
+    #signup {
+        width: 75vw;
+        position: relative;
+        bottom: -20vw;
+        right: 10vw;
+        z-index: 99;
+    }
+
+    section.page2 .floating-label-left {
+        top: 20vw;
+        left: 10vw;
+        font-size: 22px;
+    }
+
+    section.page4 .floating-label-right {
+        top: -40vw;
+    }
+}
+
+/* ----------------------------- Pour très petites dimensions -------------------------- */
+
+@media (max-width: 450px) {
+    #burger {
+        width: 80vw;
+        position: relative;
+        top: 30vw;
+        left: -30vw;
+        z-index: 99;
+    }
+
+    #clock {
+        width: 58vw;
+        position: relative;
+        top: 30vw;
+        right: -15vw;
+        z-index: 99;
+    }
+
+    #signup {
+        width: 75vw;
+        position: relative;
+        bottom: -20vw;
+        right: 10vw;
+        z-index: 99;
+    }
+
+    section.page2 .floating-label-left {
+        top: 20vw;
+        left: 10vw;
+        font-size: 20px;
+    }
+}
+
+/* -----------------------------------------------------------------------------------*/
+/* ---------------------------- Payment method section -------------------------------*/
+.how {
+    top: 150px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#search {
+    margin-top: 24px;
+    width: 95%;
+}
+
+#add {
+    margin-top: 27px;
+    width: 87%;
+}
+
+#pay {
+    margin-top: 10px;
+    width: 85%;
+}
+
+#paymentMethods .row {
+    text-align: center;
+}
+
+#paymentMethods table td {
     border: none;
-  }
 }
+
+#paymentMethods img {
+    max-width: 75px;
+    max-height: 43px;
+}
+
+#atDoor {
+    margin-bottom: 30px;
+}
+/* ------------------------------------------------------------------------------------ */

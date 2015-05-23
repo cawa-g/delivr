@@ -21,8 +21,8 @@ namespace Delivr
             bundles.Add(new ScriptBundle("~/bundles/jasnyjs").Include(
                         "~/Scripts/jasny-bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/parallaxjs").Include(
-                        "~/Scripts/parallax.js"));
+            bundles.Add(new ScriptBundle("~/bundles/scrolljs").Include(
+                        "~/Scripts/jquery.onepage-scroll.js"));
 
             // Utilisez la version de développement de Modernizr pour développer et apprendre. Puis, lorsque vous êtes
             // prêt pour la production, utilisez l'outil de génération sur http://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
@@ -37,7 +37,8 @@ namespace Delivr
                         "~/Content/jasny/jasny-bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/additions").Include(
-                        "~/Content/Site.css"));
+                        "~/Content/Site.css",
+                        "~/Content/onepage-scroll.css"));
           
             ScriptContext.ScriptPathResolver = System.Web.Optimization.Scripts.Render;
         }
