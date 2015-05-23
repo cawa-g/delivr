@@ -11,10 +11,10 @@ namespace Delivr.Controllers
 {
     public class RestaurantController : Controller
     {
-        private DelivrDbContext db = new DelivrDbContext();
+        private DelivrContext db = new DelivrContext();
 
         //
-        // GET: /Default1/
+        // GET: /Restaurant/
 
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Default1/Details/5
+        // GET: /Restaurant/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -35,7 +35,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Default1/Create
+        // GET: /Restaurant/Create
 
         public ActionResult Create()
         {
@@ -43,7 +43,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Default1/Create
+        // POST: /Restaurant/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -60,7 +60,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Default1/Edit/5
+        // GET: /Restaurant/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -73,7 +73,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Default1/Edit/5
+        // POST: /Restaurant/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,7 +89,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Default1/Delete/5
+        // GET: /Restaurant/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -102,7 +102,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Default1/Delete/5
+        // POST: /Restaurant/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

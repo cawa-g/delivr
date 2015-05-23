@@ -16,8 +16,38 @@
         <legend>Formulaire d'inscription</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)               
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Nom)
+                @Html.TextBoxFor(m => m.Nom)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Prenom)
+                @Html.TextBoxFor(m => m.Prenom)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Telephone)
+                @Html.TextBoxFor(m => m.Telephone, new { @class = "form_input",
+                   onkeydown = "javascript:backspacerDOWN(this,event);",
+                   onkeyup = "javascript:backspacerUP(this,event);" })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Rue)
+                @Html.TextBoxFor(m => m.Rue)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.CodeCivique)
+                @Html.TextBoxFor(m => m.CodeCivique)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.CodePostale)
+                @Html.TextBoxFor(m => m.CodePostale)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.DateNaissance)
+                @Html.TextBoxFor(m => m.DateNaissance)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -31,7 +61,6 @@
         <input type="submit" value="S'inscrire" />
     </fieldset>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

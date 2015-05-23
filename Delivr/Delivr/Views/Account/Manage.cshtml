@@ -3,7 +3,7 @@
     ViewBag.Title = "Gérer le compte";
 }
 
-<hgroup>
+<hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
@@ -23,7 +23,7 @@ else
 <section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
 
-    <h3>Ajouter une connexion externe</h3>
+
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 

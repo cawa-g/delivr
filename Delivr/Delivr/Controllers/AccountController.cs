@@ -17,6 +17,8 @@ namespace Delivr.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+
+        private DelivrContext db = new DelivrContext();
         //
         // GET: /Account/Login
 
@@ -35,7 +37,7 @@ namespace Delivr.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -72,6 +74,7 @@ namespace Delivr.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -79,9 +82,22 @@ namespace Delivr.Controllers
                 // Tentative d'inscription de l'utilisateur
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+
+                    WebSecurity.CreateUserAndAccount(
+                        model.Email,
+                        model.Password,
+                        propertyValues: new { email = model.Email,
+                                              Nom = model.Nom, 
+                                              Prenom = model.Prenom, 
+                                              Rue = model.Rue, 
+                                              CodeCivique = model.CodeCivique, 
+                                              CodePostale = model.CodePostale, 
+                                              Telephone = model.Telephone,
+                                              DateNaissance = model.DateNaissance});
+
+                    WebSecurity.Login(model.Email, model.Password);
+
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.CodeCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> Date de Naissance = " + model.DateNaissance.ToString("d MMM yyyy") + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -91,6 +107,66 @@ namespace Delivr.Controllers
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
+        }
+
+
+        //
+        // GET: /Account/Message
+        public ActionResult Edit(string userName)
+        {
+            if (userName == null)
+            {
+                userName = WebSecurity.CurrentUserName;
+            }
+            int id = WebSecurity.GetUserId(userName);
+            UserProfile user = db.UserProfiles.Find(id);
+            EditUserModel edit = new EditUserModel();
+            edit.Rue = user.Rue;
+            edit.CodeCivique = user.CodeCivique;
+            edit.CodePostale = user.CodePostale;
+            edit.Telephone = user.Telephone;
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(edit);
+        }
+
+        //
+        // POST: /Account/Edit
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditUserModel edit)
+        {
+            try
+                {
+            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+            user.Rue = edit.Rue;
+            user.CodeCivique = edit.CodeCivique;
+            user.CodePostale = edit.CodePostale;
+            user.Telephone = edit.Telephone;
+            TryUpdateModel(user);
+            db.SaveChanges();
+            return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> CodeCivique = " + edit.CodeCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
+            
+                }
+            catch (MembershipCreateUserException e)
+            {
+                ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+            }
+            return View(edit);
+        }
+
+        //
+        // GET: /Account/Message
+
+       
+        [ValidateInput(false)]
+        public ActionResult Message(string chaine)
+        {
+            ViewBag.Chaine = chaine;
+            return View();
         }
 
         //
@@ -122,6 +198,7 @@ namespace Delivr.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
+
         //
         // GET: /Account/Manage
 
@@ -144,6 +221,7 @@ namespace Delivr.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
+
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -263,7 +341,7 @@ namespace Delivr.Controllers
             if (ModelState.IsValid)
             {
                 // Insérer un nouvel utilisateur dans la base de données
-                using (UsersContext db = new UsersContext())
+                using (DelivrContext db = new DelivrContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Vérifier si l'utilisateur n'existe pas déjà
@@ -297,6 +375,23 @@ namespace Delivr.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        public ActionResult IsEmailAvailble(string email)
+        {
+
+            using (DelivrContext db = new DelivrContext())
+            {
+                try
+                {
+                    var tag = db.UserProfiles.Single(m => m.Email == email);
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception)
+                {
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
         }
 
         [AllowAnonymous]
@@ -372,7 +467,7 @@ namespace Delivr.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "Le nom d'utilisateur existe déjà. Entrez un nom d'utilisateur différent.";
+                    return "L'adresse courriel existe déjà. Entrez une adresse différente.";
 
                 case MembershipCreateStatus.DuplicateEmail:
                     return "Un nom d'utilisateur pour cette adresse de messagerie existe déjà. Entrez une adresse de messagerie différente.";
