@@ -3,24 +3,25 @@
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Restaurant</legend>
-
-    <div>
-         @Html.DisplayNameFor(model => model.nom)
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <h3>Are you sure you want to delete @Html.DisplayFor(model => model.nom)?</h3>
     </div>
-    <div>
-        @Html.DisplayFor(model => model.nom)
+    <div class="container">
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+                <div class="btn-group btn-group-lg" role="group">
+                    @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </div>
+        }
     </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+</div>

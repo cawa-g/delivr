@@ -4,19 +4,26 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="jumbotron padded">
+    <div class="container">
 
-<fieldset>
-    <legend>Restaurant</legend>
+        <h2>@ViewBag.Title : @Html.DisplayFor(model => model.nom)</h2>
+        <hr />
 
-    <div>
-         @Html.DisplayNameFor(model => model.nom)
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.nom)</span>
+            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.nom)" aria-describedby="sizing-addon1" disabled>
+        </div>
     </div>
-    <div>
-        @Html.DisplayFor(model => model.nom)
+    <div class="container">
+        <hr />
+        <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+            <div class="btn-group btn-group-lg" role="group">
+                @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
+            </div>
+            <div class="btn-group btn-group-lg" role="group">
+                @(Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))
+            </div>
+        </div>
     </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.RestaurantId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

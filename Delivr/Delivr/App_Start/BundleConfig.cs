@@ -36,10 +36,11 @@ namespace Delivr
             bundles.Add(new StyleBundle("~/Content/jasnycss").Include(
                         "~/Content/jasny/jasny-bootstrap.css"));
 
-            bundles.Add(new StyleBundle("~/Content/additions").Include(
-                        "~/Content/Site.css",
+            bundles.Add(new StyleBundle("~/Content/customcss").Include(
+                        "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/page-scroll").Include(
                         "~/Content/onepage-scroll.css"));
-          
             ScriptContext.ScriptPathResolver = System.Web.Optimization.Scripts.Render;
         }
     }

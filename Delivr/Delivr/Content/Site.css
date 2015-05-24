@@ -11,6 +11,40 @@ body {
     font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.jumbotron.padded {
+    margin:15px;
+    background-color:#f8f8f8;
+}
+
+.jumbotron .control-label {
+    margin-top: 5px;
+}
+
+.jumbotron .form-input {
+    margin-bottom:5px;
+}
+
+.margin-top {
+    margin-top:15px;
+}
+
+@media (max-width: 768px) {
+    .google-maps {
+        position: relative;
+        padding-bottom: 75%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .google-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
 /* ---------------------  Section concernant le header/navbar ------------------------------ */
 
 #header {

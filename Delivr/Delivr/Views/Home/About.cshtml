@@ -1,34 +1,25 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About us";
 }
 
-<hgroup>
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
-
-<article>
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-</article>
-
-<aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-</aside>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <h2><small>Our mission</small></h2>
+        <p>
+            Our story began with a group of four friends back in late 2003.
+            They came up with the idea that would later become <strong>Delivr</strong>.
+        </p>
+        <p>
+            A <em>true revolution</em> among the restaurant industry.
+            <strong>Delivr</strong> brings a breath of fresh air to communities
+            all around North America.
+        </p>
+        <p>
+            We aim to provide food delivery services and, therefore, ease of 
+            access to any restaurant within 25 miles of
+            your home.
+        </p>
+    </div>
+</div>

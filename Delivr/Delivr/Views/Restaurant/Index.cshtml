@@ -4,30 +4,41 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        @(Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" }))
+        <hr />
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.nom)</strong></td>
+                </tr>
+            </thead>
+            <tbody>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RestaurantId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RestaurantId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RestaurantId })
-        </td>
-    </tr>
-}
-
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nom)
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group btn-group-xs" role="group" aria-label="controls">
+                                <div class="btn-group btn-group-xs" role="group">
+                                    @(Html.ActionLink("Edit", "Edit", new { id = item.RestaurantId }, new { @class = "btn btn-info" }))
+                                </div>
+                                <div class="btn-group btn-group-xs" role="group">
+                                    @(Html.ActionLink("Details", "Details", new { id = item.RestaurantId }, new { @class = "btn btn-default" }))
+                                </div>
+                                <div class="btn-group btn-group-xs" role="group">
+                                    @(Html.ActionLink("Delete", "Delete", new { id = item.RestaurantId }, new { @class = "btn btn-danger" }))
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

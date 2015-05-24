@@ -1,50 +1,30 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Get in touch with us!";
 }
 
-<hgroup>
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <section class="col-md-4">
+            <address>
+                <strong>Delivr, Inc.</strong><br>
+                123 Eat St, Suite 42<br>
+                Montreal, QC J5R6A3<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+            </address>
 
-<section>
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
-    </p>
-</section>
-
-<section>
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span>Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span>Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span>General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
-    </p>
-</section>
-
-<section>
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+            <address>
+                <strong>Business inquiries</strong><br>
+                <a href="mailto:#">delivr.business@delivr.com</a>
+            </address>
+            <address>
+                <strong>Support</strong><br>
+                <a href="mailto:#">delivr.support@delivr.com</a>
+            </address>
+        </section>
+        <section class="google-maps col-md-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5592.88802440899!2d-73.56709450343709!3d45.501139795893046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sca!4v1432483090083" width="600" height="450" frameborder="0" style="border:0"></iframe>
+        </section>
+    </div>
+</div>
