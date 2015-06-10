@@ -26,6 +26,14 @@ namespace Delivr.Models
         public int CodeCivique { get; set; }
         public string CodePostale { get; set; }
         public DateTime DateNaissance { get; set; }
+        public bool estRestaurateur { get; set; }
+        public bool estEntrepreneur { get; set; }
+
+        public UserProfile()
+        {
+            estEntrepreneur = false;
+            estRestaurateur = false;
+        }
 
     }
 

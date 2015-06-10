@@ -93,7 +93,9 @@ namespace Delivr.Controllers
                                               CodeCivique = model.CodeCivique, 
                                               CodePostale = model.CodePostale, 
                                               Telephone = model.Telephone,
-                                              DateNaissance = model.DateNaissance});
+                                              DateNaissance = model.DateNaissance,
+                                              estRestaurateur = false,
+                                              estEntrepreneur = false});
 
                     WebSecurity.Login(model.Email, model.Password);
 
