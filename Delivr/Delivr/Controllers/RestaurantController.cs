@@ -73,7 +73,7 @@ namespace Delivr.Controllers
                 {
                     db.Restaurants.Add(restaurant);
                     db.SaveChanges();
-                    return RedirectToAction("Message", "Restaurant","Le restaurant à été ajouté sans restaurateur");
+                    return RedirectToAction("Message", "Restaurant", new { chaine = "Le restaurant à été ajouté sans restaurateur" });
                 }
                 restaurant.Restaurateur = db.Restaurateurs.Find(restaurant.UserId);
                 db.Restaurants.Add(restaurant);
@@ -89,11 +89,35 @@ namespace Delivr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+
+            
             Restaurant restaurant = db.Restaurants.Find(id);
             if (restaurant == null)
             {
                 return HttpNotFound();
             }
+
+
+            List<SelectListItem> restaurateurs = new List<SelectListItem>();
+            restaurateurs.Add(new SelectListItem
+            {
+                Value = null,
+                Text = "",
+            });
+            foreach (Restaurateur r in db.Restaurateurs.ToList())
+            {
+                if (r.UserId != restaurant.UserId)
+                { 
+                restaurateurs.Add(new SelectListItem
+                {
+                    Value = r.UserId.ToString(),
+                    Text = r.Nom,
+                });
+                }
+            }
+            ViewBag.DropDownRestaurateurs = restaurateurs;
+
+
             return View(restaurant);
         }
 

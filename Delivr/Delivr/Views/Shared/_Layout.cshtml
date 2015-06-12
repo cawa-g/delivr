@@ -41,6 +41,10 @@
                         {
                             <li class="btn-custom">@Html.ActionLink("Gestion de restaurants", "Index", "Restaurant")</li>
                         }
+                        @if (User.IsInRole("Admin") )
+                        {
+                            <li class="btn-custom">@Html.ActionLink("Gestion de restaurateurs", "Index", "Restaurateur")</li>
+                        }
                         @Html.Partial("_LoginPartial")
                     </ul>
                 </div><!--/.nav-collapse -->

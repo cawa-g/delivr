@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using WebMatrix.WebData;
 
 namespace Delivr.Controllers
 {
@@ -80,15 +81,17 @@ namespace Delivr.Controllers
                 restaurateur.UserName = model.Email;
                 if (model.restaurantId == null)
                 {
-                    return RedirectToAction("Message", "Restaurateur", "Le restaurateur à été ajouté sans restaurant");
+                    db.UserProfiles.Add(restaurateur);
+                    db.SaveChanges();
+                    return RedirectToAction("Message", "Restaurateur", new { chaine = "Le restaurateur à été ajouté sans restaurant" });
                 }
                 restaurateur.Restaurants.Add(db.Restaurants.Find(model.restaurantId));
                 db.UserProfiles.Add(restaurateur);
-                db.SaveChanges();
+                db.SaveChanges();   
+
                 return RedirectToAction("Index");
             //}
 
-            return View(model);
         }
 
         //
