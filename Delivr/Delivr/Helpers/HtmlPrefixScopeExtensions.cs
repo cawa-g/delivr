@@ -3,6 +3,11 @@ using System.Web.Mvc;
 using System.Web;
 using System.Collections.Generic;
 
+/*************************************************************************************************
+ * The following code and every segment that uses it was taken from                              *
+ * http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/ *
+ *************************************************************************************************/
+
 namespace Delivr.Helpers
 {
     public static class HtmlPrefixScopeExtensions

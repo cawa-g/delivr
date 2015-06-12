@@ -39,6 +39,24 @@ namespace Delivr.Controllers
 
         public ActionResult Create()
         {
+            
+
+             List<SelectListItem> restaurateurs = new List<SelectListItem>();
+             restaurateurs.Add(new SelectListItem
+             {
+                 Value = null,
+                 Text = "",
+             });
+            foreach (Restaurateur r in db.Restaurateurs.ToList())
+            {
+                restaurateurs.Add(new SelectListItem
+                {
+                    Value = r.UserId.ToString(),
+                    Text = r.Nom,
+                });
+            }
+            ViewBag.DropDownRestaurateurs = restaurateurs;
+
             return View();
         }
 
@@ -51,6 +69,13 @@ namespace Delivr.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (restaurant.UserId == null)
+                {
+                    db.Restaurants.Add(restaurant);
+                    db.SaveChanges();
+                    return RedirectToAction("Message", "Restaurant","Le restaurant à été ajouté sans restaurateur");
+                }
+                restaurant.Restaurateur = db.Restaurateurs.Find(restaurant.UserId);
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -112,6 +137,17 @@ namespace Delivr.Controllers
             db.Restaurants.Remove(restaurant);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Account/Message
+
+
+        [ValidateInput(false)]
+        public ActionResult Message(string chaine)
+        {
+            ViewBag.Chaine = chaine;
+            return View();
         }
 
         protected override void Dispose(bool disposing)

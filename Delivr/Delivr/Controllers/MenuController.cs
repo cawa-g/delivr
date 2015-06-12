@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using WebMatrix.WebData;
 
 namespace Delivr.Controllers
 {
@@ -25,7 +26,15 @@ namespace Delivr.Controllers
             }
             return View(menu);
         }
-        
+
+        //
+        // GET: /Menu/BlankMenuItemRow
+
+        public ActionResult BlankMenuItemRow()
+        {
+            return View("MenuItemRow", new EditMenuItemModel());
+        }
+
         //
         // GET: /Menu/Edit/5
 
@@ -45,7 +54,7 @@ namespace Delivr.Controllers
             {
                 Restaurant restaurant = db.Restaurants.Find(restaurantId);
 
-                if (restaurant != null) // TODO: Check for Restaurateur ID.
+                if (restaurant != null && (User.IsInRole("Admin") || restaurant.UserId == WebSecurity.CurrentUserId))
                 {
                     model = new EditMenuModel(restaurantId.Value);
                 }
