@@ -188,6 +188,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RestaurateurController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,9 +198,18 @@
     <Compile Include="Models\DelivrContext.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\RestaurantModels.cs" />
+    <Compile Include="Models\RestaurateurModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Delivr-20150515145923.mdf" />
+    <Content Include="App_Data\aspnet-Delivr-20150515145923_log.ldf">
+      <DependentUpon>aspnet-Delivr-20150515145923.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\Delivr.Models.DelivrDbContext.mdf" />
+    <Content Include="App_Data\Delivr.Models.DelivrDbContext_log.ldf">
+      <DependentUpon>Delivr.Models.DelivrDbContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -291,12 +301,18 @@
     <Content Include="Views\Restaurant\Edit.cshtml" />
     <Content Include="Views\Restaurant\Delete.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\Restaurateur\Index.cshtml" />
+    <Content Include="Views\Restaurateur\Details.cshtml" />
+    <Content Include="Views\Restaurateur\Create.cshtml" />
+    <Content Include="Views\Restaurateur\Edit.cshtml" />
+    <Content Include="Views\Restaurateur\Delete.cshtml" />
     <Content Include="Views\Menu\Edit.cshtml" />
     <Content Include="Views\Menu\MenuItemRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>

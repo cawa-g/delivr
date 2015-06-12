@@ -14,5 +14,8 @@ namespace Delivr.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int RestaurantId { get; set; }
         public string nom { get; set; }
+        public int UserId { get; set; }
+
+        public virtual Restaurateur Restaurateur { get; set; }
     }
 }
