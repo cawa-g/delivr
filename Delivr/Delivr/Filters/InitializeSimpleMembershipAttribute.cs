@@ -39,11 +39,33 @@ namespace Delivr.Filters
                     }
 
                     WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    
+
+                    InitializeRoles();
                 }
                 catch (Exception ex)
                 {
                     throw new InvalidOperationException("Impossible d'initialiser la base de données ASP.NET Simple Membership. Pour plus d'informations, consultez la page http://go.microsoft.com/fwlink/?LinkId=256588", ex);
                 }
+            }
+
+            protected void InitializeRoles()
+            {
+
+                var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
+                var membership = (SimpleMembershipProvider)System.Web.Security.Membership.Provider;
+
+                if (!roles.RoleExists("Admin"))
+                    roles.CreateRole("Admin");
+
+                if (!roles.RoleExists("User"))
+                    roles.CreateRole("User");
+
+                if (!roles.RoleExists("Restaurateur"))
+                    roles.CreateRole("Restaurateur");
+
+                //System.Web.Security.Roles.AddUserToRole("admin@admin.com", "Admin");
+
             }
         }
     }

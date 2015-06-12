@@ -36,8 +36,12 @@
                         <li class="btn-custom">@Html.ActionLink("Accueil", "Index", "Home")</li>
                         <li class="btn-custom">@Html.ActionLink("À propos de", "About", "Home")</li>
                         <li class="btn-custom">@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li class="btn-custom">@Html.ActionLink("Restos", "Index", "Restaurant")</li>
-                        <li class="btn-custom">@Html.ActionLink("CreerResto", "Create", "Restaurant")</li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="btn-custom">@Html.ActionLink("Gestion de restaurants", "Index", "Restaurant")</li>
+                        }
+    
                         @Html.Partial("_LoginPartial")
                     </ul>
                 </div><!--/.nav-collapse -->
