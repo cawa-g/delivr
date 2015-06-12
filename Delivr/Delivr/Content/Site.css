@@ -62,6 +62,24 @@ body {
 #userMenu {
     margin-top: 9px;
     margin-left: 5px;
+    text-align:center;
+}
+
+#userMenu li {
+    text-align:center;
+}
+
+#logout a {
+    color:#333333;
+}
+
+#logout:hover {
+    background-color: #f5f5f5;
+}
+
+#logout:hover a {
+    color: #262626;
+    text-decoration: none;
 }
 
 #collapseMenu {
