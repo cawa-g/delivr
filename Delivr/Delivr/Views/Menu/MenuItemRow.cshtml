@@ -1,10 +1,10 @@
 ﻿@using Delivr.Helpers
 @model Delivr.Models.EditMenuItemModel
 
-<div class="menuItemRow">
+<div class="editor-row">
     @using (Html.BeginCollectionItem("MenuItemModels"))
     {
-        <div class="editor-row">
+        <div class="editor-cell">
             <div class="row-editor-label">
                 @Html.LabelFor(model => model.Nom)
             </div>
@@ -12,21 +12,24 @@
                 @Html.EditorFor(model => model.Nom)
             </div>
         </div>
-        <div class="editor-row">
+        <div class="editor-cell">
             <div class="row-editor-label">
                 @Html.LabelFor(model => model.Description)
             </div>
             <div class="row-editor-field">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description)
             </div>
         </div>
-        <div class="editor-row">
+        <div class="editor-cell">
             <div class="row-editor-label">
                 @Html.LabelFor(model => model.Prix)
             </div>
             <div class="row-editor-field">
                 @Html.EditorFor(model => model.Prix)
             </div>
+        </div>
+        <div class="editor-cell">
+            <a href="#" class="removeItem">Remove Item</a>
         </div>
     }
 </div>
