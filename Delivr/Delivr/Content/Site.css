@@ -28,6 +28,10 @@ body {
     margin-top:15px;
 }
 
+#menu-group {
+    margin-right:5px;
+}
+
 @media (max-width: 768px) {
     .google-maps {
         position: relative;
