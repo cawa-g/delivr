@@ -1,0 +1,46 @@
+﻿@model Delivr.Models.EditMenuModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EditMenuModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nom)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nom)
+            @Html.ValidationMessageFor(model => model.Nom)
+        </div>
+        <div class="editor-rows">
+            @if (Model.MenuItemModels != null)
+            {
+                foreach (var itemModel in Model.MenuItemModels)
+                {
+                    Html.RenderPartial("MenuItemRow", itemModel);
+                }
+            }
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a href="/Restaurant/Details?id=@Model.RestaurantId">Back to Restaurant</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
