@@ -13,6 +13,9 @@
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.nom)</span>
             <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.nom)" aria-describedby="sizing-addon1" disabled>
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayName("Restaurateur")</span>
+            <input type="text" class="form-control" placeholder="@Html.Raw(ViewBag.Restaurateur)" aria-describedby="sizing-addon1" disabled>
+            
         </div>
     </div>
     <div class="container">

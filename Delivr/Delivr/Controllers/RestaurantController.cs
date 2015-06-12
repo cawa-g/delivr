@@ -27,6 +27,12 @@ namespace Delivr.Controllers
         public ActionResult Details(int id = 0)
         {
             Restaurant restaurant = db.Restaurants.Find(id);
+            ViewBag.Restaurateur = "";
+            string email = db.Restaurateurs.Find(restaurant.UserId).Email;
+            if (email != null)
+            {
+                ViewBag.Restaurateur = email;
+            }
             if (restaurant == null)
             {
                 return HttpNotFound();
