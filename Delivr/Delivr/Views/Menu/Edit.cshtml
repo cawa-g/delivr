@@ -21,7 +21,7 @@
             @Html.EditorFor(model => model.Nom)
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
-        <div class="editor-rows">
+        <div class="editor-rows" id="MenuItemsList">
             @if (Model.MenuItemModels != null)
             {
                 foreach (var itemModel in Model.MenuItemModels)
@@ -30,6 +30,7 @@
                 }
             }
         </div>
+        @Html.ActionLink("Add Item", "BlankMenuItemRow", null, new { id = "addItem" })
 
         <p>
             <input type="submit" value="Save" />
@@ -43,4 +44,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#addItem").click(function () {
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function(html) { $("#MenuItemsList").append(html); }
+            });
+            return false;
+        });
+    </script>
 }
