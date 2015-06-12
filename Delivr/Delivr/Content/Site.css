@@ -57,7 +57,7 @@ body {
     display: table-row;
 }
 
-.row-editor-label .row-editor-field {
+.editor-cell {
     display: table-cell;
 }
 
