@@ -1,46 +1,66 @@
 ﻿@model Delivr.Models.EditMenuModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit menu";
 }
 
-<h2>Edit</h2>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>EditMenuModel</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nom)
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <form class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nom, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.Nom, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Nom)
+                    </div>
+                </div>
+                <div class="editor-rows" id="MenuItemsList">
+                    @if (Model.MenuItemModels != null)
+                    {
+                        foreach (var itemModel in Model.MenuItemModels)
+                        {
+                            Html.RenderPartial("MenuItemRow", itemModel);
+                        }
+                    }
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 control-label">
+                        @Html.ActionLink("Add Item", "BlankMenuItemRow", null, new { id = "addItem" }, new { @class = "btn btn-default bnt-small margin-top" })
+                        <input type="submit" class="btn btn-primary margin-top" value="Save" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+    <div class="container">
+        <hr />
+        <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+            <div class="btn-group btn-group-lg" role="group">
+                @(Html.ActionLink("Back to listing", "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
+            </div>
+            <div class="btn-group btn-group-lg" role="group">
+                @(Html.ActionLink("Back to details", "Details", "Restaurant", new { RestaurantId = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nom)
-            @Html.ValidationMessageFor(model => model.Nom)
-        </div>
-        <div class="editor-rows">
-            @if (Model.MenuItemModels != null)
-            {
-                foreach (var itemModel in Model.MenuItemModels)
-                {
-                    Html.RenderPartial("MenuItemRow", itemModel);
-                }
-            }
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    <a href="/Restaurant/Details?id=@Model.RestaurantId">Back to Restaurant</a>
+    </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#addItem").click(function () {
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function (html) { $("#MenuItemsList").append(html); }
+            });
+            return false;
+        });
+    </script>
 }

@@ -37,11 +37,10 @@
                         <li class="btn-custom">@Html.ActionLink("À propos de", "About", "Home")</li>
                         <li class="btn-custom">@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Admin") || User.IsInRole("Restaurateurs"))
                         {
                             <li class="btn-custom">@Html.ActionLink("Gestion de restaurants", "Index", "Restaurant")</li>
                         }
-    
                         @Html.Partial("_LoginPartial")
                     </ul>
                 </div><!--/.nav-collapse -->

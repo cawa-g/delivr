@@ -1,28 +1,41 @@
-﻿@if (Request.IsAuthenticated) {
-    <text>
-        Bonjour, @Html.ActionLink(User.Identity.Name, "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
-        }
-    </text>
-}
-else
-{
-    <li id="userMenu">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-expanded="true">
-                <span class="glyphicon glyphicon-user"></span>
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+﻿
+<li id="userMenu">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-expanded="true">
+            <span class="glyphicon glyphicon-user"></span>
+            @if (Request.IsAuthenticated)
+            {
+                <text>
+                    @User.Identity.Name
+                </text>
+            }
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            @if (Request.IsAuthenticated)
+            {
+                <text>
+                    <li>
+                        @Html.ActionLink("Manage", "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })
+                    </li>
+                    <li id="logout">
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+                        }
+                    </li>
+                </text>
+            }
+            else
+            { 
                 <li>
                     @Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
                     @Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
                 </li>       
-            </ul>
-        </div>
-    </li>
-}
+            }
+        </ul>
+    </div>
+</li>

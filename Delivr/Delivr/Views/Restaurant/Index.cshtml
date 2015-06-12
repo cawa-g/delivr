@@ -24,6 +24,14 @@
                             @Html.DisplayFor(modelItem => item.nom)
                         </td>
                         <td class="text-right">
+                            @if (User.IsInRole("Admin") || User.IsInRole("Restaurateurs"))
+                            {
+                                <div id="menu-group" class="btn-group btn-group-xs" role="group">
+                                    <a href="@Url.Action("Edit", "Menu", new { RestaurantId = item.RestaurantId })" class="btn btn-default">
+                                        Menu <span class="glyphicon glyphicon-cutlery"></span>
+                                    </a>
+                                </div>
+                            }
                             <div class="btn-group btn-group-xs" role="group" aria-label="controls">
                                 <div class="btn-group btn-group-xs" role="group">
                                     @(Html.ActionLink("Edit", "Edit", new { id = item.RestaurantId }, new { @class = "btn btn-info" }))
