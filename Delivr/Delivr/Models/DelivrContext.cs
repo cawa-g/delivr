@@ -15,5 +15,7 @@ namespace Delivr.Models
 
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+
+        public DbSet<Restaurateur> Restaurateurs { get; set; }
     }
 }
