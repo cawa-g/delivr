@@ -303,6 +303,8 @@
     <Content Include="Views\Restaurateur\Create.cshtml" />
     <Content Include="Views\Restaurateur\Edit.cshtml" />
     <Content Include="Views\Restaurateur\Delete.cshtml" />
+    <Content Include="Views\Restaurant\Message.cshtml" />
+    <Content Include="Views\Account\Message.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
