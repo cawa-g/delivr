@@ -9,7 +9,11 @@ namespace Delivr.Models
 {
     [Table("Restaurateur")]
     public class Restaurateur : UserProfile
-    { 
+    {
+        public Restaurateur()
+        {
+            this.Restaurants = new List<Restaurant>();
+        }
         public virtual ICollection<Restaurant> Restaurants { get; set; }
     }
 }

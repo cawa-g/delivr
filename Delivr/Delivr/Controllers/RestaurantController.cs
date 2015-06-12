@@ -15,7 +15,7 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/
-        
+
         public ActionResult Index()
         {
             return View(db.Restaurants.ToList());
@@ -23,6 +23,7 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/Details/5
+
         public ActionResult Details(int id = 0)
         {
             Restaurant restaurant = db.Restaurants.Find(id);
@@ -35,6 +36,7 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/Create
+
         public ActionResult Create()
         {
             return View();
@@ -59,6 +61,7 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/Edit/5
+
         public ActionResult Edit(int id = 0)
         {
             Restaurant restaurant = db.Restaurants.Find(id);
@@ -87,6 +90,7 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/Delete/5
+
         public ActionResult Delete(int id = 0)
         {
             Restaurant restaurant = db.Restaurants.Find(id);

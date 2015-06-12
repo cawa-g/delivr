@@ -64,7 +64,7 @@ namespace Delivr.Filters
                 if (!roles.RoleExists("Restaurateur"))
                     roles.CreateRole("Restaurateur");
 
-                //System.Web.Security.Roles.AddUserToRole("admin@admin.com", "Admin");
+               // System.Web.Security.Roles.AddUserToRole("admin@admin.com", "Admin");
 
             }
         }
