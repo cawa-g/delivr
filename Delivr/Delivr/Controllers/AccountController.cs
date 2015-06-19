@@ -93,13 +93,11 @@ namespace Delivr.Controllers
                                               CodeCivique = model.CodeCivique, 
                                               CodePostale = model.CodePostale, 
                                               Telephone = model.Telephone,
-                                              DateNaissance = model.DateNaissance,
-                                              estRestaurateur = false,
-                                              estEntrepreneur = false});
+                                              DateNaissance = model.DateNaissance});
 
                     WebSecurity.Login(model.Email, model.Password);
 
-                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.CodeCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> Date de Naissance = " + model.DateNaissance.ToString("d MMM yyyy") + " <p>" });
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.CodeCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> " + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -109,6 +107,80 @@ namespace Delivr.Controllers
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
+        }
+
+        //
+        // GET: /Restaurateur/Create
+
+        public ActionResult AddRestaurateur()
+        {
+            List<SelectListItem> restaurants = new List<SelectListItem>();
+            restaurants.Add(new SelectListItem
+            {
+                Value = null,
+                Text = "",
+            });
+            foreach (Restaurant r in db.Restaurants.ToList())
+            {
+
+                restaurants.Add(new SelectListItem
+                {
+                    Value = r.RestaurantId.ToString(),
+                    Text = r.nom,
+                });
+            }
+            ViewBag.DropDownRestaurants = restaurants;
+
+            return View();
+        }
+
+        //
+        // POST: /Restaurateur/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddRestaurateur(RestaurateurModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Tentative d'inscription de l'utilisateur
+                try
+                {
+
+                    WebSecurity.CreateUserAndAccount(
+                        model.Email,
+                        model.Password,
+                        propertyValues: new
+                        {
+                            email = model.Email,
+                            Nom = model.Nom,
+                            Prenom = model.Prenom,
+                            Telephone = model.Telephone
+                        });
+                    System.Web.Security.Roles.AddUserToRole(model.Email, "Restaurateur");
+                    if (model.restaurantId == null)
+                    {
+                        return RedirectToAction("Message", "Restaurateur", new { chaine = "Le restaurateur à été ajouté sans restaurant" });
+                    }
+                    else
+                    {
+                        Restaurant resto = db.Restaurants.Find(model.restaurantId);
+                        resto.Restaurateur = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie !­ </p>" });
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+            return View(model);
+           return RedirectToAction("Index");
+           
+
         }
 
 

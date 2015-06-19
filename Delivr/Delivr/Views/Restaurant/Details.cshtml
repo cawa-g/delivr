@@ -15,18 +15,32 @@
             <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.nom)" aria-describedby="sizing-addon1" disabled>
             <span class="input-group-addon" id="sizing-addon1">@Html.DisplayName("Restaurateur")</span>
             <input type="text" class="form-control" placeholder="@Html.Raw(ViewBag.Restaurateur)" aria-describedby="sizing-addon1" disabled>
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.Rue)</span>
+            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.Rue)" aria-describedby="sizing-addon1" disabled>
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.Telephone)</span>
+            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.Telephone)" aria-describedby="sizing-addon1" disabled>
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.CodeCivique)</span>
+            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.CodeCivique)</span>
+            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.CodePostale)" aria-describedby="sizing-addon1" disabled>
+            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.CodePostale)" aria-describedby="sizing-addon1" disabled>
             
         </div>
     </div>
     <div class="container">
         <hr />
         <div class="btn-group btn-group-lg" role="group" aria-label="controls">
-            <div class="btn-group btn-group-lg" role="group">
-                @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
-            </div>
-            <div class="btn-group btn-group-lg" role="group">
-                @(Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))
-            </div>
+            
+                @if (User.IsInRole("Admin")) { 
+                            <div class="btn-group btn-group-lg" role="group">
+                        @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
+                    </div>
+                    <div class="btn-group btn-group-lg" role="group">
+                        @(Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))
+                    </div>
+                } @if (User.IsInRole("Restaurateur"))
+                 {
+                <div class="btn-group btn-group-lg" role="group">@Html.ActionLink("Gestion de restaurants", "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</div>
+                 }
         </div>
     </div>
 </div>

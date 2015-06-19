@@ -23,17 +23,16 @@ namespace Delivr.Models
         public string Nom { get; set; }
         public string Telephone { get; set; }
         public string Rue { get; set; }
-        public int CodeCivique { get; set; }
+        public int? CodeCivique { get; set; }
         public string CodePostale { get; set; }
-        public DateTime DateNaissance { get; set; }
-        public bool estRestaurateur { get; set; }
-        public bool estEntrepreneur { get; set; }
+        public DateTime? DateNaissance { get; set; }
 
         public UserProfile()
         {
-            estEntrepreneur = false;
-            estRestaurateur = false;
+            this.Restaurants = new List<Restaurant>();
         }
+        public virtual ICollection<Restaurant> Restaurants { get; set; }
+
 
     }
 
@@ -95,7 +94,7 @@ namespace Delivr.Models
 
         [Required]
         [Display(Name = "Code Civique")]
-        public int CodeCivique { get; set; }
+        public int? CodeCivique { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale non valide, utilisez le format H1H 1H1")]
@@ -145,7 +144,7 @@ namespace Delivr.Models
 
         [Required]
         [Display(Name = "Code Civique")]
-        public int CodeCivique { get; set; }
+        public int? CodeCivique { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale invalide, utilisez le format H1H 1H1")]
@@ -156,7 +155,7 @@ namespace Delivr.Models
         [Required]
         [Display(Name = "Date de naissance")]
         [DataType(DataType.Date, ErrorMessage = "Date invalide, utilisez le format JJ/MM/AAAA"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateNaissance { get; set; }
+        public DateTime? DateNaissance { get; set; }
     }
 
     public class ExternalLogin
@@ -164,5 +163,41 @@ namespace Delivr.Models
         public string Provider { get; set; }
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
+    }
+
+    public class RestaurateurModel
+    {
+        [Required]
+        [Display(Name = "Adresse courriel")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Adresse courriel invalide")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mot de passe")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmer le mot de passe ")]
+        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Prénom")]
+        public string Prenom { get; set; }
+
+        [Required]
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone invalide, utilisez le format xxx-xxx-xxxx")]
+        [Display(Name = "Téléphone")]
+        public string Telephone { get; set; }
+
+        public int? restaurantId { get; set; }
     }
 }

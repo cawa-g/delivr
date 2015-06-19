@@ -311,6 +311,8 @@
     <Content Include="Views\Menu\Edit.cshtml" />
     <Content Include="Views\Menu\MenuItemRow.cshtml" />
     <Content Include="Views\Restaurateur\Message.cshtml" />
+    <Content Include="Views\Account\AddRestaurateur.cshtml" />
+    <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

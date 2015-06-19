@@ -16,7 +16,9 @@
             {
                 <text>
                     <li>
+                @if (!User.IsInRole("Admin")) { 
                         @Html.ActionLink("Manage", "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })
+                }
                     </li>
                     <li id="logout">
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))

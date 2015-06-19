@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using WebMatrix.WebData;
+using System.Web.Security;
 
 namespace Delivr.Controllers
 {
@@ -21,6 +23,28 @@ namespace Delivr.Controllers
             return View(db.Restaurants.ToList());
         }
 
+
+        //
+        // GET: /Restaurant/
+         [ActionName("IndexForRestaurateur")]
+        public ActionResult Index(int? id)
+        {
+            List<Restaurant> Restaurants = db.Restaurants.ToList();
+            List<Restaurant> RestaurantsToDelete = new List<Restaurant>();
+            foreach (Restaurant r in Restaurants)
+            {
+                if (r.Restaurateur.UserId != id)
+                {
+                    RestaurantsToDelete.Add(r);
+                }
+            }
+             foreach (Restaurant r in RestaurantsToDelete)
+            {
+                Restaurants.Remove(r);
+            }
+            return View(Restaurants);
+        }
+
         //
         // GET: /Restaurant/Details/5
 
@@ -28,7 +52,11 @@ namespace Delivr.Controllers
         {
             Restaurant restaurant = db.Restaurants.Find(id);
             ViewBag.Restaurateur = "";
-            string email = db.Restaurateurs.Find(restaurant.UserId).Email;
+            string email = "";
+            if (restaurant.UserId != null)
+            {
+                email = db.UserProfiles.Find(restaurant.UserId).Email;
+            }         
             if (email != null)
             {
                 ViewBag.Restaurateur = email;
@@ -45,25 +73,33 @@ namespace Delivr.Controllers
 
         public ActionResult Create()
         {
-            
 
+            var roles = (SimpleRoleProvider)Roles.Provider;
+
+            var allRoles = roles.GetAllRoles();
              List<SelectListItem> restaurateurs = new List<SelectListItem>();
              restaurateurs.Add(new SelectListItem
              {
                  Value = null,
                  Text = "",
              });
-            foreach (Restaurateur r in db.Restaurateurs.ToList())
-            {
-                restaurateurs.Add(new SelectListItem
-                {
-                    Value = r.UserId.ToString(),
-                    Text = r.Nom,
-                });
-            }
-            ViewBag.DropDownRestaurateurs = restaurateurs;
+             foreach (UserProfile r in db.UserProfiles.ToList())
+             {
+                 if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
+                 {
+                     restaurateurs.Add(new SelectListItem
+                     {
+                         Value = r.UserId.ToString(),
+                         Text = r.Nom,
+                     });
+                 }
+             }
+             ViewBag.DropDownRestaurateurs = restaurateurs;
+
 
             return View();
+
+           
         }
 
         //
@@ -81,7 +117,7 @@ namespace Delivr.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Message", "Restaurant", new { chaine = "Le restaurant à été ajouté sans restaurateur" });
                 }
-                restaurant.Restaurateur = db.Restaurateurs.Find(restaurant.UserId);
+                restaurant.Restaurateur = db.UserProfiles.Find(restaurant.UserId);
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,7 +132,10 @@ namespace Delivr.Controllers
         public ActionResult Edit(int id = 0)
         {
 
-            
+            var roles = (SimpleRoleProvider)Roles.Provider;
+
+            var allRoles = roles.GetAllRoles();
+
             Restaurant restaurant = db.Restaurants.Find(id);
             if (restaurant == null)
             {
@@ -110,9 +149,9 @@ namespace Delivr.Controllers
                 Value = null,
                 Text = "",
             });
-            foreach (Restaurateur r in db.Restaurateurs.ToList())
+            foreach (UserProfile r in db.UserProfiles.ToList())
             {
-                if (r.UserId != restaurant.UserId)
+                if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
                 { 
                 restaurateurs.Add(new SelectListItem
                 {

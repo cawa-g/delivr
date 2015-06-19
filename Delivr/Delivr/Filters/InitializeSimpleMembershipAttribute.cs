@@ -55,6 +55,7 @@ namespace Delivr.Filters
                 var roles = (SimpleRoleProvider)System.Web.Security.Roles.Provider;
                 var membership = (SimpleMembershipProvider)System.Web.Security.Membership.Provider;
 
+            
                 if (!roles.RoleExists("Admin"))
                     roles.CreateRole("Admin");
 
@@ -64,8 +65,8 @@ namespace Delivr.Filters
                 if (!roles.RoleExists("Restaurateur"))
                     roles.CreateRole("Restaurateur");
 
-               // System.Web.Security.Roles.AddUserToRole("admin@admin.com", "Admin");
-
+               //System.Web.Security.Roles.AddUserToRole("admin@admin.com", "Admin");
+                
             }
         }
     }
