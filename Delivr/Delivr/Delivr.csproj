@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdresseModels.cs" />
     <Compile Include="Models\DelivrContext.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\RestaurantModels.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Views\Restaurateur\Message.cshtml" />
     <Content Include="Views\Account\AddRestaurateur.cshtml" />
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

@@ -94,6 +94,13 @@ namespace Delivr.Controllers
                                               CodePostale = model.CodePostale, 
                                               Telephone = model.Telephone,
                                               DateNaissance = model.DateNaissance});
+                    Adresse adresse = new Adresse();
+                    adresse.CodeCivique = model.CodeCivique;
+                    adresse.CodePostale = model.CodePostale;
+                    adresse.Rue = model.Rue;
+                    adresse.User = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
+                    db.Adresses.Add(adresse);
+                    db.SaveChanges();
 
                     WebSecurity.Login(model.Email, model.Password);
 

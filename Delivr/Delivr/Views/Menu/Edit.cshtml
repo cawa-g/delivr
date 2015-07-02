@@ -51,7 +51,7 @@
                 @(Html.ActionLink("Back to listing", "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
             </div>
             <div class="btn-group btn-group-lg" role="group">
-                @(Html.ActionLink("Back to details", "Details", "Restaurant", new { RestaurantId = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
+                @(Html.ActionLink("Back to details", "Details", "Restaurant", new { id = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
             </div>
             }
             @if (User.IsInRole("Restaurateur"))
