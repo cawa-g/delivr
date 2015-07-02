@@ -21,7 +21,7 @@
             <button class="btn btn-default btn-sm removeItem">@Resources.Menu.RemoveItem</button>
         </div>
 
-        <!-- Check for errors -->
+        @* Check for errors *@
         if (ViewData.ModelState.Keys.Any(s => s.StartsWith(ViewData.TemplateInfo.HtmlFieldPrefix) && !ViewData.ModelState.IsValidField(s)))
         {
             <div class="form-group">
@@ -33,7 +33,7 @@
             </div>
         }
 
-        <!-- Check for warnings -->
+        @* Check for warnings *@
         if (ViewBag.MenuItemWarnings != null && ViewBag.MenuItemWarnings.ContainsKey(Model))
         {
             <div class="form-group">
