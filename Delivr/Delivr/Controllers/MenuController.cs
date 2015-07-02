@@ -94,6 +94,8 @@ namespace Delivr.Controllers
                 List<MenuItem> menuItems = new List<MenuItem>();
                 if (model.MenuItemModels != null)
                 {
+                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel,string>();
+
                     foreach (EditMenuItemModel itemModel in model.MenuItemModels)
                     {
                         MenuItem item;
@@ -103,6 +105,9 @@ namespace Delivr.Controllers
                             item.Nom = itemModel.Nom;
                             item.Description = itemModel.Description;
                             item.Prix = Decimal.ToInt32(itemModel.Prix * 100);
+
+                            // Indicate the item was modified:
+                            db.Entry(item).State = EntityState.Modified;
                         }
                         else
                         {
@@ -116,8 +121,15 @@ namespace Delivr.Controllers
                             db.MenuItems.Add(item);
                         }
 
+                        if (String.IsNullOrEmpty(item.Description))
+                        {
+                            menuItemWarnings[itemModel] = Resources.Menu.DescriptionMissingWarning;
+                        }
+
                         menuItems.Add(item);
                     }
+
+                    ViewBag.MenuItemWarnings = menuItemWarnings;
                 }
 
                 Menu menu;
@@ -132,6 +144,12 @@ namespace Delivr.Controllers
                         if (!model.MenuItemModels.Any(itemModel => itemModel.MenuItemId.HasValue && itemModel.MenuItemId.Value == item.MenuItemId))
                             db.MenuItems.Remove(item);
                     }
+
+                    menu.Nom = model.Nom;
+                    menu.MenuItems = menuItems;
+
+                    // Indicate the menu was modified:
+                    db.Entry(menu).State = EntityState.Modified;
                 }
                 else    // New menu - no need to check for items to delete
                 {
@@ -146,7 +164,7 @@ namespace Delivr.Controllers
                 }
 
                 db.SaveChanges();
-                ViewBag.SuccessMessage = "Définition du menu complétée avec succès.";
+                ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
             }
 
             return View(model);

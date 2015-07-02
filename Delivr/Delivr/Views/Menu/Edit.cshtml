@@ -1,42 +1,59 @@
 ﻿@model Delivr.Models.EditMenuModel
 
-@{
-    ViewBag.Title = "Edit menu";
-}
-
 <div class="jumbotron padded">
     <div class="container">
-        <h2>@ViewBag.Title</h2>
+        <h2>@Resources.Menu.PageTitle</h2>
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
             if (ViewBag.SuccessMessage != null)
-            { 
-                @ViewBag.SuccessMessage
+            {
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @ViewBag.SuccessMessage
+                </div>
             }
-            <form class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <form>
+                @Html.HiddenFor(model => model.MenuId)
+
+                @if (ViewData.ModelState.IsValidField("Nom"))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nom, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group has-error">
+                        @Html.LabelFor(model => model.Nom, new { @class = "control-label" })
+                        @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger bg-danger", style = "margin-left: 10px" })
+                        @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
+                    </div>
+                }
+
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Nom, new { @class = "col-sm-2 control-label" })
-                    <div class="col-sm-10">
-                        @Html.EditorFor(model => model.Nom, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Nom)
+                    @Html.LabelFor(model => model.MenuItemModels, new { @class = "control-label", style = "width: 100%; border-bottom: solid 1px" })
+                    <div class="" id="MenuItemsList">
+                        @if (Model.MenuItemModels != null)
+                        {
+                            foreach (var itemModel in Model.MenuItemModels)
+                            {
+                                Html.RenderPartial("MenuItemRow", itemModel);
+                            }
+                        }
                     </div>
                 </div>
-                <div class="editor-rows" id="MenuItemsList">
-                    @if (Model.MenuItemModels != null)
-                    {
-                        foreach (var itemModel in Model.MenuItemModels)
-                        {
-                            Html.RenderPartial("MenuItemRow", itemModel);
-                        }
-                    }
-                </div>
+
                 <div class="form-group">
                     <div class="col-sm-10 control-label">
-                        @Html.ActionLink("Add Item", "BlankMenuItemRow", null, new { id = "addItem", @class = "btn btn-default bnt-small margin-top" })
-                        <input type="submit" class="btn btn-primary margin-top" value="Save" />
+                        @Html.ActionLink(Resources.Menu.AddItem, "BlankMenuItemRow", null, new { id = "addItem", @class = "btn btn-default bnt-small margin-top" })
+                        <input type="submit" class="btn btn-primary margin-top" value="@Resources.General.Save" />
                     </div>
                 </div>
             </form>
@@ -48,19 +65,22 @@
             @if (User.IsInRole("Admin"))
             {
                 <div class="btn-group btn-group-lg" role="group">
-                @(Html.ActionLink("Back to listing", "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
-            </div>
-            <div class="btn-group btn-group-lg" role="group">
-                @(Html.ActionLink("Back to details", "Details", "Restaurant", new { RestaurantId = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
-            </div>
+                    @(Html.ActionLink(Resources.General.BackToListing, "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                    @(Html.ActionLink(Resources.General.BackToDetails, "Details", "Restaurant", new { RestaurantId = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
+                </div>
             }
             @if (User.IsInRole("Restaurateur"))
             {
-                <div class="btn-group btn-group-lg" role="group">@Html.ActionLink("Gestion de restaurants", "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</div>
+                <div class="btn-group btn-group-lg" role="group">
+                    @Html.ActionLink(Resources.Menu.BackToRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)
+                </div>
             }
         </div>
     </div>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -74,7 +94,7 @@
             return false;
         });
 
-        $("#MenuItemsList").on("click", "a.removeItem", function () {
+        $("#MenuItemsList").on("click", "button.removeItem", function () {
             $(this).parents("div.editor-row:first").remove();
             return false;
         });

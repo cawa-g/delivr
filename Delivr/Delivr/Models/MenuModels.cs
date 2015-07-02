@@ -37,13 +37,13 @@ namespace Delivr.Models
         public int? MenuId { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "La chaîne {0} doit comporter entre {2} et {1} caractères.", MinimumLength = 4)]
+        [StringLength(50, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
         public string Nom { get; set; }
 
         [ScaffoldColumn(false)]
         public int RestaurantId { get; set; }
 
-        [Display(Name = "Éléments du menu")]
+        [Display(ResourceType = typeof(Resources.Menu), Name = "MenuItems")]
         public ICollection<EditMenuItemModel> MenuItemModels { get; set; }
     }
 
@@ -53,14 +53,14 @@ namespace Delivr.Models
         public int? MenuItemId { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "La chaîne {0} doit comporter entre {2} et {1} caractères.")]
+        [StringLength(50, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
         public string Nom { get; set; }
 
         public string Description { get; set; }
-        
+
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        [Range(0, 1000, ErrorMessage = "Le prix doit être un nombre positif inférieur à 1000.")]
+        [Range(0, 1000, ErrorMessageResourceType = typeof(Resources.Menu), ErrorMessageResourceName = "PriceErrorMessage")]
         public decimal Prix { get; set; }
     }
 }
