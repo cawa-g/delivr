@@ -1,35 +1,46 @@
 ﻿@using Delivr.Helpers
 @model Delivr.Models.EditMenuItemModel
 
-<div class="editor-row">
+<div class="editor-row form-inline">
     @using (Html.BeginCollectionItem("MenuItemModels"))
     {
-        <div class="editor-cell">
-            <div class="row-editor-label">
-                @Html.LabelFor(model => model.Nom)
-            </div>
-            <div class="row-editor-field">
-                @Html.EditorFor(model => model.Nom)
-            </div>
+        @Html.HiddenFor(model => model.MenuItemId)
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.Nom, new { @class = "control-label small" })
+            @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
         </div>
-        <div class="editor-cell">
-            <div class="row-editor-label">
-                @Html.LabelFor(model => model.Description)
-            </div>
-            <div class="row-editor-field">
-                @Html.TextAreaFor(model => model.Description)
-            </div>
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label small" })
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
         </div>
-        <div class="editor-cell">
-            <div class="row-editor-label">
-                @Html.LabelFor(model => model.Prix)
-            </div>
-            <div class="row-editor-field">
-                @Html.EditorFor(model => model.Prix)
-            </div>
+        <div class="form-group form-group-sm">
+            @Html.LabelFor(model => model.Prix, new { @class = "control-label small" })
+            @Html.TextBoxFor(model => model.Prix, new { @class = "form-control" })
         </div>
-        <div class="editor-cell">
-            <a href="#" class="removeItem">Remove Item</a>
+        <div class="form-group">
+            <button class="btn btn-default btn-sm removeItem">@Resources.Menu.RemoveItem</button>
         </div>
+
+        @* Check for errors *@
+        if (ViewData.ModelState.Keys.Any(s => s.StartsWith(ViewData.TemplateInfo.HtmlFieldPrefix) && !ViewData.ModelState.IsValidField(s)))
+        {
+            <div class="form-group">
+                <div class="alert alert-danger" style="margin: 0">
+                    @Html.ValidationMessageFor(model => model.Nom)
+                    @Html.ValidationMessageFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Prix)
+                </div>
+            </div>
+        }
+
+        @* Check for warnings *@
+        if (ViewBag.MenuItemWarnings != null && ViewBag.MenuItemWarnings.ContainsKey(Model))
+        {
+            <div class="form-group">
+                <div class="alert alert-warning" style="margin: 0">
+                    @ViewBag.MenuItemWarnings[Model]
+                </div>
+            </div>
+        }
     }
 </div>

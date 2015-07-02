@@ -179,6 +179,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\General\General.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>General.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home\Home.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Menu\Menu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Menu.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -316,12 +331,29 @@
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\General\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Home.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Home.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Menu\Menu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

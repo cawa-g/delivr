@@ -1,70 +1,67 @@
 ﻿<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        @Styles.Render("~/Content/bootstrapcss")
-        @Styles.Render("~/Content/jasnycss")
-        @Styles.Render("~/Content/customcss")
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Delivr - @ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/bootstrapcss")
+    @Styles.Render("~/Content/jasnycss")
+    @Styles.Render("~/Content/customcss")
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-    </head>
-    <body>
-        <nav id="header" class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button id="collapseMenu" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a  id="logo" class="navmenu-brand" href="@Url.Action("Index","Home")">
-                        <img class="truck-logo" alt="" src="@Url.Content("~/Content/images/logo_truck.svg")" />
-                    </a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="btn-custom">@Html.ActionLink("Accueil", "Index", "Home")</li>
-                        <li class="btn-custom">@Html.ActionLink("À propos de", "About", "Home")</li>
-                        <li class="btn-custom">@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="btn-custom">@Html.ActionLink("Gestion de restaurants", "Index", "Restaurant")</li>
-                        }
-                        @if (User.IsInRole("Restaurateur"))
-                        {
-                            <li class="btn-custom">@Html.ActionLink("Gestion de restaurants", "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId },null)</li>
-                        }
-                        @if (User.IsInRole("Admin") )
-                        {
-                            <li class="btn-custom">@Html.ActionLink("Gestion de restaurateurs", "AddRestaurateur", "Account")</li>
-                        }
-                        @Html.Partial("_LoginPartial")
-                    </ul>
-                </div><!--/.nav-collapse -->
+</head>
+<body>
+    <nav id="header" class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button id="collapseMenu" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" class="navmenu-brand" href="@Url.Action("Index","Home")">
+                    <img class="truck-logo" alt="" src="@Url.Content("~/Content/images/logo_truck.svg")" />
+                </a>
             </div>
-        </nav>
-        @RenderBody() <!-- Il est souvent préférable d'englober votre vue dans un div de classe container -->
-        @*<div id="permFooter" class="panel-footer">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="btn-custom">@Html.ActionLink(Resources.General.Home, "Index", "Home")</li>
+                    <li class="btn-custom">@Html.ActionLink(Resources.General.About, "About", "Home")</li>
+                    <li class="btn-custom">@Html.ActionLink(Resources.General.Contact, "Contact", "Home")</li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Index", "Restaurant")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "AddRestaurateur", "Account")</li>
+                    }
+                    @if (User.IsInRole("Restaurateur"))
+                    {
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>
+                    }
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    @RenderBody() <!-- Il est souvent préférable d'englober votre vue dans un div de classe container -->
+    @*<div id="permFooter" class="panel-footer">
 
         </div>*@
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrapjs")
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/jasnyjs")
-        @Scripts.Render("~/bundles/scrolljs")
-        @Scripts.Render("~/bundles/modernizr")
-        @RenderSection("scripts", required: false)
-        @Html.RenderScripts()
-    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jasnyjs")
+    @Scripts.Render("~/bundles/scrolljs")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+    @Html.RenderScripts()
+</body>
 </html>

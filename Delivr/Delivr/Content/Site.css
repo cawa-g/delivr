@@ -49,16 +49,12 @@ body {
     }
 }
 
-.editor-rows {
-    display: table;
+.form-inline {
+    margin: 5px 0;
 }
 
-.editor-row {
-    display: table-row;
-}
-
-.editor-cell {
-    display: table-cell;
+.form-inline .form-group {
+    padding: 0 2px;
 }
 
 /* ---------------------  Section concernant le header/navbar ------------------------------ */
