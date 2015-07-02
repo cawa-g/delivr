@@ -117,14 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>À propos</value>
+  </data>
   <data name="BackToDetails" xml:space="preserve">
     <value>Retour aux détails</value>
   </data>
   <data name="BackToListing" xml:space="preserve">
     <value>Retour au listage</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Gérer</value>
+  </data>
+  <data name="ManageRestaurants" xml:space="preserve">
+    <value>Gestion de restaurants</value>
+  </data>
+  <data name="ManageRestaurateurs" xml:space="preserve">
+    <value>Gestion de restaurateurs</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>S'inscrire</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>La chaîne {0} doit comporter entre {2} et {1} caractères</value>

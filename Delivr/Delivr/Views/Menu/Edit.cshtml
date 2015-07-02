@@ -1,8 +1,12 @@
 ﻿@model Delivr.Models.EditMenuModel
+@{
+    ViewBag.Title = @Resources.Menu.PageTitle;
+}
+
 
 <div class="jumbotron padded">
     <div class="container">
-        <h2>@Resources.Menu.PageTitle</h2>
+        <h2>@ViewBag.Title</h2>
 
         @using (Html.BeginForm())
         {

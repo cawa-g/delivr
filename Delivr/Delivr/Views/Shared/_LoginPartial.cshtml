@@ -17,14 +17,14 @@
                 <text>
                     <li>
                 @if (!User.IsInRole("Admin")) { 
-                        @Html.ActionLink("Manage", "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })
+                        @Html.ActionLink(Resources.General.Manage, "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = Resources.General.Manage })
                 }
                     </li>
                     <li id="logout">
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.General.LogOff</a>
                         }
                     </li>
                 </text>
@@ -32,10 +32,10 @@
             else
             { 
                 <li>
-                    @Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                    @Html.ActionLink(Resources.General.SignUp, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
-                    @Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    @Html.ActionLink(Resources.General.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
                 </li>       
             }
         </ul>

@@ -6,121 +6,100 @@
     <section class="page1">
         <img id="burger" class="col-sm-6 col-xs-6" src="@Url.Content("~/Content/images/Flat_Burger.svg")" />
         <h2 class="col-sm-6 col-xs-6 floating-label-right">
-            <p>
-                Delicious <strong>food</strong>,
-                delivered right to your <strong>doorstep</strong>.
-            </p>
-        </h2>   
+            @Html.Raw(Resources.Home.DeliveryPromotion)
+        </h2>
     </section>
     <section class="page2">
         <h2 class="col-sm-4 col-xs-5 floating-label-left">
-            <p>
-                All orders are delivered <br />
-                in <strong>under an hour</strong>,<br />
-                Guaranteed!
-            </p>
-            <p>
-                If not, you get your meal at <strong>no charge</strong>!
-            </p> 
+            @Html.Raw(Resources.Home.DeliveryTimeGuarantee)
         </h2>
         <img id="clock" class="col-sm-4 col-xs-3" src="@Url.Content("~/Content/images/Clock_Hour.svg")" />
     </section>
     <section class="page3">
         <h2>
-            <strong>How it works:</strong>
+            <strong>@Resources.Home.HowItWorks</strong>
         </h2>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 how">
             <p>
-                1. Browse our selection
+                1. @Resources.Home.Browse
                 <img id="search" src="@Url.Content("~/Content/images/Search.svg")" />
             </p>
-            <p> <h3><small>Choose from a huge selection of restaurants</small></h3></p>
+            <p> <h3><small>@Resources.Home.Browse2</small></h3></p>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 how">
             <p>
-                2. Pick a meal
+                2. @Resources.Home.Pick
                 <img id="add" src="@Url.Content("~/Content/images/Add.svg")" />
             </p>
-            <p> <h3><small>Or more!</small></h3></p>
+            <p> <h3><small>@Resources.Home.Pick2</small></h3></p>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 how">
             <p>
-                3. Pay<br />
+                3. @Resources.Home.Pay<br />
                 <img id="pay" src="@Url.Content("~/Content/images/Pay_NoMethod.svg")" />
             </p>
-            <p> 
-                <h3>
-                    <small>
-                        Either online or at the door
-                    </small>
-                </h3>
+            <p>
+                <h3><small>@Resources.Home.Pay2</small></h3>
                 <!-- Bouton déclencheur pour le modal de modalités de paiement -->
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentMethods">
-                    Payment methods
+                    @Resources.Home.PaymentMethods
                 </button>
             </p>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 how">
             <p>
-                4. Bon appétit!
+                4. @Resources.Home.Enjoy
                 <img id="delivery" src="@Url.Content("~/Content/images/Delivery.svg")" />
             </p>
-            <p> <h3><small>We hope you enjoy</small></h3></p>
+            <p> <h3><small>@Resources.Home.Enjoy2</small></h3></p>
         </div>
     </section>
     <section class="page4">
         <img id="signup" class="col-sm-6 col-xs-6" src="@Url.Content("~/Content/images/Signup.svg")" />
         <div class="col-sm-6 col-xs-6 floating-label-right">
             <p class="h2">
-
-                Join our growing community <br /> and learn to <strong>stop worrying</strong>. <br />
-                Sign up <strong>now</strong>!
+                @Html.Raw(Resources.Home.JoinUs)
             </p>
             <button id="signupBtn" type="button" class="btn btn-success">
-                @Html.ActionLink("Sign up", "Register", "Account")
+                @Html.ActionLink(Resources.General.SignUp, "Register", "Account")
             </button>
         </div>
     </section>
 </div>
-
 <!-- Modal de modalités de paiement (doit se situer juste avant le closing tag de body)-->
 <div class="modal fade" id="paymentMethods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Payment methods</h4>
+                <h4 class="modal-title" id="myModalLabel">@Resources.Home.PaymentMethods</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>
-                                    <h4>Online</h4>
-                                </td>
-                                <td>
-                                    <h4>At the door</h4>
-                                </td>
+                                <td><h4>@Resources.Home.PaymentMethodOnline</h4></td>
+                                <td><h4>@Resources.Home.PaymentMethodDoor</h4></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-                                     <table class="table">
-                                         <tbody>
-                                             <tr>
-                                                 <td><img id="visaOnline" src="@Url.Content("~/Content/images/Visa.svg")"/></td>
-                                                 <td><img id="mcOnline" src="@Url.Content("~/Content/images/MasterCard.svg")"/></td>
-                                                 <td><img id="paypalOnline" src="@Url.Content("~/Content/images/Paypal.svg")"/></td>
-                                             </tr>
-                                             <tr>
-                                                 <td><img id="debitOnline" src="@Url.Content("~/Content/images/Debit.svg")"/></td>
-                                                 <td><img id="bitcoinOnline" src="@Url.Content("~/Content/images/Bitcoin.svg")"/></td>
-                                             </tr>
-                                         </tbody>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td><img id="visaOnline" src="@Url.Content("~/Content/images/Visa.svg")" /></td>
+                                                <td><img id="mcOnline" src="@Url.Content("~/Content/images/MasterCard.svg")" /></td>
+                                                <td><img id="paypalOnline" src="@Url.Content("~/Content/images/Paypal.svg")" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img id="debitOnline" src="@Url.Content("~/Content/images/Debit.svg")" /></td>
+                                                <td><img id="bitcoinOnline" src="@Url.Content("~/Content/images/Bitcoin.svg")" /></td>
+                                            </tr>
+                                        </tbody>
                                     </table>
-                                    <p>We accept Visa, MasterCard, Paypal and Interact as well as any of your favorite crypto currencies.</p>
+                                    <p>@Resources.Home.PaymentMethodOnlineDetails</p>
                                 </td>
                                 <td>
                                     <table id="atDoor" class="table table-responsive">
@@ -135,7 +114,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <p>At the door, you'll be able to use either Visa or MasterCard if you're paying credit, Interact or good old cash.</p>
+                                    <p>@Resources.Home.PaymentMethodDoorDetails</p>
                                 </td>
                             </tr>
                         </tbody>
