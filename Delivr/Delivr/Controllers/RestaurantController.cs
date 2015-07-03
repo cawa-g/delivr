@@ -35,7 +35,7 @@ namespace Delivr.Controllers
             List<CreateCommandeItemModel> createCommandeItems = new List<CreateCommandeItemModel>();
             foreach (MenuItem mi in menuItems)
             { 
-                CreateCommandeItemModel model = new CreateCommandeItemModel(0,mi.MenuItemId,mi.Nom,mi.Prix);
+                CreateCommandeItemModel model = new CreateCommandeItemModel(0,mi.MenuItemId,mi.Nom,mi.Prix,id);
                 createCommandeItems.Add(model);
             }
 
@@ -43,9 +43,40 @@ namespace Delivr.Controllers
         }
 
         [HttpPost]
-        public ActionResult MenuCommande(IEnumerable<Delivr.Models.CreateCommandeItemModel> createCommandeItems)
+        public ActionResult MenuCommande(IList<Delivr.Models.CreateCommandeItemModel> createCommandeItems)
         {
-        
+            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+            Commande commande = new Commande()
+            {
+                AdresseId = (int)user.AdresseDefaultId,
+                RestaurantId = createCommandeItems.First().RestaurantId,
+                UserId = user.UserId,
+                Date = DateTime.Today,
+                Statut = Commande.StatutCommande.EnAttente
+
+            };
+
+            List<CommandeItem> items = new List<CommandeItem>();
+            foreach (CreateCommandeItemModel c in createCommandeItems)
+            {
+                if (c.Quantite != 0)
+                { 
+                    CommandeItem cItem = new CommandeItem()
+                    {
+                        MenuItemId = c.MenuItemId,
+                        Quantite = c.Quantite
+                    };
+
+                    items.Add(cItem);
+                    db.CommandeItems.Add(cItem);
+                }
+            }
+
+            commande.CommandeItems = items;
+            db.Commandes.Add(commande);
+
+            db.SaveChanges();
+
             return View(createCommandeItems);
         }
 

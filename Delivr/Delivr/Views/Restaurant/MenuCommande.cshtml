@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Delivr.Models.CreateCommandeItemModel>
+﻿@model IList<Delivr.Models.CreateCommandeItemModel>
 
 @{
     ViewBag.Title = "MenuCommande";
@@ -6,40 +6,45 @@
 
 <h2>MenuCommande</h2>
 @using (Html.BeginForm("MenuCommande", "Restaurant", FormMethod.Post))
-        {
-<table>
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
+{
+    Delivr.Models.CreateCommandeItemModel template = new Delivr.Models.CreateCommandeItemModel();
+    
+    <table>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(m => template.Nom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.prix)
+            @Html.DisplayNameFor(model => template.Prix)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantite)
+            @Html.DisplayNameFor(model => template.Quantite)
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        @Html.HiddenFor(modelItem => item.nom)
-        @Html.HiddenFor(modelItem => item.prix)
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prix)
-        </td>
-        <td>
-            @Html.TextBoxFor(modelItem => item.Quantite)
-        </td>
-    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+{
+        <tr>
+                @Html.HiddenFor(modelItem => Model[i].Nom)
+                @Html.HiddenFor(modelItem => Model[i].Prix)
+            @Html.HiddenFor(modelItem => Model[i].MenuItemId)
+            @Html.HiddenFor(modelItem => Model[i].RestaurantId)
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Prix)
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Quantite)
+                </td>
+            </tr>
 }
 
 </table>
 
-<div class="col-sm-12">
-    <input type="submit" class="btn btn-primary margin-top" value="Commander" />
-</div>
+    <div class="col-sm-12">
+        <input type="submit" class="btn btn-primary margin-top" value="Commander" />
+    </div>
 }
