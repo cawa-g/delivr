@@ -48,6 +48,13 @@
             </div>
             <div class="col-sm-9">
                 <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@(Html.LabelFor(m => m.CodeCivique))</th>
+                            <th>@(Html.LabelFor(m => m.Rue))</th>
+                            <th>@(Html.LabelFor(m => m.CodePostale))</th>
+                        </tr>
+                    </thead>
                     @for (var i = 0; i < Model.Adresses.Count; i++)
                     {
 
