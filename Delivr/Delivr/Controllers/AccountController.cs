@@ -185,8 +185,42 @@ namespace Delivr.Controllers
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
-           return RedirectToAction("Index");
            
+
+        }
+
+        //
+        // GET: /Account/CreateAdresse
+
+        public ActionResult AddAdresse()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/CreateAdresse
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAdresse(AddAdresseModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Adresse adresse = new Adresse();
+                adresse.CodeCivique = model.CodeCivique;
+                adresse.CodePostale = model.CodePostale;
+                adresse.Rue = model.Rue;
+                adresse.User = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+                db.Adresses.Add(adresse);
+                db.SaveChanges();
+                return RedirectToAction("Edit");
+
+
+            }
+
+            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+            return View(model);
+
 
         }
 
@@ -206,6 +240,7 @@ namespace Delivr.Controllers
             edit.CodeCivique = user.CodeCivique;
             edit.CodePostale = user.CodePostale;
             edit.Telephone = user.Telephone;
+            edit.Adresses = db.Adresses.Where(c => c.UserId == id).ToList();
             if (user == null)
             {
                 return HttpNotFound();

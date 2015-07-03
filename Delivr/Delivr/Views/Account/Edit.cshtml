@@ -45,11 +45,25 @@
             @Html.EditorFor(model => model.CodePostale)
             @Html.ValidationMessageFor(model => model.CodePostale)
         </div>
+        <div class="editor-label">
+            Adresses
+        </div>
+        <table border="1" style="width:30%">
+            @for (var i = 0; i < Model.Adresses.Count; i++)
+            {
 
+                <tr>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodeCivique)</td>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).Rue)</td>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodePostale)</td>
+                </tr>
+
+            }
+        </table>
         <p>
             <input type="submit" value="Sauvegarder" />
         </p>
-
+        <h2>@Html.ActionLink("Ajouter une adresse", "AddAdresse", "Account")</h2>
         <h2>@Html.ActionLink("Modifier votre mot de passe", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })</h2>
     </fieldset>
 }
