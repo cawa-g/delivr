@@ -22,11 +22,11 @@ namespace Delivr.Models
         public virtual UserProfile User { get; set; }
         public virtual Restaurant Restaurant { get; set; }
         public virtual Adresse Adresse { get; set; }
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
+        public virtual ICollection<CommandeItem> CommandeItems { get; set; }
 
         public Commande()
         {
-            this.MenuItems = new List<MenuItem>();
+            this.CommandeItems = new List<CommandeItem>();
         }
 
     }

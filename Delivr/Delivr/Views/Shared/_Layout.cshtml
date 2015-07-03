@@ -41,10 +41,13 @@
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Index", "Restaurant")</li>
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "AddRestaurateur", "Account")</li>
-                    }
-                    @if (User.IsInRole("Restaurateur"))
+                    }else if(User.IsInRole("Restaurateur"))
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>
+                    }
+                    else
+                    {
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Liste", "Restaurant")</li>
                     }
                     @Html.Partial("_LoginPartial")
                 </ul>
