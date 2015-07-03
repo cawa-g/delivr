@@ -179,6 +179,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CommandeController.cs" />
+    <Compile Include="Models\CommandeModels.cs" />
     <Compile Include="Resources\General\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,6 +212,7 @@
     </Compile>
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdresseModels.cs" />
     <Compile Include="Models\DelivrContext.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\RestaurantModels.cs" />
@@ -329,6 +332,7 @@
     <Content Include="Views\Account\AddRestaurateur.cshtml" />
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\AddAdresse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\General\General.resx">

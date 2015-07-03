@@ -48,7 +48,7 @@ namespace Delivr.Controllers
         //
         // GET: /Restaurant/Details/5
 
-        public ActionResult Details(int id = 0)
+         public ActionResult Details(int? id)
         {
             Restaurant restaurant = db.Restaurants.Find(id);
             ViewBag.Restaurateur = "";

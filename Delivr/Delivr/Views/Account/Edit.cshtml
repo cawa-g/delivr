@@ -12,43 +12,58 @@
         <hr />
         @using (Html.BeginForm())
         {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            <form class="form-horizontal">
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Telephone, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Telephone)
-                    </div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <form class="form-horizontal">
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Telephone, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Telephone)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Rue, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Rue, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Rue)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Rue, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Rue, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Rue)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.CodeCivique, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.CodeCivique, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.CodeCivique)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.CodeCivique, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.CodeCivique, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.CodeCivique)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.CodePostale, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.CodePostale, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.CodePostale)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.CodePostale, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.CodePostale, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.CodePostale)
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="submit" class="btn btn-primary margin-top" value="Sauvegarder" />
-                    </div>
+            </div>
+            <div class="editor-label">
+                Adresses
+            </div>
+            <table border="1" style="width:30%">
+                @for (var i = 0; i < Model.Adresses.Count; i++)
+                {
+
+                <tr>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodeCivique)</td>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).Rue)</td>
+                    <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodePostale)</td>
+                </tr>
+
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="submit" class="btn btn-primary margin-top" value="Sauvegarder" />
                 </div>
-            </form>
+            </div>
+        </form>
         }
     </div>
     <div class="container">

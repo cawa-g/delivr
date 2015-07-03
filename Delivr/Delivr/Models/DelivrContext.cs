@@ -18,5 +18,8 @@ namespace Delivr.Models
         public DbSet<Restaurateur> Restaurateurs { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<Adresse> Adresses { get; set; }
+
+        public DbSet<Commande> Commandes { get; set; }
     }
 }

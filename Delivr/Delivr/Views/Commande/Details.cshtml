@@ -1,0 +1,64 @@
+﻿@model Delivr.Models.Commande
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Commande</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Statut)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Statut)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Rue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rue)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodeCivique)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodeCivique)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodePostale)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodePostale)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Restaurant.nom)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Restaurant.nom)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.UserName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CommandeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
