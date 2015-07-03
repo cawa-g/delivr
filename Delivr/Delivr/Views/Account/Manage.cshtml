@@ -19,7 +19,15 @@
     </div>
     <div class="container">
         <hr />
-        <input type="submit" class="btn btn-primary margin-top" value="Sauvegarder" />
+        <div class="btn-group" role="group" aria-label="controls">
+            <div class="btn-group" role="group">
+                <input type="submit" class="btn btn-primary" value="Sauvegarder" />
+            </div>
+            <div class="btn-group" role="group">
+                @(Html.ActionLink("Retour au compte", "Edit", null, new { @class = "btn btn-default" }))
+            </div>
+        </div>
+
     </div>
 </div>
 @section Scripts {
