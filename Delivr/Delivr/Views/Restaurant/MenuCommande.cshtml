@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Delivr.Models.CreateCommandeItemModel>
+
+@{
+    ViewBag.Title = "MenuCommande";
+}
+
+<h2>MenuCommande</h2>
+@using (Html.BeginForm("MenuCommande", "Restaurant", FormMethod.Post))
+        {
+<table>
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantite)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @Html.HiddenFor(modelItem => item.nom)
+        @Html.HiddenFor(modelItem => item.prix)
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix)
+        </td>
+        <td>
+            @Html.TextBoxFor(modelItem => item.Quantite)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="col-sm-12">
+    <input type="submit" class="btn btn-primary margin-top" value="Commander" />
+</div>
+}

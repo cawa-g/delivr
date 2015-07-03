@@ -46,6 +46,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.CodePostale)
         </td>
+        <td>
+           @(Html.ActionLink("Voir", "Details", new { id = item.RestaurantId }, new { @class = "btn btn-info" }))
+        </td>
     </tr>
 }
 

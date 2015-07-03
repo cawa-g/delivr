@@ -45,9 +45,9 @@
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>
                     }
-                    else
+                    else if(User.Identity.IsAuthenticated)
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Liste", "Restaurant")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "Liste", "Restaurant")</li>
                     }
                     @Html.Partial("_LoginPartial")
                 </ul>

@@ -20,4 +20,23 @@ namespace Delivr.Models
         public virtual Commande Commande { get; set; }
         public virtual MenuItem MenuItem { get; set; }
     }
+
+    public class CreateCommandeItemModel
+    {
+        public int Quantite { get; set; }
+        public int MenuItemId { get; set; }
+        public string nom { get; set; }
+        [DisplayFormat(DataFormatString = "${0:C}", ApplyFormatInEditMode = true)]
+        public int prix {  get; set; }
+
+        public virtual MenuItem MenuItem { get; set; }
+
+        public CreateCommandeItemModel(int quantite, int menuItemId, string nom, int prix)
+        {
+            Quantite = quantite;
+            MenuItemId = menuItemId;
+            this.nom = nom;
+            this.prix = prix;
+        }
+    }
 }

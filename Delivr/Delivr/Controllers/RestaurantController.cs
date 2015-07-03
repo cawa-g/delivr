@@ -26,6 +26,34 @@ namespace Delivr.Controllers
 
         //
         // GET: /Restaurant/
+
+        public ActionResult MenuCommande(int id)
+        {
+            Restaurant resto = db.Restaurants.Find(id);
+            Menu menu = db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).First();
+            List<MenuItem> menuItems = db.MenuItems.Where(c => c.MenuId == menu.MenuId).ToList();
+            List<CreateCommandeItemModel> createCommandeItems = new List<CreateCommandeItemModel>();
+            foreach (MenuItem mi in menuItems)
+            { 
+                CreateCommandeItemModel model = new CreateCommandeItemModel(0,mi.MenuItemId,mi.Nom,mi.Prix);
+                createCommandeItems.Add(model);
+            }
+
+            return View(createCommandeItems);
+        }
+
+        [HttpPost]
+        public ActionResult MenuCommande(IEnumerable<Delivr.Models.CreateCommandeItemModel> createCommandeItems)
+        {
+        
+            return View(createCommandeItems);
+        }
+
+
+
+
+        //
+        // GET: /Restaurant/
          [ActionName("IndexForRestaurateur")]
         public ActionResult Index(int? id)
         {
