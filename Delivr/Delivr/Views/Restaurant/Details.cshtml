@@ -6,25 +6,46 @@
 
 <div class="jumbotron padded">
     <div class="container">
-
         <h2>@ViewBag.Title : @Html.DisplayFor(model => model.nom)</h2>
         <hr />
-
-        <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.nom)</span>
-            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.nom)" aria-describedby="sizing-addon1" disabled>
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayName("Restaurateur")</span>
-            <input type="text" class="form-control" placeholder="@Html.Raw(ViewBag.Restaurateur)" aria-describedby="sizing-addon1" disabled>
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.Rue)</span>
-            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.Rue)" aria-describedby="sizing-addon1" disabled>
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.Telephone)</span>
-            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.Telephone)" aria-describedby="sizing-addon1" disabled>
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.CodeCivique)</span>
-            <span class="input-group-addon" id="sizing-addon1">@Html.DisplayNameFor(model => model.CodeCivique)</span>
-            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.CodePostale)" aria-describedby="sizing-addon1" disabled>
-            <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.CodePostale)" aria-describedby="sizing-addon1" disabled>
-            
-        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.nom, new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.nom, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Restaurateur , new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.Restaurateur.Email, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rue, new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.Rue, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Telephone, new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.Telephone, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodeCivique, new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.CodeCivique, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodePostale, new { @class = "col-sm-3" })
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(model => model.CodePostale, new { @class = "form-control form-input", disabled = "disabled" }))
+                </div>
+            </div>
+        </form>
     </div>
     <div class="container">
         <hr />
