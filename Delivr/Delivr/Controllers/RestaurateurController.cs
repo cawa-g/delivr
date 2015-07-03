@@ -71,15 +71,15 @@ namespace Delivr.Controllers
             Restaurateur restaurateur = new Restaurateur();
             //if (ModelState.IsValid)
             //{
-                restaurateur.CodeCivique = model.CodeCivique;
-                restaurateur.CodePostale = model.CodePostale;
-                restaurateur.DateNaissance = model.DateNaissance;
-                restaurateur.Email = model.Email;
-                restaurateur.Nom = model.Nom;
-                restaurateur.Prenom = model.Prenom;
-                restaurateur.Rue = model.Rue;
-                restaurateur.Telephone = model.Telephone;
-                restaurateur.UserName = model.Email;
+                //restaurateur.CodeCivique = model.CodeCivique;
+                //restaurateur.CodePostale = model.CodePostale;
+                //restaurateur.DateNaissance = model.DateNaissance;
+                //restaurateur.Email = model.Email;
+                //restaurateur.Nom = model.Nom;
+                //restaurateur.Prenom = model.Prenom;
+                //restaurateur.Rue = model.Rue;
+                //restaurateur.Telephone = model.Telephone;
+                //restaurateur.UserName = model.Email;
                 if (model.restaurantId == null)
                 {
                     db.UserProfiles.Add(restaurateur);

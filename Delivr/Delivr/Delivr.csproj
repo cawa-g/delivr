@@ -333,6 +333,11 @@
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\AddAdresse.cshtml" />
+    <Content Include="Views\Commande\Index.cshtml" />
+    <Content Include="Views\Commande\Details.cshtml" />
+    <Content Include="Views\Commande\Create.cshtml" />
+    <Content Include="Views\Commande\Edit.cshtml" />
+    <Content Include="Views\Commande\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\General\General.resx">
