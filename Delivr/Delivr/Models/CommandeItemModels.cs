@@ -17,7 +17,7 @@ namespace Delivr.Models
         public int CommandeId { get; set; }
         public int MenuItemId { get; set; }
 
-        public virtual Commande User { get; set; }
-        public virtual MenuItem Restaurant { get; set; }
+        public virtual Commande Commande { get; set; }
+        public virtual MenuItem MenuItem { get; set; }
     }
 }
