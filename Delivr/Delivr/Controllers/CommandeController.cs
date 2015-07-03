@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using WebMatrix.WebData;
 
 namespace Delivr.Controllers
 {
@@ -121,6 +122,23 @@ namespace Delivr.Controllers
             db.Commandes.Remove(commande);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Commande/List
+
+        public ActionResult List(int? restaurantId = null)
+        {
+            if (!restaurantId.HasValue)
+                return HttpNotFound();
+
+            Restaurant restaurant = db.Restaurants.Find(restaurantId);
+            if (restaurant == null || restaurant.UserId != WebSecurity.CurrentUserId)
+                return HttpNotFound();
+
+            var commandes = restaurant.Commandes.Where(c => c.Statut != Commande.StatutCommande.EnLivraison && c.Statut != Commande.StatutCommande.Livree).OrderBy(c => c.Date);
+
+            return View(commandes);
         }
 
         protected override void Dispose(bool disposing)
