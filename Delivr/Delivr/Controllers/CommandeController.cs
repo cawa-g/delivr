@@ -141,6 +141,47 @@ namespace Delivr.Controllers
             return View(commandes);
         }
 
+        //
+        // GET: /Commande/Statut/5
+
+        /*public ActionResult Statut(int? id = null)
+        {
+            if (!id.HasValue)
+                return HttpNotFound();
+
+            Commande commande = db.Commandes.Find(id);
+            if (commande == null)
+                return HttpNotFound();
+
+            return PartialView("StatutCommande", commande);
+        }*/
+
+        //
+        // POST: /Commande/Statut
+
+        public ActionResult Statut(SetStatutCommandeModel model)
+        {
+            if (model.Statut == null ||
+                (model.Statut != Commande.StatutCommande.EnAttente
+                && model.Statut != Commande.StatutCommande.EnPreparation
+                && model.Statut != Commande.StatutCommande.Prete
+                && model.Statut != Commande.StatutCommande.EnLivraison
+                && model.Statut != Commande.StatutCommande.Livree))
+            {
+                return HttpNotFound();
+            }
+
+            Commande commande = db.Commandes.Find(model.Id);
+            if (commande == null)
+                return HttpNotFound();
+
+            commande.Statut = model.Statut;
+            db.Entry(commande).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return PartialView("StatutCommande", commande);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

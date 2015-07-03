@@ -2,43 +2,61 @@
 
 @{
     string statusString;
-    string panelClass;
-    string collapseClass;
+    string buttonText;
+    string panelClasses;
+    string buttonClasses;
+    string collapseClasses;
     switch (Model.Statut)
     {
         case Delivr.Models.Commande.StatutCommande.EnAttente:
             statusString = "En attente";
-            panelClass = "panel-info";
-            collapseClass = "in";
+            buttonText = "Préparer cette commande";
+            panelClasses = "panel-info";
+            buttonClasses = "btn-primary startPrepare";
+            collapseClasses = "in";
             break;
         case Delivr.Models.Commande.StatutCommande.EnPreparation:
             statusString = "En préparation";
-            panelClass = "panel-primary";
-            collapseClass = "in";
+            buttonText = "Terminer la préparation";
+            panelClasses = "panel-primary";
+            buttonClasses = "btn-success finishPrepare";
+            collapseClasses = "in";
             break;
         case Delivr.Models.Commande.StatutCommande.Prete:
             statusString = "Prête";
-            panelClass = "panel-success";
-            collapseClass = "";
+            buttonText = "Do nothing";
+            panelClasses = "panel-success";
+            buttonClasses = "hidden";
+            collapseClasses = "";
             break;
         default:    // Should not happen
             statusString = "Error";
-            panelClass = "panel-danger";
-            collapseClass = "";
+            buttonText = "Error";
+            panelClasses = "panel-danger";
+            buttonClasses = "btn-danger";
+            collapseClasses = "";
             break;
     }
 
     string collapseId = "collapseCommande" + Html.ValueFor(model => model.CommandeId);
 
-    <div class="panel @panelClass">
+    <div class="panel @panelClasses">
         <div class="panel-heading" role="tab">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
-                    Commande #@Html.ValueFor(model => model.CommandeId) (@Model.CommandeItems.Sum(i => i.Quantite) éléments)
+                    Commande #@Html.ValueFor(model => model.CommandeId) (@Model.CommandeItems.Sum(i => i.Quantite) éléments - @statusString)
                 </a>
+                <span>
+                    @Html.ActionLink(buttonText, "Statut/", null, new
+                    {
+                        @class = "pull-right btn btn-sm " + buttonClasses,
+                        role = "button",
+                        style = "margin: -6px -11px 0 0"
+                    })
+                </span>
             </h4>
         </div>
-        <div id="@collapseId" class="panel-collapse collapse @collapseClass" role="tabpanel">
+        <div id="@collapseId" class="panel-collapse collapse @collapseClasses" role="tabpanel">
             <div class="panel-body">
                 <ul>
                     @{

@@ -8,9 +8,45 @@
     <div class="container">
         <h2>@ViewBag.Title</h2>
 
-        @foreach (var item in Model)
-        {
-            Html.RenderPartial("StatutCommande", item);
-        }
+        <div id="listeCommandes">
+            @foreach (var item in Model)
+            {
+                <div class="panelCommande" data-id="@item.CommandeId">
+                    @{Html.RenderPartial("StatutCommande", item);}
+                </div>
+            }
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#listeCommandes').on("click", '.panelCommande a.startPrepare', function () {
+            $panel = $(this).parents('.panelCommande');
+            $.ajax({
+                url: this.href,
+                data: {
+                    Id: $panel.attr("data-id"),
+                    Statut: "@Delivr.Models.Commande.StatutCommande.EnPreparation",
+                },
+                success: function (html) { alert(); $panel.html(html); }
+            });
+            return false;
+        });
+
+        $('#listeCommandes').on("click", '.panelCommande a.finishPrepare', function () {
+            $panel = $(this).parents('.panelCommande');
+            $.ajax({
+                url: this.href,
+                data: {
+                    Id: $panel.attr("data-id"),
+                    Statut: "@Delivr.Models.Commande.StatutCommande.Prete",
+                },
+                success: function (html) { alert(); $panel.html(html); }
+            });
+            return false;
+        });
+    </script>
+}

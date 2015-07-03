@@ -37,6 +37,11 @@ namespace Delivr.Models
         {
             this.CommandeItems = new List<CommandeItem>();
         }
+    }
 
+    public class SetStatutCommandeModel
+    {
+        public int Id { get; set; }
+        public string Statut { get; set; }
     }
 }
