@@ -338,6 +338,7 @@
     <Content Include="Views\Commande\Create.cshtml" />
     <Content Include="Views\Commande\Edit.cshtml" />
     <Content Include="Views\Commande\Delete.cshtml" />
+    <Content Include="Views\Restaurant\Liste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\General\General.resx">

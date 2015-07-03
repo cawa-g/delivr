@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Delivr.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Liste";
+}
+
+<h2>Liste</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodeCivique)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodePostale)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodeCivique)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodePostale)
+        </td>
+    </tr>
+}
+
+</table>

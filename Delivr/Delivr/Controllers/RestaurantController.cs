@@ -45,6 +45,14 @@ namespace Delivr.Controllers
             return View(Restaurants);
         }
 
+         //
+         // GET: /Restaurant/
+         public ActionResult Liste()
+         {
+             List<Restaurant> Restaurants = db.Restaurants.ToList();
+             return View(Restaurants);
+         }
+
         //
         // GET: /Restaurant/Details/5
 

@@ -15,14 +15,19 @@ namespace Delivr.Models
         public int CommandeId { get; set; }
         public DateTime? Date { get; set; }
         public string Statut { get; set; }
-        public string Rue { get; set; }
-        public int? CodeCivique { get; set; }
-        public string CodePostale { get; set; }
         public int RestaurantId { get; set; }
         public int UserId { get; set; }
+        public int AdresseId { get; set; }
 
         public virtual UserProfile User { get; set; }
         public virtual Restaurant Restaurant { get; set; }
+        public virtual Adresse Adresse { get; set; }
+        public virtual ICollection<MenuItem> MenuItems { get; set; }
+
+        public Commande()
+        {
+            this.MenuItems = new List<MenuItem>();
+        }
 
     }
 }
