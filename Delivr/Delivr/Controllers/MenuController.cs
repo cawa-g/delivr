@@ -78,7 +78,7 @@ namespace Delivr.Controllers
                     RestaurantId = restaurantId.Value
                 };
             }
-
+            ViewBag.RestoName = restaurant.nom;
             return View(model);
         }
 
