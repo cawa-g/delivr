@@ -328,6 +328,7 @@
     <Content Include="Views\Restaurateur\Message.cshtml" />
     <Content Include="Views\Account\AddRestaurateur.cshtml" />
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\General\General.resx">
