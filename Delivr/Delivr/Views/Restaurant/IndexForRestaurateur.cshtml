@@ -30,6 +30,11 @@
                         <td class="text-right">
                             @if (User.IsInRole("Admin") || User.IsInRole("Restaurateur"))
                             {
+                                <div id="commandes-group" class="btn-group btn-group-xs" role="group">
+                                    <a href="@Url.Action("List", "Commande", new { RestaurantId = item.RestaurantId })" class="btn btn-default">
+                                        Commandes <span class="glyphicon glyphicon-book"></span>
+                                    </a>
+                                </div>
                                 <div id="menu-group" class="btn-group btn-group-xs" role="group">
                                     <a href="@Url.Action("Edit", "Menu", new { RestaurantId = item.RestaurantId })" class="btn btn-default">
                                         Menu <span class="glyphicon glyphicon-cutlery"></span>
