@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Delivr.Models.Commande>
+
+@{
+    ViewBag.Title = "Commandes en cours";
+}
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        @foreach (var item in Model)
+        {
+            Html.RenderPartial("StatutCommande", item);
+        }
+    </div>
+</div>

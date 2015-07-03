@@ -1,0 +1,61 @@
+﻿@model Delivr.Models.Commande
+
+@{
+    string statusString;
+    string panelClass;
+    string collapseClass;
+    switch (Model.Statut)
+    {
+        case Delivr.Models.Commande.StatutCommande.EnAttente:
+            statusString = "En attente";
+            panelClass = "panel-info";
+            collapseClass = "in";
+            break;
+        case Delivr.Models.Commande.StatutCommande.EnPreparation:
+            statusString = "En préparation";
+            panelClass = "panel-primary";
+            collapseClass = "in";
+            break;
+        case Delivr.Models.Commande.StatutCommande.Prete:
+            statusString = "Prête";
+            panelClass = "panel-success";
+            collapseClass = "";
+            break;
+        default:    // Should not happen
+            statusString = "Error";
+            panelClass = "panel-danger";
+            collapseClass = "";
+            break;
+    }
+
+    string collapseId = "collapseCommande" + Html.ValueFor(model => model.CommandeId);
+
+    <div class="panel @panelClass">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
+                    Commande #@Html.ValueFor(model => model.CommandeId) (@Model.CommandeItems.Sum(i => i.Quantite) éléments)
+                </a>
+            </h4>
+        </div>
+        <div id="@collapseId" class="panel-collapse collapse @collapseClass" role="tabpanel">
+            <div class="panel-body">
+                <ul>
+                    @{
+                        Decimal total = 0;
+                        foreach (var item in Model.CommandeItems)
+                        {
+                            Decimal subtotal = new Decimal(item.Quantite * item.MenuItem.Prix) / 100;
+                            <li>
+                                @Html.Raw(String.Format("{0:C} ({1}x <strong>{2}</strong>)",
+                                    subtotal, item.Quantite, Html.Encode(item.MenuItem.Nom)))
+                            </li>
+                            total += subtotal;
+                        }
+                    }
+                </ul>
+                <strong>Total:</strong> @String.Format("{0:C}", total)
+            </div>
+        </div>
+    </div>
+}

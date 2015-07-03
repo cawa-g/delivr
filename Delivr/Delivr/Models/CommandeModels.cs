@@ -10,10 +10,19 @@ namespace Delivr.Models
     [Table("Commande")]
     public class Commande
     {
+        public static class StatutCommande
+        {
+            public const string EnAttente = "EnAttente";
+            public const string EnPreparation = "EnPreparation";
+            public const string Prete = "Prete";
+            public const string EnLivraison = "EnLivraison";
+            public const string Livree = "Livree";
+        }
+
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int CommandeId { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         public string Statut { get; set; }
         public int RestaurantId { get; set; }
         public int UserId { get; set; }
