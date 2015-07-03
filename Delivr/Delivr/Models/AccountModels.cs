@@ -22,9 +22,7 @@ namespace Delivr.Models
         public string Prenom { get; set; }
         public string Nom { get; set; }
         public string Telephone { get; set; }
-        public string Rue { get; set; }
-        public int? CodeCivique { get; set; }
-        public string CodePostale { get; set; }
+        public int? AdresseDefaultId { get; set; }
         public DateTime? DateNaissance { get; set; }
 
         public UserProfile()

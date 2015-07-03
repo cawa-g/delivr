@@ -89,18 +89,19 @@ namespace Delivr.Controllers
                         propertyValues: new { email = model.Email,
                                               Nom = model.Nom, 
                                               Prenom = model.Prenom, 
-                                              Rue = model.Rue, 
-                                              CodeCivique = model.CodeCivique, 
-                                              CodePostale = model.CodePostale, 
                                               Telephone = model.Telephone,
                                               DateNaissance = model.DateNaissance});
-                    //Adresse adresse = new Adresse();
-                    //adresse.CodeCivique = model.CodeCivique;
-                    //adresse.CodePostale = model.CodePostale;
-                    //adresse.Rue = model.Rue;
-                    //adresse.User = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
-                    //db.Adresses.Add(adresse);
-                    //db.SaveChanges();
+                    Adresse adresse = new Adresse();
+                    adresse.CodeCivique = model.CodeCivique;
+                    adresse.CodePostale = model.CodePostale;
+                    adresse.Rue = model.Rue;
+                    adresse.User = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
+                    db.Adresses.Add(adresse);
+                    db.SaveChanges();
+                    UserProfile user = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
+                    user.AdresseDefaultId = db.Adresses.First(c => c.UserId == user.UserId).AdresseId;
+                    TryUpdateModel(user);
+                    db.SaveChanges();
 
                     WebSecurity.Login(model.Email, model.Password);
 
@@ -236,9 +237,10 @@ namespace Delivr.Controllers
             int id = WebSecurity.GetUserId(userName);
             UserProfile user = db.UserProfiles.Find(id);
             EditUserModel edit = new EditUserModel();
-            edit.Rue = user.Rue;
-            edit.CodeCivique = user.CodeCivique;
-            edit.CodePostale = user.CodePostale;
+            Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
+            edit.Rue = adresse.Rue;
+            edit.CodeCivique = adresse.CodeCivique;
+            edit.CodePostale = adresse.CodePostale;
             edit.Telephone = user.Telephone;
             edit.Adresses = db.Adresses.Where(c => c.UserId == id).ToList();
             if (user == null)
@@ -258,11 +260,13 @@ namespace Delivr.Controllers
             try
                 {
             UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
-            user.Rue = edit.Rue;
-            user.CodeCivique = edit.CodeCivique;
-            user.CodePostale = edit.CodePostale;
+            Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
+            adresse.Rue = edit.Rue;
+            adresse.CodeCivique = edit.CodeCivique;
+            adresse.CodePostale = edit.CodePostale;
             user.Telephone = edit.Telephone;
             TryUpdateModel(user);
+            TryUpdateModel(adresse);
             db.SaveChanges();
             return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> CodeCivique = " + edit.CodeCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
             
