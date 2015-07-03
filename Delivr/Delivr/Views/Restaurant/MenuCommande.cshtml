@@ -34,10 +34,14 @@
                     @Html.DisplayFor(modelItem => Model[i].Nom)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => Model[i].Prix)
+
+                    @{Decimal subtotal = new Decimal(Model[i].Prix) / 100;
+                        @Html.Raw(String.Format("{0:C}",
+                                    subtotal))
+                    }
                 </td>
                 <td>
-                    @Html.TextBoxFor(modelItem => Model[i].Quantite)
+                    @Html.TextBoxFor(modelItem => Model[i].Quantite, new { autocomplete = "off" })
                 </td>
             </tr>
 }

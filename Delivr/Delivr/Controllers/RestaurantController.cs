@@ -77,7 +77,7 @@ namespace Delivr.Controllers
 
             db.SaveChanges();
 
-            return View(createCommandeItems);
+            return RedirectToAction("Liste", "Restaurant");
         }
 
 
