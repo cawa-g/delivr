@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Delivr.Models
 {
@@ -45,6 +47,17 @@ namespace Delivr.Models
 
         [Display(ResourceType = typeof(Resources.Menu), Name = "MenuItems")]
         public ICollection<EditMenuItemModel> MenuItemModels { get; set; }
+
+        public EditMenuModel()
+        { }
+
+        public EditMenuModel(Menu menu)
+        {
+            MenuId = menu.MenuId;
+            Nom = menu.Nom;
+            RestaurantId = menu.RestaurantId;
+            MenuItemModels = menu.MenuItems.Select(item => new EditMenuItemModel(item)).ToList();
+        }
     }
 
     public class EditMenuItemModel
@@ -62,5 +75,16 @@ namespace Delivr.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
         [Range(0, 1000, ErrorMessageResourceType = typeof(Resources.Menu), ErrorMessageResourceName = "PriceErrorMessage")]
         public decimal Prix { get; set; }
+
+        public EditMenuItemModel()
+        { }
+
+        public EditMenuItemModel(MenuItem item)
+        {
+            MenuItemId = item.MenuItemId;
+            Nom = item.Nom;
+            Description = item.Description;
+            Prix = new Decimal(item.Prix) / 100;
+        }
     }
 }

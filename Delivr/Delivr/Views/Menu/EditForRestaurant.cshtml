@@ -1,0 +1,136 @@
+﻿@model Delivr.Models.Restaurant
+@{
+    ViewBag.Title = @Resources.Menu.PageTitle;
+}
+
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title : @Model.nom</h2>
+
+        <ul class="nav nav-tabs">
+            @{
+                System.Text.StringBuilder tabContentBuilder = new System.Text.StringBuilder("<div id=\"menu-tabs\" class=\"tab-content\">\n");
+                bool first = true;
+                foreach (var menu in Model.Menus)
+                {
+                    string additionalClasses = "";
+                    if (first)
+                    {
+                        additionalClasses = "active";
+                        first = false;
+                    }
+
+                    <li role="presentation" class="@additionalClasses">
+                        <a id="tab_@(menu.MenuId)" href="#tabpanel_@(menu.MenuId)" role="tab" data-toggle="tab">@menu.Nom</a>
+                    </li>
+
+                    tabContentBuilder.AppendFormat("<div role=\"tabpanel\" class=\"tab-pane menu {0}\" id=\"tabpanel_{1}\" data-tab=\"tab_{1}\">\n", additionalClasses, menu.MenuId);
+                    tabContentBuilder.Append(Html.Partial("EditMenuPartial", new Delivr.Models.EditMenuModel(menu)));
+                    tabContentBuilder.AppendLine("</div>");
+                }
+
+                <li role="presentation">
+                    <a href="#tabpanel_new" role="tab" data-toggle="tab">+</a>
+                </li>
+
+                tabContentBuilder.AppendFormat("<div role=\"tabpanel\" class=\"tab-pane menu {0}\" id=\"tabpanel_new\">", first ? "active" : "");
+                tabContentBuilder.Append(Html.Partial("EditMenuPartial", new Delivr.Models.EditMenuModel() { RestaurantId = Model.RestaurantId }));
+                tabContentBuilder.AppendLine("</div>");
+
+                tabContentBuilder.AppendLine("</div>");
+            }
+        </ul>
+
+        @* Render the tabs content *@
+        @Html.Raw(tabContentBuilder.ToString())
+    </div>
+    <div class="container">
+        <hr />
+        <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="btn-group btn-group-lg" role="group">
+                    @(Html.ActionLink(Resources.General.BackToListing, "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                    @(Html.ActionLink(Resources.General.BackToDetails, "Details", "Restaurant", new { id = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
+                </div>
+            }
+            @if (User.IsInRole("Restaurateur"))
+            {
+                <div class="btn-group btn-group-lg" role="group">
+                    @Html.ActionLink(Resources.Menu.BackToRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // Tabs level event handlers:
+        $("#menu-tabs").on("submit", "edit-menu-form", function () {
+
+            $menu = $(this).parent();
+            $(this).ajaxSubmit(function (html) {
+                $menu.html(html);
+                // If not in error:
+                if (!$(".edit-menu-form", $menu).hasClass("in-error")) {
+                    $("#" + $menu.attr("data-tab")).html($("input[name=Nom]", $menu).val());
+                }
+            });
+
+            return false;
+        });
+
+        $("#menu-tabs").on("submit", "add-menu-form", function () {
+
+            $(this).ajaxSubmit(function (html) {
+                // If not in error:
+                if (!$("[class$=-menu-form]", html).hasClass("in-error")) {
+
+                    id = $("input[name=MenuId]", html).val();
+                    nom = $("input[name=Nom]", html).val();
+
+                    $("#menu-tabs").append(
+                          "<li role='presentation'>"
+                        + "    <a id='tab_" + id + "' href='#tabpanel_" + id + "' role='tab'>" + nom + "</a>"
+                        + "</li>");
+
+                    $("#tabpanel_new").before(
+                          "<div role='tabpanel' class='tab-pane menu' id='tabpanel_" + id + "' data-tab='tab_" + id + "'>"
+                        + html
+                        + "</div>");
+
+                    $("#tab_" + id).tab("show");
+
+                } else {
+
+                    $("#tabpanel_new").html(html)
+
+                }
+            });
+
+            return false;
+        });
+
+        // Menu level event handlers:
+        $("#menu-tabs").on("click", ".add-item", function () {
+            $menu = $(this).parents(".menu");
+            $.ajax({
+                url: this.href,
+                cache: false,
+                success: function (html) { $(".menu-items-list", $menu).append(html); }
+            });
+            return false;
+        });
+
+        $("#menu-tabs").on("click", ".menu-items-list .removeItem", function () {
+            $(this).parents("div.editor-row:first").remove();
+            return false;
+        });
+    </script>
+}

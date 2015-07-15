@@ -36,9 +36,9 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Menu/Edit/5
+        // GET: /Menu/EditForRestaurant/5
 
-        public ActionResult Edit(int? restaurantId = null)
+        public ActionResult EditForRestaurant(int? restaurantId = null)
         {
             if (restaurantId == null)
                 return HttpNotFound();
@@ -47,39 +47,7 @@ namespace Delivr.Controllers
             if (restaurant == null || (!User.IsInRole("Admin") && restaurant.UserId != WebSecurity.CurrentUserId))
                 return HttpNotFound();
 
-            Menu menu = db.Menus.SingleOrDefault(m => m.RestaurantId == restaurantId);
-            EditMenuModel model;
-            if (menu != null)
-            {
-                List<EditMenuItemModel> menuItemModels = new List<EditMenuItemModel>();
-                foreach (MenuItem item in menu.MenuItems)
-                {
-                    menuItemModels.Add(new EditMenuItemModel()
-                    {
-                        MenuItemId = item.MenuItemId,
-                        Nom = item.Nom,
-                        Description = item.Description,
-                        Prix = new Decimal(item.Prix) / 100
-                    });
-                }
-
-                model = new EditMenuModel()
-                {
-                    MenuId = menu.MenuId,
-                    Nom = menu.Nom,
-                    RestaurantId = menu.RestaurantId,
-                    MenuItemModels = menuItemModels
-                };
-            }
-            else
-            {
-                model = new EditMenuModel()
-                {
-                    RestaurantId = restaurantId.Value
-                };
-            }
-            ViewBag.RestoName = restaurant.nom;
-            return View(model);
+            return View(restaurant);
         }
 
         //

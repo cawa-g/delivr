@@ -21,6 +21,7 @@ namespace Delivr.Models
         public string CodePostale { get; set; }
 
         public virtual UserProfile Restaurateur { get; set; }
+        public virtual ICollection<Menu> Menus { get; set; }
         public virtual ICollection<Commande> Commandes { get; set; }
     }
 }

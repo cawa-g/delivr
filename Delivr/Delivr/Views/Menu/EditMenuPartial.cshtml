@@ -1,0 +1,58 @@
+﻿@model Delivr.Models.EditMenuModel
+@{
+    bool editMode = Model.MenuId.HasValue;
+
+    using (Html.BeginForm(editMode ? "Edit" : "Add", "Menu", FormMethod.Post,
+        new { @class = (editMode ? "edit-menu-form" : "add-menu-form") + (ViewData.ModelState.IsValid ? "" : " in-error") }))
+    {
+        @Html.AntiForgeryToken()
+        if (ViewBag.SuccessMessage != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @ViewBag.SuccessMessage
+            </div>
+        }
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.MenuId)
+
+        if (ViewData.ModelState.IsValidField("Nom"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nom, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
+            </div>
+        }
+        else
+        {
+            <div class="form-group has-error">
+                @Html.LabelFor(model => model.Nom, new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger bg-danger", style = "margin-left: 10px" })
+                @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuItemModels, new { @class = "control-label", style = "width: 100%; border-bottom: solid 1px" })
+            <div class="menu-items-list">
+                @if (Model.MenuItemModels != null)
+                {
+                    foreach (var itemModel in Model.MenuItemModels)
+                    {
+                        Html.RenderPartial("MenuItemRow", itemModel);
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10 control-label">
+                @Html.ActionLink(Resources.Menu.AddItem, "BlankMenuItemRow", null, new { @class = "btn btn-default bnt-small add-item" })
+                <input type="submit" class="btn btn-primary" value="@Resources.General.Save" />
+            </div>
+        </div>
+    }
+}

@@ -182,6 +182,11 @@
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
+    <Compile Include="Resources\Commande\Commande.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Commande.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\General\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,12 +229,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Restaurant.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Resources\Restaurant\Restaurant.resx">
-      <SubType>Designer</SubType>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Restaurant.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
+    <Compile Include="Resources\Restaurateur\Restaurateur.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Restaurateur.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnet-Delivr-20150515145923.mdf" />
@@ -283,6 +287,8 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.onepage-scroll.js" />
     <Content Include="Scripts\jquery.onepage-scroll.min.js" />
     <Content Include="Scripts\jquery.stellar.js" />
@@ -338,7 +344,7 @@
     <Content Include="Views\Restaurateur\Delete.cshtml" />
     <Content Include="Views\Restaurant\Message.cshtml" />
     <Content Include="Views\Account\Message.cshtml" />
-    <Content Include="Views\Menu\Edit.cshtml" />
+    <Content Include="Views\Menu\EditForRestaurant.cshtml" />
     <Content Include="Views\Menu\MenuItemRow.cshtml" />
     <Content Include="Views\Restaurateur\Message.cshtml" />
     <Content Include="Views\Account\AddRestaurateur.cshtml" />
@@ -354,8 +360,14 @@
     <Content Include="Views\Commande\StatutCommande.cshtml" />
     <Content Include="Views\Restaurant\Liste.cshtml" />
     <Content Include="Views\Restaurant\MenuCommande.cshtml" />
+    <Content Include="Views\Menu\EditMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Commande\Commande.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Commande.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\General\General.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>General.Designer.cs</LastGenOutput>
@@ -364,6 +376,16 @@
     <EmbeddedResource Include="Resources\Home\Home.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Restaurant\Restaurant.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Restaurant.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Restaurateur\Restaurateur.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Restaurateur.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
@@ -379,10 +401,7 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Commande\" />
-    <Folder Include="Resources\Restaurateur\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
