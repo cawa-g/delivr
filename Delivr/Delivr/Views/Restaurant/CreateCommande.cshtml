@@ -1,0 +1,117 @@
+﻿@model Delivr.Models.CreateCommandeModel
+
+@{
+    ViewBag.Title = "Confirmez votre commande";
+}
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <form class="form-horizontal">
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, new { @class = "col-sm-3 control-label" })
+
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Date, new { @class = "form-control form-input" })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+                </div>
+
+                <div class="col-sm-9">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@(Html.LabelFor(m => m.CommandeItems.First().MenuItem.Nom))</th>
+                                <th>@(Html.LabelFor(m => m.CommandeItems.First().Quantite))</th>
+                                <th>@(Html.LabelFor(m => m.CommandeItems.First().SousTotal))</th>
+                            </tr>
+                        </thead>
+                        @for (var i = 0; i < Model.CommandeItems.Count; i++)
+                        {
+
+                            <tr>
+                                <td>@Html.DisplayFor(m => Model.CommandeItems.ElementAt(i).MenuItem.Nom)</td>
+                                <td>@Html.DisplayFor(m => Model.CommandeItems.ElementAt(i).Quantite)</td>
+                                <td>@Html.DisplayFor(m => Model.CommandeItems.ElementAt(i).SousTotal)</td>
+                            </tr>                    
+                            @Html.HiddenFor(m => m.CommandeItems[i].Commande)
+                            @Html.HiddenFor(m => m.CommandeItems[i].CommandeId)
+                            @Html.HiddenFor(m => m.CommandeItems[i].CommandeItemId)
+                            @Html.HiddenFor(m => m.CommandeItems[i].MenuItem)
+                            @Html.HiddenFor(m => m.CommandeItems[i].MenuItemId)
+                            @Html.HiddenFor(m => m.CommandeItems[i].Quantite)
+                            @Html.HiddenFor(m => m.CommandeItems[i].SousTotal)
+                        }
+                    </table>
+                </div>
+
+                
+
+                <div class="form-group">
+                    @(Html.LabelFor(m => m.NewAdresse.Rue, new { @class = "col-sm-3 control-label" }))
+                    <div class="col-sm-9">
+                        @(Html.TextBoxFor(m => m.NewAdresse.Rue, new { @class = "form-control form-input" }))
+                    </div>
+                </div>
+                <div class="form-group">
+                    @(Html.LabelFor(m => m.NewAdresse.CodeCivique, new { @class = "col-sm-3 control-label" }))
+                    <div class="col-sm-9">
+                        @(Html.TextBoxFor(m => m.NewAdresse.CodeCivique, new { @class = "form-control form-input" }))
+                    </div>
+                </div>
+                <div class="form-group">
+                    @(Html.LabelFor(m => m.NewAdresse.CodePostale, new { @class = "col-sm-3 control-label" }))
+
+                    <div class="col-sm-9">
+                        @(Html.TextBoxFor(m => m.NewAdresse.CodePostale, new { @class = "form-control form-input" }))
+                    </div>
+                </div>
+
+                @{
+
+                        List<SelectListItem> adresses = new List<SelectListItem>();
+                        adresses.Add(new SelectListItem
+                        {
+                            Value = Model.AdresseDefault.AdresseId.ToString(),
+                            Text = Model.AdresseDefault.CodeCivique.ToString() + " " + Model.AdresseDefault.Rue.ToString(),
+                        });
+                        foreach (Delivr.Models.Adresse r in Model.Adresses)
+                        {
+                            adresses.Add(new SelectListItem
+                            {
+                                Value = r.AdresseId.ToString(),
+                                Text = r.CodeCivique.ToString() + " " + r.Rue.ToString(),
+                            });
+                        }
+                }
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        @(Html.DropDownListFor(m => m.AdresseId, (List<SelectListItem>)adresses, new { @class = "form-control form-input" }))
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-primary margin-top" value="Confirmer commande" />
+                    </div>
+                </div>
+            </form>
+        }
+        </div>
+      </div>
+        
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

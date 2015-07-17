@@ -39,6 +39,23 @@ namespace Delivr.Models
         }
     }
 
+    public class CreateCommandeModel
+    {
+        public DateTime Date { get; set; }
+        public Adresse NewAdresse { get; set; }
+        public Adresse AdresseDefault { get; set; }
+        public virtual IList<CommandeItem> CommandeItems { get; set; }
+        public virtual IList<Adresse> Adresses { get; set; }
+        public int AdresseId { get; set; }
+
+        public CreateCommandeModel()
+        {
+            this.CommandeItems = new List<CommandeItem>();
+            this.Adresses = new List<Adresse>();
+        }
+
+    }
+
     public class SetStatutCommandeModel
     {
         public int Id { get; set; }

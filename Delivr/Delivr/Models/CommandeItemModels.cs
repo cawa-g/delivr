@@ -16,6 +16,7 @@ namespace Delivr.Models
         public int Quantite { get; set; }
         public int CommandeId { get; set; }
         public int MenuItemId { get; set; }
+        public int SousTotal { get; set; }
 
         public virtual Commande Commande { get; set; }
         public virtual MenuItem MenuItem { get; set; }

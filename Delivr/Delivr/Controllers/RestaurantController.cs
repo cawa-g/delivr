@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Delivr.Models;
 using WebMatrix.WebData;
 using System.Web.Security;
+using System.Net.Mail;
 
 namespace Delivr.Controllers
 {
@@ -45,16 +46,7 @@ namespace Delivr.Controllers
         [HttpPost]
         public ActionResult MenuCommande(IList<Delivr.Models.CreateCommandeItemModel> createCommandeItems)
         {
-            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
-            Commande commande = new Commande()
-            {
-                AdresseId = (int)user.AdresseDefaultId,
-                RestaurantId = createCommandeItems.First().RestaurantId,
-                UserId = user.UserId,
-                Date = DateTime.Today,
-                Statut = Commande.StatutCommande.EnAttente
-
-            };
+            
 
             List<CommandeItem> items = new List<CommandeItem>();
             foreach (CreateCommandeItemModel c in createCommandeItems)
@@ -64,23 +56,124 @@ namespace Delivr.Controllers
                     CommandeItem cItem = new CommandeItem()
                     {
                         MenuItemId = c.MenuItemId,
-                        Quantite = c.Quantite
+                        Quantite = c.Quantite,
+                        SousTotal = c.Quantite*c.Prix
+                        
                     };
 
                     items.Add(cItem);
-                    db.CommandeItems.Add(cItem);
                 }
             }
-
-            commande.CommandeItems = items;
-            db.Commandes.Add(commande);
-
-            db.SaveChanges();
-
-            return RedirectToAction("Liste", "Restaurant");
+            TempData["list"] = items;
+            return RedirectToAction("CreateCommande");
         }
 
 
+
+        //
+        // GET: /Restaurant/
+
+        public ActionResult CreateCommande()
+        {
+            
+            var items = TempData["list"] as List<CommandeItem>;
+            if (items == null)
+                return RedirectToAction("Liste");
+            CreateCommandeModel createCommande = new CreateCommandeModel();
+            MenuItem firstMenuItem = db.MenuItems.Find(items.First().MenuItemId);
+            Menu menu = db.Menus.Find(firstMenuItem.MenuId);
+            Restaurant resto = db.Restaurants.Find(menu.RestaurantId);
+            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+            List<MenuItem> menuItems = db.MenuItems.Where(c => c.MenuId == menu.MenuId).ToList();
+            List<CommandeItem> commandeItems = new List<CommandeItem>();
+            foreach (CommandeItem ci in items)
+            {
+                firstMenuItem = db.MenuItems.Find(ci.MenuItemId);
+                ci.MenuItem = firstMenuItem;
+                createCommande.CommandeItems.Add(ci);
+            }
+
+            foreach (Adresse ad in user.Adresses)
+            {
+                if (user.AdresseDefaultId != ad.AdresseId)
+                    createCommande.Adresses.Add(ad);
+                else
+                    createCommande.AdresseDefault = ad;
+            }
+
+            createCommande.Date = DateTime.Now;
+            return View(createCommande);
+        }
+
+        [HttpPost]
+        public ActionResult CreateCommande(CreateCommandeModel createCommande)
+        {
+            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+            MenuItem firstMenuItem = db.MenuItems.Find(createCommande.CommandeItems.First().MenuItemId);
+            Menu menu = db.Menus.Find(firstMenuItem.MenuId);
+            Restaurant resto = db.Restaurants.Find(menu.RestaurantId);
+            int AdresseId = createCommande.AdresseId;
+            if ((createCommande.NewAdresse.Rue == null || createCommande.NewAdresse.Rue == ""))
+            {
+                AdresseId = createCommande.AdresseId;
+                user.AdresseDefaultId = AdresseId;
+            }else
+            {
+                Adresse add = new Adresse();
+                add.CodeCivique = createCommande.NewAdresse.CodeCivique;
+                add.CodePostale = createCommande.NewAdresse.CodePostale;
+                add.Rue = createCommande.NewAdresse.Rue;
+                add.User = user;
+                db.Adresses.Add(add);
+                db.SaveChanges();
+                user.Adresses.Add(add);               
+                AdresseId = add.AdresseId;
+                user.AdresseDefaultId = add.AdresseId;
+
+                
+            }
+
+            
+            Commande commande = new Commande()
+            {
+                
+                    
+                AdresseId = AdresseId,
+                RestaurantId = resto.RestaurantId,
+                UserId = user.UserId,
+                Date = createCommande.Date,
+                Statut = Commande.StatutCommande.EnAttente
+
+            };
+            commande.Adresse = db.Adresses.Find(AdresseId);
+            foreach (CommandeItem c in createCommande.CommandeItems)
+            {
+                {
+
+ 
+                    db.CommandeItems.Add(c);
+                }
+            }
+
+            commande.CommandeItems = createCommande.CommandeItems;
+            commande.Adresse = db.Adresses.Find(AdresseId);
+            db.Commandes.Add(commande);
+            
+
+            db.SaveChanges();
+            string items = Environment.NewLine+"Items: ";
+            string totalString = "Total: ";
+            int total = 0;
+            foreach (CommandeItem c in commande.CommandeItems)
+            {
+                MenuItem mi = db.MenuItems.Find(c.MenuItemId);
+                items += mi.Nom + " x" + c.Quantite.ToString() + "" + Environment.NewLine;
+                total = total + c.SousTotal;
+            }
+            totalString += total.ToString();
+            SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.CodeCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
+            return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " +commande.CommandeId });
+        }
 
 
         //
@@ -290,6 +383,27 @@ namespace Delivr.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        protected void SendMail(string sujet, string message,string destinataire)
+        {
+            MailMessage msg = new MailMessage();
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+
+                msg.Subject = sujet;
+                msg.Body = message;
+                msg.From = new MailAddress("delivrmail@gmail.com");
+                msg.To.Add(destinataire);//mdp user deliveruser1123
+                msg.IsBodyHtml = true;
+                client.Host = "smtp.gmail.com";
+                System.Net.NetworkCredential basicauthenticationinfo = new System.Net.NetworkCredential("delivrmail@gmail.com", "delivrmail123");
+                client.Port = int.Parse("587");
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = basicauthenticationinfo;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.Send(msg);
+            
+
         }
     }
 }

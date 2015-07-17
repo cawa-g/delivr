@@ -361,6 +361,7 @@
     <Content Include="Views\Restaurant\Liste.cshtml" />
     <Content Include="Views\Restaurant\MenuCommande.cshtml" />
     <Content Include="Views\Menu\AddEditMenuPartial.cshtml" />
+    <Content Include="Views\Restaurant\CreateCommande.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
