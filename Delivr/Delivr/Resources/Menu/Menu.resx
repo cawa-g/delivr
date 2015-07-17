@@ -136,7 +136,7 @@
     <value>Définition du menu</value>
   </data>
   <data name="PriceErrorMessage" xml:space="preserve">
-    <value>Le prix doit être un nombre positif inférieur à {2}</value>
+    <value>Le prix doit être un nombre positif non nul inférieur à {2}</value>
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Retirer l'élément</value>

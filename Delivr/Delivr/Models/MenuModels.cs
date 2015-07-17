@@ -28,9 +28,10 @@ namespace Delivr.Models
         public string Nom { get; set; }
         public string Description { get; set; }
         public int Prix { get; set; }
-        public int MenuId { get; set; }
+        public int? MenuId { get; set; }
 
         public virtual Menu Menu { get; set; }
+        public virtual ICollection<CommandeItem> CommandeItems { get; set; }
     }
 
     public class EditMenuModel
@@ -73,7 +74,7 @@ namespace Delivr.Models
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        [Range(0, 1000, ErrorMessageResourceType = typeof(Resources.Menu), ErrorMessageResourceName = "PriceErrorMessage")]
+        [Range(0.01, 1000, ErrorMessageResourceType = typeof(Resources.Menu), ErrorMessageResourceName = "PriceErrorMessage")]
         public decimal Prix { get; set; }
 
         public EditMenuItemModel()

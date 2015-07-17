@@ -26,7 +26,7 @@
                     </li>
 
                     tabContentBuilder.AppendFormat("<div role=\"tabpanel\" class=\"tab-pane menu {0}\" id=\"tabpanel_{1}\" data-tab=\"tab_{1}\">\n", additionalClasses, menu.MenuId);
-                    tabContentBuilder.Append(Html.Partial("EditMenuPartial", new Delivr.Models.EditMenuModel(menu)));
+                    tabContentBuilder.Append(Html.Partial("AddEditMenuPartial", new Delivr.Models.EditMenuModel(menu)));
                     tabContentBuilder.AppendLine("</div>");
                 }
 
@@ -35,7 +35,7 @@
                 </li>
 
                 tabContentBuilder.AppendFormat("<div role=\"tabpanel\" class=\"tab-pane menu {0}\" id=\"tabpanel_new\">", first ? "active" : "");
-                tabContentBuilder.Append(Html.Partial("EditMenuPartial", new Delivr.Models.EditMenuModel() { RestaurantId = Model.RestaurantId }));
+                tabContentBuilder.Append(Html.Partial("AddEditMenuPartial", new Delivr.Models.EditMenuModel() { RestaurantId = Model.RestaurantId }));
                 tabContentBuilder.AppendLine("</div>");
 
                 tabContentBuilder.AppendLine("</div>");
@@ -68,14 +68,13 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
     <script>
         // Tabs level event handlers:
-        $("#menu-tabs").on("submit", "edit-menu-form", function () {
-
+        $("#menu-tabs").on("submit", ".edit-menu-form", function () {
+            
             $menu = $(this).parent();
             $(this).ajaxSubmit(function (html) {
+
                 $menu.html(html);
                 // If not in error:
                 if (!$(".edit-menu-form", $menu).hasClass("in-error")) {
@@ -86,7 +85,7 @@
             return false;
         });
 
-        $("#menu-tabs").on("submit", "add-menu-form", function () {
+        $("#menu-tabs").on("submit", ".add-menu-form", function () {
 
             $(this).ajaxSubmit(function (html) {
                 // If not in error:
@@ -109,7 +108,7 @@
 
                 } else {
 
-                    $("#tabpanel_new").html(html)
+                    $("#tabpanel_new").html(html);
 
                 }
             });

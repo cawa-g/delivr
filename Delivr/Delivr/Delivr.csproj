@@ -360,7 +360,7 @@
     <Content Include="Views\Commande\StatutCommande.cshtml" />
     <Content Include="Views\Restaurant\Liste.cshtml" />
     <Content Include="Views\Restaurant\MenuCommande.cshtml" />
-    <Content Include="Views\Menu\EditMenuPartial.cshtml" />
+    <Content Include="Views\Menu\AddEditMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">

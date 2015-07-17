@@ -15,6 +15,9 @@ namespace Delivr
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryform").Include(
+                        "~/Scripts/jquery.form.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                         "~/Scripts/bootstrap.js"));
 

@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Le prix doit être un nombre positif inférieur à {2}.
+        ///   Looks up a localized string similar to Le prix doit être un nombre positif non nul inférieur à {2}.
         /// </summary>
         public static string PriceErrorMessage {
             get {

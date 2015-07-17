@@ -51,18 +51,23 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Menu/Edit/5
+        // POST: /Menu/Edit
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditMenuModel model)
         {
+            // Simple security to avoid trying to edit an non-existing menu
+            if (!model.MenuId.HasValue)
+                return HttpNotFound();
+
             if (ModelState.IsValid)
             {
+                // Generate a list of MenuItems used by this Menu
                 List<MenuItem> menuItems = new List<MenuItem>();
                 if (model.MenuItemModels != null)
                 {
-                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel,string>();
+                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel, string>();
 
                     foreach (EditMenuItemModel itemModel in model.MenuItemModels)
                     {
@@ -100,42 +105,85 @@ namespace Delivr.Controllers
                     ViewBag.MenuItemWarnings = menuItemWarnings;
                 }
 
-                Menu menu;
-                if (model.MenuId.HasValue)
-                {
-                    menu = db.Menus.Find(model.MenuId.Value);
+                Menu menu = db.Menus.Find(model.MenuId.Value);
 
-                    // Iterate through the items of the stored menu:
-                    foreach (MenuItem item in menu.MenuItems.ToList())
+                // Iterate through the items of the stored menu:
+                foreach (MenuItem item in menu.MenuItems.ToList())
+                {
+                    // If the item does not exist in the presentation model, it has been removed.
+                    // Remove from database if there was no CommandeItem associated to the Item.
+                    if (!item.CommandeItems.Any() && !model.MenuItemModels.Any(itemModel =>
+                        itemModel.MenuItemId.HasValue && itemModel.MenuItemId.Value == item.MenuItemId))
                     {
-                        // If the item does not exist in the presentation model, it has been removed:
-                        if (!model.MenuItemModels.Any(itemModel => itemModel.MenuItemId.HasValue && itemModel.MenuItemId.Value == item.MenuItemId))
-                            db.MenuItems.Remove(item);
+                        db.MenuItems.Remove(item);
                     }
-
-                    menu.Nom = model.Nom;
-                    menu.MenuItems = menuItems;
-
-                    // Indicate the menu was modified:
-                    db.Entry(menu).State = EntityState.Modified;
                 }
-                else    // New menu - no need to check for items to delete
-                {
-                    menu = new Menu()
-                    {
-                        Nom = model.Nom,
-                        RestaurantId = model.RestaurantId,
-                        MenuItems = menuItems
-                    };
 
-                    db.Menus.Add(menu);
-                }
+                menu.Nom = model.Nom;
+                menu.MenuItems = menuItems;
+
+                // Indicate the menu was modified:
+                db.Entry(menu).State = EntityState.Modified;
 
                 db.SaveChanges();
                 ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
             }
 
-            return View(model);
+            return PartialView("AddEditMenuPartial", model);
+        }
+
+        //
+        // POST: /Menu/Add
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(EditMenuModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Generate a list of MenuItems used by this Menu
+                List<MenuItem> menuItems = new List<MenuItem>();
+                if (model.MenuItemModels != null)
+                {
+                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel, string>();
+
+                    foreach (EditMenuItemModel itemModel in model.MenuItemModels)
+                    {
+                        MenuItem item = new MenuItem()
+                        {
+                            Nom = itemModel.Nom,
+                            Description = itemModel.Description,
+                            Prix = Decimal.ToInt32(itemModel.Prix * 100)
+                        };
+
+                        db.MenuItems.Add(item);
+
+                        if (String.IsNullOrEmpty(item.Description))
+                        {
+                            menuItemWarnings[itemModel] = Resources.Menu.DescriptionMissingWarning;
+                        }
+
+                        menuItems.Add(item);
+                    }
+
+                    ViewBag.MenuItemWarnings = menuItemWarnings;
+                }
+
+                // Create a new Menu with the information provided, and the MenuItems generated
+                Menu menu = new Menu()
+                {
+                    Nom = model.Nom,
+                    RestaurantId = model.RestaurantId,
+                    MenuItems = menuItems
+                };
+
+                db.Menus.Add(menu);
+
+                db.SaveChanges();
+                ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
+            }
+
+            return PartialView("AddEditMenuPartial", model);
         }
 
         protected override void Dispose(bool disposing)
