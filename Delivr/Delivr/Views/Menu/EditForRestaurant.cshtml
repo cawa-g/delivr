@@ -8,9 +8,9 @@
     <div class="container">
         <h2>@ViewBag.Title : @Model.nom</h2>
 
-        <ul class="nav nav-tabs">
+        <ul id="menu-tabs" class="nav nav-tabs">
             @{
-                System.Text.StringBuilder tabContentBuilder = new System.Text.StringBuilder("<div id=\"menu-tabs\" class=\"tab-content\">\n");
+                System.Text.StringBuilder tabContentBuilder = new System.Text.StringBuilder("<div id=\"menu-tabs-content\" class=\"tab-content\">\n");
                 bool first = true;
                 foreach (var menu in Model.Menus)
                 {
@@ -31,7 +31,7 @@
                 }
 
                 <li role="presentation">
-                    <a href="#tabpanel_new" role="tab" data-toggle="tab">+</a>
+                    <a id="tab_new" href="#tabpanel_new" role="tab" data-toggle="tab">+</a>
                 </li>
 
                 tabContentBuilder.AppendFormat("<div role=\"tabpanel\" class=\"tab-pane menu {0}\" id=\"tabpanel_new\">", first ? "active" : "");
@@ -70,8 +70,8 @@
 @section Scripts {
     <script>
         // Tabs level event handlers:
-        $("#menu-tabs").on("submit", ".edit-menu-form", function () {
-            
+        $("#menu-tabs-content").on("submit", ".edit-menu-form", function () {
+
             $menu = $(this).parent();
             $(this).ajaxSubmit(function (html) {
 
@@ -85,18 +85,23 @@
             return false;
         });
 
-        $("#menu-tabs").on("submit", ".add-menu-form", function () {
+        $("#menu-tabs-content").on("submit", ".add-menu-form", function () {
 
             $(this).ajaxSubmit(function (html) {
+
+                alert(html);
                 // If not in error:
-                if (!$("[class$=-menu-form]", html).hasClass("in-error")) {
+                if (!($(html).hasClass("in-error"))) {
+                    alert("in-error NOT detected.")
 
-                    id = $("input[name=MenuId]", html).val();
-                    nom = $("input[name=Nom]", html).val();
+                    var id = $("input[name=MenuId]", html).val();
+                    var nom = $("input[name=Nom]", html).val();
 
-                    $("#menu-tabs").append(
+                    alert("id = " + id + "\nnom = " + nom);
+
+                    $("#tab_new").parent().before(
                           "<li role='presentation'>"
-                        + "    <a id='tab_" + id + "' href='#tabpanel_" + id + "' role='tab'>" + nom + "</a>"
+                        + "    <a id='tab_" + id + "' href='#tabpanel_" + id + "' role='tab' data-toggle='tab'>" + nom + "</a>"
                         + "</li>");
 
                     $("#tabpanel_new").before(
@@ -104,10 +109,16 @@
                         + html
                         + "</div>");
 
+                    $("#tabpanel_new").html(
+                        @Html.Raw(HttpUtility.JavaScriptStringEncode(
+                            Html.Partial("AddEditMenuPartial", new Delivr.Models.EditMenuModel() { RestaurantId = Model.RestaurantId }).ToString(),
+                            true)));
+
                     $("#tab_" + id).tab("show");
 
                 } else {
 
+                    alert("in-error detected.")
                     $("#tabpanel_new").html(html);
 
                 }
@@ -117,7 +128,7 @@
         });
 
         // Menu level event handlers:
-        $("#menu-tabs").on("click", ".add-item", function () {
+        $("#menu-tabs-content").on("click", ".add-item", function () {
             $menu = $(this).parents(".menu");
             $.ajax({
                 url: this.href,
@@ -127,7 +138,7 @@
             return false;
         });
 
-        $("#menu-tabs").on("click", ".menu-items-list .removeItem", function () {
+        $("#menu-tabs-content").on("click", ".menu-items-list .removeItem", function () {
             $(this).parents("div.editor-row:first").remove();
             return false;
         });

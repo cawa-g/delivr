@@ -18,6 +18,7 @@
         @Html.ValidationSummary(true)
 
         @Html.HiddenFor(model => model.MenuId)
+        @Html.HiddenFor(model => model.RestaurantId)
 
         if (ViewData.ModelState.IsValidField("Nom"))
         {

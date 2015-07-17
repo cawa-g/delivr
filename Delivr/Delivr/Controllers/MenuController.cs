@@ -26,7 +26,7 @@ namespace Delivr.Controllers
             }
             return View(menu);
         }
-
+        
         //
         // GET: /Menu/BlankMenuItemRow
 
@@ -124,8 +124,9 @@ namespace Delivr.Controllers
 
                 // Indicate the menu was modified:
                 db.Entry(menu).State = EntityState.Modified;
-
                 db.SaveChanges();
+
+                model = new EditMenuModel(menu); // Update the presentation model with exact data
                 ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
             }
 
@@ -178,8 +179,9 @@ namespace Delivr.Controllers
                 };
 
                 db.Menus.Add(menu);
-
                 db.SaveChanges();
+
+                model = new EditMenuModel(menu); // Update the presentation model with exact data
                 ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
             }
 
