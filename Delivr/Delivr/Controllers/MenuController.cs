@@ -183,6 +183,7 @@ namespace Delivr.Controllers
 
                 model = new EditMenuModel(menu); // Update the presentation model with exact data
                 ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
+                ModelState.Clear();
             }
 
             return PartialView("AddEditMenuPartial", model);
