@@ -1,55 +1,61 @@
 ﻿@model IEnumerable<Delivr.Models.Restaurant>
 
 @{
-    ViewBag.Title = "Liste";
+    ViewBag.Title = "Restaurant list";
 }
 
-<h2>Liste</h2>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>Liste</h2>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CodeCivique)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CodePostale)
-        </th>
-        <th></th>
-    </tr>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodeCivique)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodePostale)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodeCivique)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodePostale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodePostale)
-        </td>
-        <td>
-           @(Html.ActionLink("Voir", "Details", new { id = item.RestaurantId }, new { @class = "btn btn-info" }))
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodeCivique)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodePostale)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodePostale)
+                    </td>
+                    <td>
+                        @(Html.ActionLink("Voir", "Details", new { id = item.RestaurantId }, new { @class = "btn btn-info" }))
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+    </div>
+</div>

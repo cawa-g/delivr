@@ -26,12 +26,25 @@ namespace Delivr.Controllers
 
 
         //
+        // GET: /Restaurant/MenuNotFound
+        public ActionResult MenuNotFound()
+        {
+            return View();
+        }
+
+        //
         // GET: /Restaurant/
 
         public ActionResult MenuCommande(int id)
         {
             Restaurant resto = db.Restaurants.Find(id);
-            Menu menu = db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).First();
+            Menu menu;
+            if (db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).FirstOrDefault() != null)
+            {
+                menu = db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).First();
+            } else {
+                return RedirectToAction("MenuNotFound");
+            }
             List<MenuItem> menuItems = db.MenuItems.Where(c => c.MenuId == menu.MenuId).ToList();
             List<CreateCommandeItemModel> createCommandeItems = new List<CreateCommandeItemModel>();
             foreach (MenuItem mi in menuItems)
@@ -71,7 +84,7 @@ namespace Delivr.Controllers
 
 
         //
-        // GET: /Restaurant/
+        // GET: /Restaurant/CreateCommande
 
         public ActionResult CreateCommande()
         {
@@ -105,6 +118,9 @@ namespace Delivr.Controllers
             return View(createCommande);
         }
 
+        //
+        // POST: /Restaurant/CreateCommande
+
         [HttpPost]
         public ActionResult CreateCommande(CreateCommandeModel createCommande)
         {
@@ -129,15 +145,11 @@ namespace Delivr.Controllers
                 user.Adresses.Add(add);               
                 AdresseId = add.AdresseId;
                 user.AdresseDefaultId = add.AdresseId;
-
-                
             }
 
             
             Commande commande = new Commande()
-            {
-                
-                    
+            {  
                 AdresseId = AdresseId,
                 RestaurantId = resto.RestaurantId,
                 UserId = user.UserId,
@@ -148,11 +160,7 @@ namespace Delivr.Controllers
             commande.Adresse = db.Adresses.Find(AdresseId);
             foreach (CommandeItem c in createCommande.CommandeItems)
             {
-                {
-
- 
-                    db.CommandeItems.Add(c);
-                }
+                db.CommandeItems.Add(c);
             }
 
             commande.CommandeItems = createCommande.CommandeItems;
@@ -369,7 +377,7 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Account/Message
+        // GET: /Restaurant/Message
 
 
         [ValidateInput(false)]

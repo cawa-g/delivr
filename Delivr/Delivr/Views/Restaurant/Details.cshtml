@@ -65,7 +65,14 @@
                 else
                 {
                     <div class="btn-group btn-group-lg" role="group">
-                        @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
+                        @if (!User.IsInRole("Restaurateur") && !User.IsInRole("Admin"))
+                        {
+                            @(Html.ActionLink("Back to listing", "Liste", null, new { @class = "btn btn-default" }))        //Si client, redirige vers la page client
+                        }
+                        else
+                        {
+                            @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))        //Sinon, redirige vers la liste dédiée au restaurateur & admin
+                        }
                     </div>
                     <div class="btn-group btn-group-lg" role="group">
                         @(Html.ActionLink("Menu", "MenuCommande", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))

@@ -1,54 +1,58 @@
 ﻿@model IList<Delivr.Models.CreateCommandeItemModel>
 
 @{
-    ViewBag.Title = "MenuCommande";
+    ViewBag.Title = "Order";
 }
 
-<h2>MenuCommande</h2>
-@using (Html.BeginForm("MenuCommande", "Restaurant", FormMethod.Post))
-{
-    Delivr.Models.CreateCommandeItemModel template = new Delivr.Models.CreateCommandeItemModel();
-    
-    <table>
-        <tr>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm("MenuCommande", "Restaurant", FormMethod.Post))
+        {
+            Delivr.Models.CreateCommandeItemModel template = new Delivr.Models.CreateCommandeItemModel();
 
-            <th>
-                @Html.DisplayNameFor(m => template.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => template.Prix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => template.Quantite)
-        </th>
-    </tr>
+            <table class="table table-striped">
+                <tr>
 
-    @for (int i = 0; i < Model.Count(); i++)
-{
-        <tr>
-                @Html.HiddenFor(modelItem => Model[i].Nom)
-                @Html.HiddenFor(modelItem => Model[i].Prix)
-            @Html.HiddenFor(modelItem => Model[i].MenuItemId)
-            @Html.HiddenFor(modelItem => Model[i].RestaurantId)
-                <td>
-                    @Html.DisplayFor(modelItem => Model[i].Nom)
-                </td>
-                <td>
+                    <th>
+                        @Html.DisplayNameFor(m => template.Nom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => template.Prix)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => template.Quantite)
+                    </th>
+                </tr>
 
-                    @{Decimal subtotal = new Decimal(Model[i].Prix) / 100;
-                        @Html.Raw(String.Format("{0:C}",
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        @Html.HiddenFor(modelItem => Model[i].Nom)
+                        @Html.HiddenFor(modelItem => Model[i].Prix)
+                        @Html.HiddenFor(modelItem => Model[i].MenuItemId)
+                        @Html.HiddenFor(modelItem => Model[i].RestaurantId)
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].Nom)
+                        </td>
+                        <td>
+
+                            @{Decimal subtotal = new Decimal(Model[i].Prix) / 100;
+                            @Html.Raw(String.Format("{0:C}",
                                     subtotal))
-                    }
-                </td>
-                <td>
-                    @Html.TextBoxFor(modelItem => Model[i].Quantite, new { autocomplete = "off" })
-                </td>
-            </tr>
-}
+                            }
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].Quantite, new { autocomplete = "off" })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
 
-    <div class="col-sm-12">
-        <input type="submit" class="btn btn-primary margin-top" value="Commander" />
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-primary margin-top" value="Commander" />
+            </div>
+        }
     </div>
-}
+</div>

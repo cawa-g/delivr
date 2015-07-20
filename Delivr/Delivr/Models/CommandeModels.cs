@@ -27,6 +27,18 @@ namespace Delivr.Models
         public int RestaurantId { get; set; }
         public int UserId { get; set; }
         public int AdresseId { get; set; }
+        public double Prix 
+        { 
+            get
+            {
+                double total = 0;
+                foreach (var item in CommandeItems)
+                {
+                    total += item.SousTotal;
+                }
+                return total;
+            }
+        }
 
         public virtual UserProfile User { get; set; }
         public virtual Restaurant Restaurant { get; set; }

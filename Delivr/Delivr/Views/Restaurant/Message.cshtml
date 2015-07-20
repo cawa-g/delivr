@@ -3,4 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Html.Raw(ViewBag.Chaine)</h2>
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@Html.Raw(ViewBag.Chaine)</h2>
+    </div>
+    <div class="container">
+        <hr />
+        <a class="btn btn-default" href="/Restaurant/Liste">Retour à l'accueil</a>
+    </div>
+</div>
