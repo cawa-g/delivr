@@ -55,7 +55,13 @@
     </div>
     <div class="container">
         <hr />
-        @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default btn-lg" }))
+        <div class="btn-group btn-group-sm" role="group" aria-label="controls">
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink(Resources.General.BackToListing, "Index", "Restaurant", null, new { @class = "btn btn-default" })
+                @Html.ActionLink(Resources.General.BackToDetails, "Details", "Restaurant", new { id = Model.RestaurantId }, new { @class = "btn btn-default" })
+            }
+        </div>
     </div>
 </div>
 @section Scripts {
