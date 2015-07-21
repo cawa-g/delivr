@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aucune description n&apos;a été fournie.
+        ///   Looks up a localized string similar to Aucune description n&apos;a été fournie..
         /// </summary>
         public static string DescriptionMissingWarning {
             get {
@@ -88,7 +88,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Définition du menu complétée avec succès.
+        ///   Looks up a localized string similar to Définition du menu complétée avec succès..
         /// </summary>
         public static string MenuDefinitionSuccessMessage {
             get {
@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Le prix doit être un nombre positif non nul inférieur à {2}.
+        ///   Looks up a localized string similar to Le prix doit être un nombre positif non nul inférieur à {2}..
         /// </summary>
         public static string PriceErrorMessage {
             get {

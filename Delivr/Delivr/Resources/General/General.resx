@@ -157,6 +157,6 @@
     <value>S'inscrire</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
-    <value>La chaîne {0} doit comporter entre {2} et {1} caractères</value>
+    <value>La chaîne {0} doit comporter entre {2} et {1} caractères.</value>
   </data>
 </root>

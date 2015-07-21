@@ -47,6 +47,7 @@ namespace Delivr.Controllers
             if (restaurant == null || (!User.IsInRole("Admin") && restaurant.UserId != WebSecurity.CurrentUserId))
                 return HttpNotFound();
 
+            ViewBag.ShowWarnings = true;
             return View(restaurant);
         }
 
@@ -67,8 +68,6 @@ namespace Delivr.Controllers
                 List<MenuItem> menuItems = new List<MenuItem>();
                 if (model.MenuItemModels != null)
                 {
-                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel, string>();
-
                     foreach (EditMenuItemModel itemModel in model.MenuItemModels)
                     {
                         MenuItem item;
@@ -94,15 +93,8 @@ namespace Delivr.Controllers
                             db.MenuItems.Add(item);
                         }
 
-                        if (String.IsNullOrEmpty(item.Description))
-                        {
-                            menuItemWarnings[itemModel] = Resources.Menu.DescriptionMissingWarning;
-                        }
-
                         menuItems.Add(item);
                     }
-
-                    ViewBag.MenuItemWarnings = menuItemWarnings;
                 }
 
                 Menu menu = db.Menus.Find(model.MenuId.Value);
@@ -128,8 +120,10 @@ namespace Delivr.Controllers
 
                 model = new EditMenuModel(menu); // Update the presentation model with exact data
                 ViewBag.SuccessMessage = Resources.Menu.MenuDefinitionSuccessMessage;
+                ModelState.Clear();
             }
 
+            ViewBag.ShowWarnings = true;
             return PartialView("AddEditMenuPartial", model);
         }
 
@@ -146,8 +140,6 @@ namespace Delivr.Controllers
                 List<MenuItem> menuItems = new List<MenuItem>();
                 if (model.MenuItemModels != null)
                 {
-                    Dictionary<EditMenuItemModel, string> menuItemWarnings = new Dictionary<EditMenuItemModel, string>();
-
                     foreach (EditMenuItemModel itemModel in model.MenuItemModels)
                     {
                         MenuItem item = new MenuItem()
@@ -158,16 +150,8 @@ namespace Delivr.Controllers
                         };
 
                         db.MenuItems.Add(item);
-
-                        if (String.IsNullOrEmpty(item.Description))
-                        {
-                            menuItemWarnings[itemModel] = Resources.Menu.DescriptionMissingWarning;
-                        }
-
                         menuItems.Add(item);
                     }
-
-                    ViewBag.MenuItemWarnings = menuItemWarnings;
                 }
 
                 // Create a new Menu with the information provided, and the MenuItems generated
@@ -186,6 +170,7 @@ namespace Delivr.Controllers
                 ModelState.Clear();
             }
 
+            ViewBag.ShowWarnings = true;
             return PartialView("AddEditMenuPartial", model);
         }
 
