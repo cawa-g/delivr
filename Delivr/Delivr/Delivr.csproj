@@ -181,9 +181,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CommandeController.cs" />
+    <Compile Include="Helpers\AutoLocalizingRoute.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
     <Compile Include="Models\Paypal.cs" />
+    <Compile Include="Resources\Helper.cs" />
     <Compile Include="Resources\Commande\Commande.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -448,27 +450,27 @@
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Commande.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\General\General.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>General.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\Home.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Restaurant\Restaurant.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Restaurant.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Restaurateur\Restaurateur.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Restaurateur.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -480,7 +482,7 @@
     <EmbeddedResource Include="Resources\Menu\Menu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Menu.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
