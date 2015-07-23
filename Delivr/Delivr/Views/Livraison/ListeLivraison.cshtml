@@ -1,0 +1,18 @@
+﻿@model Delivr.Models.ListeLivraisonModel
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        <div id="listeCommandes">
+            @foreach (var item in Model.Livraisons)
+            {
+                <div class="panelCommande" data-id="@item.CommandeId">
+                    @{Html.RenderPartial("LivraisonCommande", item);}
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+   

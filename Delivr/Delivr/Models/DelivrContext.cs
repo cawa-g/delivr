@@ -22,5 +22,6 @@ namespace Delivr.Models
 
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<CommandeItem> CommandeItems { get; set; }
+        public DbSet<Livraison> Livraisons { get; set; }
     }
 }

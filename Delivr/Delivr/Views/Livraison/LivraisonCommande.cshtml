@@ -1,0 +1,64 @@
+﻿@model Delivr.Models.LivraisonModel
+
+@{
+    string buttonText;
+    string panelClasses;
+    string buttonClasses;
+    string collapseClasses;
+    buttonText = "Préparer cette commande";
+    panelClasses = "panel-info";
+    buttonClasses = "btn-primary startPrepare";
+    collapseClasses = "";
+
+
+    string collapseId = "collapseCommande" + Html.ValueFor(model => model.CommandeId);
+
+    <div class="panel @panelClasses">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
+                    Commande #@Html.ValueFor(model => model.CommandeId)
+                </a>
+                <span>
+                    @Html.ActionLink(buttonText, "Selectionner/", null, new
+                    {
+                        @class = "pull-right btn btn-sm " + buttonClasses,
+                        role = "button",
+                        style = "margin: -6px -11px 0 0"
+                    })
+                </span>
+            </h4>
+        </div>
+        <div id="@collapseId" class="panel-collapse collapse @collapseClasses" role="tabpanel">
+            <div class="panel-body">
+                <ul>
+                    <p>
+                        @Html.DisplayNameFor(model => model.DateLivraison)
+                        @Html.DisplayFor(model => model.DateLivraison)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.NomRestaurant)
+                        @Html.DisplayFor(model => model.NomRestaurant)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.RestaurantAdresse)
+                        @Html.DisplayFor(model => model.RestaurantAdresse.CodeCivique)
+                        @Html.DisplayFor(model => model.RestaurantAdresse.Rue)
+                        @Html.DisplayFor(model => model.RestaurantAdresse.CodePostale)
+
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.NomClient)
+                        @Html.DisplayFor(model => model.NomClient)
+                    </p>
+                    <p>
+                        @Html.DisplayNameFor(model => model.ClientAdresse)
+                        @Html.DisplayFor(model => model.ClientAdresse.CodeCivique)
+                        @Html.DisplayFor(model => model.ClientAdresse.Rue)
+                        @Html.DisplayFor(model => model.ClientAdresse.CodePostale)
+                    </p>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
