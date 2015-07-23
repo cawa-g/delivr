@@ -1,4 +1,5 @@
-﻿@model Delivr.Models.Restaurant
+﻿@using Resources = Delivr.Resources;
+@model Delivr.Models.Restaurant
 @{
     ViewBag.Title = @Resources.Menu.PageTitle;
 }
@@ -30,7 +31,7 @@
                     tabContentBuilder.AppendLine("</div>");
                 }
 
-                <li role="presentation">
+                <li role="presentation" class="@(first ? "active" : "")">
                     <a id="tab_new" href="#tabpanel_new" role="tab" data-toggle="tab">+</a>
                 </li>
 
@@ -47,21 +48,15 @@
     </div>
     <div class="container">
         <hr />
-        <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+        <div class="btn-group btn-group-sm" role="group" aria-label="controls">
             @if (User.IsInRole("Admin"))
             {
-                <div class="btn-group btn-group-lg" role="group">
-                    @(Html.ActionLink(Resources.General.BackToListing, "Index", "Restaurant", null, new { @class = "btn btn-default btn-lg" }))
-                </div>
-                <div class="btn-group btn-group-lg" role="group">
-                    @(Html.ActionLink(Resources.General.BackToDetails, "Details", "Restaurant", new { id = Model.RestaurantId }, new { @class = "btn btn-default btn-lg" }))
-                </div>
+                @Html.ActionLink(Resources.General.BackToListing, "Index", "Restaurant", null, new { @class = "btn btn-default" })
+                @Html.ActionLink(Resources.General.BackToDetails, "Details", "Restaurant", new { id = Model.RestaurantId }, new { @class = "btn btn-default" })
             }
-            @if (User.IsInRole("Restaurateur"))
+            else if (User.IsInRole("Restaurateur"))
             {
-                <div class="btn-group btn-group-lg" role="group">
-                    @Html.ActionLink(Resources.Menu.BackToRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)
-                </div>
+                @Html.ActionLink(Resources.Menu.BackToRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)
             }
         </div>
     </div>

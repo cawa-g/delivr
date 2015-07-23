@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Delivr.Helpers;
+@using Resources = Delivr.Resources;
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,6 +37,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="btn-language">@Html.LanguageLink("Français", "fr")</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.Home, "Index", "Home")</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.About, "About", "Home")</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.Contact, "Contact", "Home")</li>
@@ -46,7 +50,11 @@
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>
                     }
-                    else if(User.Identity.IsAuthenticated)
+                    else if (User.IsInRole("Livreur"))
+                    {
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "ListeLivraison", "Livraison")</li>
+                    }
+                    else if (User.Identity.IsAuthenticated)
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "Liste", "Restaurant")</li>
                     }

@@ -129,6 +129,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
   </data>
@@ -157,6 +160,6 @@
     <value>S'inscrire</value>
   </data>
   <data name="StringLengthError" xml:space="preserve">
-    <value>La chaîne {0} doit comporter entre {2} et {1} caractères</value>
+    <value>La chaîne {0} doit comporter entre {2} et {1} caractères.</value>
   </data>
 </root>

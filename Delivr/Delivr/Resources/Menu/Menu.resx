@@ -124,10 +124,10 @@
     <value>Retour aux Restaurants</value>
   </data>
   <data name="DescriptionMissingWarning" xml:space="preserve">
-    <value>Aucune description n'a été fournie</value>
+    <value>Aucune description n'a été fournie.</value>
   </data>
   <data name="MenuDefinitionSuccessMessage" xml:space="preserve">
-    <value>Définition du menu complétée avec succès</value>
+    <value>Définition du menu complétée avec succès.</value>
   </data>
   <data name="MenuItems" xml:space="preserve">
     <value>Éléments du menu</value>
@@ -136,7 +136,7 @@
     <value>Définition du menu</value>
   </data>
   <data name="PriceErrorMessage" xml:space="preserve">
-    <value>Le prix doit être un nombre positif non nul inférieur à {2}</value>
+    <value>Le prix doit être un nombre positif non nul inférieur à {2}.</value>
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Retirer l'élément</value>

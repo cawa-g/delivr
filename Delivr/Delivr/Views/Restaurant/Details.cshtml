@@ -1,4 +1,5 @@
-﻿@model Delivr.Models.Restaurant
+﻿@using Resources = Delivr.Resources;
+@model Delivr.Models.Restaurant
 
 @{
     ViewBag.Title = "Details";
@@ -16,7 +17,7 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Restaurateur , new { @class = "col-sm-3" })
+                @Html.LabelFor(model => model.Restaurateur, new { @class = "col-sm-3" })
                 <div class="col-sm-9">
                     @(Html.TextBoxFor(model => model.Restaurateur.Email, new { @class = "form-control form-input", disabled = "disabled" }))
                 </div>
@@ -49,35 +50,34 @@
     </div>
     <div class="container">
         <hr />
-        <div class="btn-group btn-group-lg" role="group" aria-label="controls">
+        @{
+            bool userIsAdmin = User.IsInRole("Admin");
+            bool userIsRestaurateur = !userIsAdmin && User.IsInRole("Restaurateur");
+
+            if (userIsAdmin)
+            {
+                @Html.ActionLink(@Resources.General.Edit, "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info btn-lg" })
+            }
+            else if (!userIsRestaurateur)
+            {
+                @Html.ActionLink(@Resources.Restaurant.Command, "MenuCommande", new { id = Model.RestaurantId }, new { @class = "btn btn-info btn-lg" })
+            }
             
-                @if (User.IsInRole("Admin")) { 
-                            <div class="btn-group btn-group-lg" role="group">
-                        @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))
-                    </div>
-                    <div class="btn-group btn-group-lg" role="group">
-                        @(Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))
-                    </div>
-                }else if (User.IsInRole("Restaurateur"))
-                 {
-                <div class="btn-group btn-group-lg" role="group">@Html.ActionLink("Gestion de restaurants", "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</div>
-                 }
-                else
+            <div class="btn-group btn-group-sm" role="group" aria-label="controls">
+                @if (userIsAdmin)
                 {
-                    <div class="btn-group btn-group-lg" role="group">
-                        @if (!User.IsInRole("Restaurateur") && !User.IsInRole("Admin"))
-                        {
-                            @(Html.ActionLink("Back to listing", "Liste", null, new { @class = "btn btn-default" }))        //Si client, redirige vers la page client
-                        }
-                        else
-                        {
-                            @(Html.ActionLink("Back to listing", "Index", null, new { @class = "btn btn-default" }))        //Sinon, redirige vers la liste dédiée au restaurateur & admin
-                        }
-                    </div>
-                    <div class="btn-group btn-group-lg" role="group">
-                        @(Html.ActionLink("Menu", "MenuCommande", new { id = Model.RestaurantId }, new { @class = "btn btn-info" }))
-                    </div>
+                    @Html.ActionLink(@Resources.General.BackToListing, "Index", null, new { @class = "btn btn-default" })
                 }
-        </div>
+                else if (userIsRestaurateur)
+                {
+                    @Html.ActionLink(@Resources.General.BackToListing, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, new { @class = "btn btn-default" })
+                }
+                else    // Si client, redirige vers la page client
+                {
+                    @Html.ActionLink(@Resources.General.BackToListing, "Liste", null, new { @class = "btn btn-default" })
+                }
+            </div>
+        }
     </div>
+</div>
 </div>

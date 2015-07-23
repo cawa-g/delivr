@@ -27,7 +27,7 @@
                             @if (User.IsInRole("Admin") || User.IsInRole("Restaurateurs"))
                             {
                                 <div id="menu-group" class="btn-group btn-group-xs" role="group">
-                                    <a href="@Url.Action("Edit", "Menu", new { RestaurantId = item.RestaurantId })" class="btn btn-default">
+                                    <a href="@Url.Action("EditForRestaurant", "Menu", new { RestaurantId = item.RestaurantId })" class="btn btn-default">
                                         Menu <span class="glyphicon glyphicon-cutlery"></span>
                                     </a>
                                 </div>

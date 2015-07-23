@@ -1,0 +1,29 @@
+﻿@model Delivr.Models.Livraison
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Livraison</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Commande.Statut)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Commande.Statut)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.LivraisonId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
