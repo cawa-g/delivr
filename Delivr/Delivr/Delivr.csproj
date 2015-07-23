@@ -181,8 +181,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CommandeController.cs" />
+    <Compile Include="Controllers\LivraisonController.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
+    <Compile Include="Models\LivraisonModels.cs" />
     <Compile Include="Models\Paypal.cs" />
     <Compile Include="Resources\Commande\Commande.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -443,6 +445,13 @@
     <Content Include="Views\Menu\AddEditMenuPartial.cshtml" />
     <Content Include="Views\Restaurant\CreateCommande.cshtml" />
     <Content Include="Views\Restaurant\MenuNotFound.cshtml" />
+    <Content Include="Views\Livraison\ListeLivraison.cshtml" />
+    <Content Include="Views\Livraison\LivraisonCommande.cshtml" />
+    <Content Include="Views\Livraison\Index.cshtml" />
+    <Content Include="Views\Livraison\Details.cshtml" />
+    <Content Include="Views\Livraison\Create.cshtml" />
+    <Content Include="Views\Livraison\Edit.cshtml" />
+    <Content Include="Views\Livraison\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">

@@ -14,8 +14,9 @@ namespace Delivr.Controllers
     {
         private DelivrContext db = new DelivrContext();
 
-        //
-        // GET: /Commande/
+
+       
+
 
         public ActionResult Index()
         {
