@@ -12,8 +12,8 @@ body {
 }
 
 .jumbotron.padded {
-    margin:15px;
-    background-color:#f8f8f8;
+    margin: 15px;
+    background-color: #f8f8f8;
 }
 
 .jumbotron .control-label {
@@ -21,11 +21,11 @@ body {
 }
 
 .jumbotron .form-input {
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 .margin-top {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 .alert-in-tab {
@@ -38,7 +38,7 @@ body {
 }
 
 #menu-group {
-    margin-right:5px;
+    margin-right: 5px;
 }
 
 @media (max-width: 768px) {
@@ -49,22 +49,22 @@ body {
         overflow: hidden;
     }
 
-    .google-maps iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100% !important;
-        height: 100% !important;
-    }
+        .google-maps iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
 }
 
 .form-inline {
     margin: 5px 0;
 }
 
-.form-inline .form-group {
-    padding: 0 2px;
-}
+    .form-inline .form-group {
+        padding: 0 2px;
+    }
 
 /* ---------------------  Section concernant le header/navbar ------------------------------ */
 
@@ -83,25 +83,25 @@ body {
 #userMenu {
     margin-top: 9px;
     margin-left: 5px;
-    text-align:center;
+    text-align: center;
 }
 
-#userMenu li {
-    text-align:center;
-}
+    #userMenu li {
+        text-align: center;
+    }
 
 #logout a {
-    color:#333333;
+    color: #333333;
 }
 
 #logout:hover {
     background-color: #f5f5f5;
 }
 
-#logout:hover a {
-    color: #262626;
-    text-decoration: none;
-}
+    #logout:hover a {
+        color: #262626;
+        text-decoration: none;
+    }
 
 #collapseMenu {
     margin-top: 35px;
@@ -155,6 +155,19 @@ body {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
 }
+
+.btn-language > a {
+    font-size: 0.66em;
+    text-decoration: underline;
+    color: #777777;
+    padding: 0 !important;
+    margin: 15px;
+}
+
+.btn-language > a:hover {
+    text-decoration: underline !important;
+}
+
 /* ---------------------------------------------------------------------------- */
 
 /* -----------------------------Footer (si besoin est) -----------------------*/
@@ -275,9 +288,9 @@ section.page3 {
     background-color: #52B3D9;
 }
 
-section.page3 small {
-    color: #FFFFFF;
-}
+    section.page3 small {
+        color: #FFFFFF;
+    }
 
 .floating-label-right {
     float: right;
@@ -292,13 +305,13 @@ section .floating-label-left, section .floating-label-right {
 }
 
 section.page4 #signupBtn {
-    margin-top:20px;
+    margin-top: 20px;
 }
 
-section.page4 #signupBtn a {
-    text-decoration:none;
-    color:#FFFFFF;
-}
+    section.page4 #signupBtn a {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
 
 /* ----------------------------- Pour très grandes dimensions -------------------------- */
 
@@ -409,7 +422,7 @@ section.page4 #signupBtn a {
     }
 
     section.page4 div {
-        z-index:100;
+        z-index: 100;
     }
 }
 

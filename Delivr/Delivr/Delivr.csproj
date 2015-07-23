@@ -183,6 +183,8 @@
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Helpers\AutoLocalizingRoute.cs" />
     <Compile Include="Controllers\LivraisonController.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
     <Compile Include="Models\LivraisonModels.cs" />
