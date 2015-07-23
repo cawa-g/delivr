@@ -60,6 +60,16 @@ namespace Delivr.Models
         public virtual IList<Adresse> Adresses { get; set; }
         public int AdresseId { get; set; }
 
+        public string cmd { get; set; }
+        public string business { get; set; }
+        public string no_shipping { get; set; }
+        public string @return { get; set; }
+        public string cancel_return { get; set; }
+        public string notify_url { get; set; }
+        public string currency_code { get; set; }
+        public string item_name { get; set; }
+        public string amount { get; set; }
+
         public CreateCommandeModel()
         {
             this.CommandeItems = new List<CommandeItem>();

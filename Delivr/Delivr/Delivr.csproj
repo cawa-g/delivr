@@ -183,7 +183,6 @@
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
-    <Compile Include="Models\Paypal.cs" />
     <Compile Include="Resources\Commande\Commande.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -383,6 +382,8 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\paypal-button-minicart.min.js" />
+    <Content Include="Scripts\paypal-button.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
