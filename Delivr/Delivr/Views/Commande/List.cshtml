@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Delivr.Models.Commande>
+﻿@using Resources = Delivr.Resources;
+@model IEnumerable<Delivr.Models.Commande>
 
 @{
-    ViewBag.Title = "Commandes en cours";
+    ViewBag.Title = Resources.Commande.PendingOrders;
 }
 
 <div class="jumbotron padded">
@@ -20,8 +21,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
     <script>
         $('#listeCommandes').on("click", '.panelCommande a.startPrepare', function () {
             $panel = $(this).parents('.panelCommande');

@@ -117,37 +117,80 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FinishPreparation" xml:space="preserve">
-    <value>Terminer la préparation</value>
+  <data name="About" xml:space="preserve">
+    <value>Our story began with a group of four friends back in late 2003. They came up with the idea that would later become &lt;strong&gt;Delivr&lt;/strong&gt;.</value>
   </data>
-  <data name="PendingOrders" xml:space="preserve">
-    <value>Commandes en cours</value>
+  <data name="About2" xml:space="preserve">
+    <value>A &lt;em&gt;true revolution&lt;/em&gt; among the restaurant industry. &lt;strong&gt;Delivr&lt;/strong&gt; brings a breath of fresh air to communities all around North America.</value>
   </data>
-  <data name="PrepareThisOrder" xml:space="preserve">
-    <value>Préparer cette commande</value>
+  <data name="About3" xml:space="preserve">
+    <value>We aim to provide food delivery services and, therefore, ease of access to any restaurant within 25 miles of your home.</value>
   </data>
-  <data name="StatusDelivered" xml:space="preserve">
-    <value>Livrée</value>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About us</value>
   </data>
-  <data name="StatusInDelivery" xml:space="preserve">
-    <value>En livraison</value>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse our selection</value>
   </data>
-  <data name="StatusInPreparation" xml:space="preserve">
-    <value>En préparation</value>
+  <data name="Browse2" xml:space="preserve">
+    <value>Choose from a huge selection of restaurants</value>
   </data>
-  <data name="StatusPending" xml:space="preserve">
-    <value>En attente</value>
+  <data name="BusinessInquiries" xml:space="preserve">
+    <value>Businness inquiries</value>
   </data>
-  <data name="StatusProcessing" xml:space="preserve">
-    <value>En traitement</value>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Get in touch with us!</value>
   </data>
-  <data name="StatusReady" xml:space="preserve">
-    <value>Prête</value>
+  <data name="DeliveryPromotion" xml:space="preserve">
+    <value>&lt;p&gt;Delicious &lt;strong&gt;food&lt;/strong&gt;, delivered right to your &lt;strong&gt;doorstep&lt;/strong&gt;.&lt;/p&gt;</value>
   </data>
-  <data name="TotalWithColon" xml:space="preserve">
-    <value>Total :</value>
+  <data name="DeliveryTimeGuarantee" xml:space="preserve">
+    <value>&lt;p&gt;All orders are delivered &lt;br /&gt; in &lt;strong&gt;under an hour&lt;/strong&gt;,&lt;br /&gt; Guaranteed!&lt;/p&gt;
+&lt;p&gt;If not, you get your meal at &lt;strong&gt;no charge&lt;/strong&gt;!&lt;/p&gt;</value>
   </data>
-  <data name="UnitsLowercase" xml:space="preserve">
-    <value>éléments</value>
+  <data name="Enjoy" xml:space="preserve">
+    <value>Bon appétit!</value>
+  </data>
+  <data name="Enjoy2" xml:space="preserve">
+    <value>We hope you enjoy</value>
+  </data>
+  <data name="HowItWorks" xml:space="preserve">
+    <value>How it works:</value>
+  </data>
+  <data name="JoinUs" xml:space="preserve">
+    <value>Join our growing community &lt;br /&gt; and learn to &lt;strong&gt;stop worrying&lt;/strong&gt;.&lt;br /&gt;Sign up &lt;strong&gt;now&lt;/strong&gt;!</value>
+  </data>
+  <data name="OurMission" xml:space="preserve">
+    <value>Our mission</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Pay</value>
+  </data>
+  <data name="Pay2" xml:space="preserve">
+    <value>Either online or at the door</value>
+  </data>
+  <data name="PaymentMethodDoor" xml:space="preserve">
+    <value>At the door</value>
+  </data>
+  <data name="PaymentMethodDoorDetails" xml:space="preserve">
+    <value>At the door, you'll be able to use either Visa or MasterCard if you're paying credit, Interact or good old cash.</value>
+  </data>
+  <data name="PaymentMethodOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="PaymentMethodOnlineDetails" xml:space="preserve">
+    <value>We accept Visa, MasterCard, Paypal and Interact as well as any of your favorite crypto currencies.</value>
+  </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>Payment methods</value>
+  </data>
+  <data name="Pick" xml:space="preserve">
+    <value>Pick a meal</value>
+  </data>
+  <data name="Pick2" xml:space="preserve">
+    <value>Or more!</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
   </data>
 </root>

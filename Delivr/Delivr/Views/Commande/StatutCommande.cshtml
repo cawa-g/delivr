@@ -1,4 +1,5 @@
-﻿@model Delivr.Models.Commande
+﻿@using Resources =  Delivr.Resources;
+@model Delivr.Models.Commande
 
 @{
     string statusString;
@@ -9,21 +10,21 @@
     switch (Model.Statut)
     {
         case Delivr.Models.Commande.StatutCommande.EnAttente:
-            statusString = "En attente";
-            buttonText = "Préparer cette commande";
+            statusString = Resources.Commande.StatusPending;
+            buttonText = Resources.Commande.PrepareThisOrder;
             panelClasses = "panel-info";
             buttonClasses = "btn-primary startPrepare";
             collapseClasses = "in";
             break;
         case Delivr.Models.Commande.StatutCommande.EnPreparation:
-            statusString = "En préparation";
-            buttonText = "Terminer la préparation";
+            statusString = Resources.Commande.StatusInPreparation;
+            buttonText = Resources.Commande.FinishPreparation;
             panelClasses = "panel-primary";
             buttonClasses = "btn-success finishPrepare";
             collapseClasses = "in";
             break;
         case Delivr.Models.Commande.StatutCommande.Prete:
-            statusString = "Prête";
+            statusString = Resources.Commande.StatusReady;
             buttonText = "Do nothing";
             panelClasses = "panel-success";
             buttonClasses = "hidden";
@@ -44,10 +45,10 @@
         <div class="panel-heading" role="tab">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
-                    Commande #@Html.ValueFor(model => model.CommandeId) (@Model.CommandeItems.Sum(i => i.Quantite) éléments - @statusString)
+                    Commande #@Html.ValueFor(model => model.CommandeId) (@Model.CommandeItems.Sum(i => i.Quantite) @Resources.Commande.UnitsLowercase - @statusString)
                 </a>
                 <span>
-                    @Html.ActionLink(buttonText, "Statut/", null, new
+                    @Html.ActionLink(buttonText, "Statut", null, new
                     {
                         @class = "pull-right btn btn-sm " + buttonClasses,
                         role = "button",
@@ -63,7 +64,7 @@
                         Decimal total = 0;
                         foreach (var item in Model.CommandeItems)
                         {
-                            Decimal subtotal = new Decimal(item.Quantite * item.MenuItem.Prix) / 100;
+                            Decimal subtotal = new Decimal(item.SousTotal) / 100;
                             <li>
                                 @Html.Raw(String.Format("{0:C} ({1}x <strong>{2}</strong>)",
                                     subtotal, item.Quantite, Html.Encode(item.MenuItem.Nom)))
@@ -72,7 +73,7 @@
                         }
                     }
                 </ul>
-                <strong>Total:</strong> @String.Format("{0:C}", total)
+                <strong>@Resources.Commande.TotalWithColon</strong> @String.Format("{0:C}", total)
             </div>
         </div>
     </div>

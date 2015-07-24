@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FinishPreparation" xml:space="preserve">
-    <value>Terminer la préparation</value>
+    <value>Finish preparation</value>
   </data>
   <data name="PendingOrders" xml:space="preserve">
-    <value>Commandes en cours</value>
+    <value>Pending orders</value>
   </data>
   <data name="PrepareThisOrder" xml:space="preserve">
-    <value>Préparer cette commande</value>
+    <value>Prepare this order</value>
   </data>
   <data name="StatusDelivered" xml:space="preserve">
-    <value>Livrée</value>
+    <value>Delivered</value>
   </data>
   <data name="StatusInDelivery" xml:space="preserve">
-    <value>En livraison</value>
+    <value>In delivery</value>
   </data>
   <data name="StatusInPreparation" xml:space="preserve">
-    <value>En préparation</value>
+    <value>In preparation</value>
   </data>
   <data name="StatusPending" xml:space="preserve">
-    <value>En attente</value>
+    <value>Pending</value>
   </data>
   <data name="StatusProcessing" xml:space="preserve">
-    <value>En traitement</value>
+    <value>Processing</value>
   </data>
   <data name="StatusReady" xml:space="preserve">
-    <value>Prête</value>
+    <value>Ready</value>
   </data>
   <data name="TotalWithColon" xml:space="preserve">
-    <value>Total :</value>
+    <value>Total:</value>
   </data>
   <data name="UnitsLowercase" xml:space="preserve">
-    <value>éléments</value>
+    <value>items</value>
   </data>
 </root>

@@ -464,11 +464,7 @@
     <Content Include="Views\Restaurant\IndexForRestaurateur.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\AddAdresse.cshtml" />
-    <Content Include="Views\Commande\Index.cshtml" />
-    <Content Include="Views\Commande\Details.cshtml" />
     <Content Include="Views\Commande\Create.cshtml" />
-    <Content Include="Views\Commande\Edit.cshtml" />
-    <Content Include="Views\Commande\Delete.cshtml" />
     <Content Include="Views\Commande\List.cshtml" />
     <Content Include="Views\Commande\StatutCommande.cshtml" />
     <Content Include="Views\Restaurant\Liste.cshtml" />
