@@ -188,6 +188,11 @@
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
     <Compile Include="Models\LivraisonModels.cs" />
+    <Compile Include="Resources\General\General.en.Designer.cs">
+      <DependentUpon>General.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Helper.cs" />
     <Compile Include="Resources\Commande\Commande.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -463,6 +468,11 @@
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Commande.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\General\General.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\General\General.resx">

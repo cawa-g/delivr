@@ -128,7 +128,7 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
         [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
         public string Email { get; set; }
 

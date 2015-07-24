@@ -70,6 +70,15 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Livraisons disponibles.
+        /// </summary>
+        public static string AvailableDeliveries {
+            get {
+                return ResourceManager.GetString("AvailableDeliveries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retour aux détails.
         /// </summary>
         public static string BackToDetails {
@@ -214,24 +223,6 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Livraisons Disponibles.
-        /// </summary>
-        public static string ListeLivraisons {
-            get {
-                return ResourceManager.GetString("ListeLivraisons", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Liste des restaurants.
-        /// </summary>
-        public static string ListeRestaurants {
-            get {
-                return ResourceManager.GetString("ListeRestaurants", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Connexion.
         /// </summary>
         public static string LogIn {
@@ -363,6 +354,15 @@ namespace Delivr.Resources {
         public static string Restaurant {
             get {
                 return ResourceManager.GetString("Restaurant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restaurants.
+        /// </summary>
+        public static string Restaurants {
+            get {
+                return ResourceManager.GetString("Restaurants", resourceCulture);
             }
         }
         
