@@ -12,6 +12,7 @@ namespace Delivr.Models
     {
         public static class StatutCommande
         {
+            public const string EnTraitement = "EnTraitement";
             public const string EnAttente = "EnAttente";
             public const string EnPreparation = "EnPreparation";
             public const string Prete = "Prete";
@@ -22,6 +23,7 @@ namespace Delivr.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int CommandeId { get; set; }
+        public string PaypalTransacId { get; set; }
         public DateTime Date { get; set; }
         public string Statut { get; set; }
         public int RestaurantId { get; set; }
@@ -59,16 +61,6 @@ namespace Delivr.Models
         public virtual IList<CommandeItem> CommandeItems { get; set; }
         public virtual IList<Adresse> Adresses { get; set; }
         public int AdresseId { get; set; }
-
-        public string cmd { get; set; }
-        public string business { get; set; }
-        public string no_shipping { get; set; }
-        public string @return { get; set; }
-        public string cancel_return { get; set; }
-        public string notify_url { get; set; }
-        public string currency_code { get; set; }
-        public string item_name { get; set; }
-        public string amount { get; set; }
 
         public CreateCommandeModel()
         {

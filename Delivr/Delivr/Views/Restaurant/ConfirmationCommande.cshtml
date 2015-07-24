@@ -1,0 +1,48 @@
+﻿@model Delivr.Models.Commande
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>Commande payée!</h2>
+        <div>
+            <h4>La commande numéro: @Model.CommandeId, contenant</h4>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Item</td><td>Quantité</td><td>Prix unitaire</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CommandeItems)
+                    {
+                        <tr>
+                            <td>@item.MenuItem.Nom</td><td>@item.Quantite</td><td>@item.MenuItem.Prix</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            <h4>D'un montant total de : @Model.Prix </h4>
+
+            @if (ViewBag.Result == "SUCCESS")
+            {
+                <h4>
+                    À été payée avec succès. Veuillez conserver ce numéro de transaction dans vos dossiers: @Model.PaypalTransacId
+                </h4>
+            }
+            else if (ViewBag.Result == "WRONG_AMOUNT")
+            {
+                <h4>
+                    N'a pu être acheminée puisque le montant que vous avez fourni n'est pas suffisant, veuillez contacter le service à la clientèle et leur fournir votre numéro de commande ainsi que ce numéro de transaction Paypal : @Model.PaypalTransacId
+                </h4>
+            }
+            else if (ViewBag.Result == "PAYMENT_FAILURE")
+            {
+                <h4>
+                    N'a pu être acheminée puisque une erreur est survenue, veuillez contacter le service à la clientèle.
+                </h4>
+            }
+        </div>
+    </div>
+</div>
+
