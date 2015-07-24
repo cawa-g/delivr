@@ -1,0 +1,55 @@
+﻿@model Delivr.Models.EditRestaurateurModel
+
+@{
+    ViewBag.Title = "EditRestaurateur";
+}
+
+<h2>EditRestaurateur</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EditRestaurateurModel</legend>
+
+
+            @Html.HiddenFor(model => model.UserId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Prenom)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Prenom)
+            @Html.ValidationMessageFor(model => model.Prenom)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nom)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nom)
+            @Html.ValidationMessageFor(model => model.Nom)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telephone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telephone)
+            @Html.ValidationMessageFor(model => model.Telephone)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Retour à l'index ", "IndexRestaurateur")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -463,6 +463,8 @@
     <Content Include="Views\Livraison\Edit.cshtml" />
     <Content Include="Views\Livraison\Delete.cshtml" />
     <Content Include="Views\Livraison\Message.cshtml" />
+    <Content Include="Views\Account\IndexRestaurateur.cshtml" />
+    <Content Include="Views\Account\EditRestaurateur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
