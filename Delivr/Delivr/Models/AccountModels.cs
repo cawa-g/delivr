@@ -221,4 +221,26 @@ namespace Delivr.Models
 
         public int? restaurantId { get; set; }
     }
+
+    public class EditRestaurateurModel
+    {
+        public int UserId { get; set; }
+
+        [Required]
+        [Display(Name = "Prénom")]
+        public string Prenom { get; set; }
+
+        [Required]
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone invalide, utilisez le format xxx-xxx-xxxx")]
+        [Display(Name = "Téléphone")]
+        public string Telephone { get; set; }
+
+    }
+
+
 }

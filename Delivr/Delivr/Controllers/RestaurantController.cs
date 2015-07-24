@@ -193,7 +193,7 @@ namespace Delivr.Controllers
             List<Restaurant> RestaurantsToDelete = new List<Restaurant>();
             foreach (Restaurant r in Restaurants)
             {
-                if (r.Restaurateur.UserId != id)
+                if ( r.UserId != id)
                 {
                     RestaurantsToDelete.Add(r);
                 }

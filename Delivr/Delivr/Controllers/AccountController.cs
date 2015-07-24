@@ -117,6 +117,64 @@ namespace Delivr.Controllers
             return View(model);
         }
 
+
+        public ActionResult IndexRestaurateur()
+        {
+            var roles = (SimpleRoleProvider)Roles.Provider;
+
+            var allRoles = roles.GetAllRoles();
+            List<UserProfile> restaurateurs = new List<UserProfile>();
+
+            foreach (UserProfile r in db.UserProfiles.ToList())
+            {
+                if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
+                {
+                    restaurateurs.Add(r);
+                }
+            }
+            return View(restaurateurs);
+        }
+
+        public ActionResult DeleteRestaurateur(int id)
+        {
+            UserProfile u = db.UserProfiles.Find(id);
+            List<Restaurant> restaurants = db.Restaurants.Where(r => r.UserId == u.UserId).ToList();
+
+
+            foreach (Restaurant r in restaurants)
+            {
+                r.UserId = null;
+            }
+            System.Web.Security.Roles.RemoveUserFromRole(u.UserName, "Restaurateur");
+            db.SaveChanges();
+            return RedirectToAction("IndexRestaurateur");
+        }
+
+        public ActionResult EditRestaurateur(int id)
+        {
+            EditRestaurateurModel model = new EditRestaurateurModel();
+            UserProfile u = db.UserProfiles.Find(id);
+            model.Nom = u.Nom;
+            model.Prenom = u.Prenom;
+            model.Telephone = u.Telephone;
+            model.UserId = u.UserId;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditRestaurateur(EditRestaurateurModel model)
+        {
+            UserProfile u = db.UserProfiles.Find(model.UserId);
+            u.Nom = model.Nom;
+            u.Prenom = model.Prenom;
+            u.Telephone = model.Telephone;
+            db.SaveChanges();
+            return RedirectToAction("IndexRestaurateur");
+        }
+
+
+
         //
         // GET: /Restaurateur/Create
 
