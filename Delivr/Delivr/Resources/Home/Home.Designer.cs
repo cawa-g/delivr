@@ -133,7 +133,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;Des repas &lt;strong&gt;délicieux&lt;/strong&gt;, livrés jusqu&apos;au pas de votre&lt;strong&gt;porte&lt;/strong&gt;.&lt;/p&gt;.
+        ///   Looks up a localized string similar to &lt;p&gt;Des repas &lt;strong&gt;délicieux&lt;/strong&gt;, livrés jusqu&apos;au pas de votre &lt;strong&gt;porte&lt;/strong&gt;.&lt;/p&gt;.
         /// </summary>
         public static string DeliveryPromotion {
             get {
@@ -242,7 +242,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nous acceptions Visa, MasterCard, Paypal et Interact, en plus de de votre devise électronique préférée..
+        ///   Looks up a localized string similar to Nous acceptons Visa, MasterCard, Paypal et Interact, en plus de de votre devise électronique préférée..
         /// </summary>
         public static string PaymentMethodOnlineDetails {
             get {

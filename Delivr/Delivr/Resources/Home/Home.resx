@@ -142,7 +142,7 @@
     <value>Contactez-nous !</value>
   </data>
   <data name="DeliveryPromotion" xml:space="preserve">
-    <value>&lt;p&gt;Des repas &lt;strong&gt;délicieux&lt;/strong&gt;, livrés jusqu'au pas de votre&lt;strong&gt;porte&lt;/strong&gt;.&lt;/p&gt;</value>
+    <value>&lt;p&gt;Des repas &lt;strong&gt;délicieux&lt;/strong&gt;, livrés jusqu'au pas de votre &lt;strong&gt;porte&lt;/strong&gt;.&lt;/p&gt;</value>
   </data>
   <data name="DeliveryTimeGuarantee" xml:space="preserve">
     <value>&lt;p&gt;Toutes les commandes seront livrées &lt;br /&gt; en dedans d'&lt;strong&gt;une heure&lt;/strong&gt;,&lt;br /&gt; Garanti!&lt;/p&gt;
@@ -179,7 +179,7 @@
     <value>En ligne</value>
   </data>
   <data name="PaymentMethodOnlineDetails" xml:space="preserve">
-    <value>Nous acceptions Visa, MasterCard, Paypal et Interact, en plus de de votre devise électronique préférée.</value>
+    <value>Nous acceptons Visa, MasterCard, Paypal et Interact, en plus de de votre devise électronique préférée.</value>
   </data>
   <data name="PaymentMethods" xml:space="preserve">
     <value>Méthodes de paiement</value>
