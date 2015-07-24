@@ -57,7 +57,7 @@ namespace Delivr.Models
 
         [Required]
         [Display(Name = "Code Civique")]
-        public int CodeCivique { get; set; }
+        public int NumeroCivique { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale invalide, utilisez le format H1H 1H1")]

@@ -25,7 +25,7 @@ namespace Delivr.Controllers
                 UserProfile u = db.UserProfiles.Find(c.UserId);
                 Adresse clientAdd = db.Adresses.Find(c.AdresseId);
                 Adresse add = new Adresse();
-                add.CodeCivique = r.CodeCivique;
+                add.NumeroCivique = r.NumeroCivique;
                 add.CodePostale = r.CodePostale;
                 add.Rue = r.Rue;
                 LivraisonModel lm = new LivraisonModel(c.Date, add, clientAdd, r.nom, u.Prenom + " " + u.Nom, c.CommandeId);

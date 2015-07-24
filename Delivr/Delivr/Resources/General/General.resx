@@ -120,26 +120,56 @@
   <data name="About" xml:space="preserve">
     <value>À propos</value>
   </data>
+  <data name="AvailableDeliveries" xml:space="preserve">
+    <value>Livraisons disponibles</value>
+  </data>
   <data name="BackToDetails" xml:space="preserve">
     <value>Retour aux détails</value>
   </data>
   <data name="BackToListing" xml:space="preserve">
     <value>Retour au listage</value>
   </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="CivicNumber" xml:space="preserve">
+    <value>Numéro civique</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmer le nouveau mot de passe</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="ConfirmPasswordMismatch" xml:space="preserve">
+    <value>Le mot de passe et le mot de passe de confirmation ne correspondent pas.</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
+  <data name="DateFormatError" xml:space="preserve">
+    <value>Date invalide. Utilisez le format JJ/MM/AAAA.</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Adresse courriel</value>
+  </data>
+  <data name="EmailAddressError" xml:space="preserve">
+    <value>Adresse courriel invalide.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
   </data>
-  <data name="ListeLivraisons" xml:space="preserve">
-    <value>Livraisons Disponibles</value>
-  </data>
-  <data name="ListeRestaurants" xml:space="preserve">
-    <value>Liste des restaurants</value>
+  <data name="LastName" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Connexion</value>
@@ -156,13 +186,55 @@
   <data name="ManageRestaurateurs" xml:space="preserve">
     <value>Gestion de restaurateurs</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Commande</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Numéro de téléphone</value>
+  </data>
+  <data name="PhoneNumberFormatError" xml:space="preserve">
+    <value>Numéro de téléphone invalide. Utilisez le format ###-###-####.</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="PostalCodeFormatError" xml:space="preserve">
+    <value>Code postale invalide. Utilisez le format A1A 1A1.</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Mémoriser le mot de passe ?</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Restaurateur" xml:space="preserve">
+    <value>Restaurateur</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
   <data name="SignUp" xml:space="preserve">
     <value>S'inscrire</value>
   </data>
+  <data name="StreetName" xml:space="preserve">
+    <value>Rue</value>
+  </data>
   <data name="StringLengthError" xml:space="preserve">
     <value>La chaîne {0} doit comporter entre {2} et {1} caractères.</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
   </data>
 </root>

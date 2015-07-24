@@ -52,11 +52,11 @@
                     }
                     else if (User.IsInRole("Livreur"))
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeLivraisons, "ListeLivraison", "Livraison")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.AvailableDeliveries, "ListeLivraison", "Livraison")</li>
                     }
                     else if (User.Identity.IsAuthenticated)
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "Liste", "Restaurant")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.Restaurants, "Liste", "Restaurant")</li>
                     }
                     @Html.Partial("_LoginPartial")
                 </ul>
