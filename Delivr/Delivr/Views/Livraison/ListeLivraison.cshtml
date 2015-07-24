@@ -4,15 +4,114 @@
     <div class="container">
         <h2>@ViewBag.Title</h2>
 
-        <div id="listeCommandes">
-            @foreach (var item in Model.Livraisons)
-            {
-                <div class="panelCommande" data-id="@item.CommandeId">
-                    @{Html.RenderPartial("LivraisonCommande", item);}
-                </div>
-            }
+        <div class="form-group">
+            @Html.TextBox("livreuradresse")
+            <div class="col-sm-9">
+                @Html.Label("Adresse")
+            </div>
+
         </div>
+        @using (Html.BeginForm("ListeLivraison", "Livraison", FormMethod.Post))
+        {
+
+            @Html.HiddenFor(model => model.IdCommande)
+
+
+            <div id="listeCommandes">
+                @foreach (var item in Model.Livraisons)
+                {
+                    <div class="panelCommande">
+                        @{Html.RenderPartial("LivraisonCommande", item);}
+                    </div>
+                }
+            </div>
+            <div>
+                <div id="googleMap" style="width:500px;height:380px;"></div>
+            </div>
+
+        <div class="col-sm-12">
+            <input type="submit" class="btn btn-primary margin-top" value="Livrer" />
+        </div>
+        }
     </div>
 </div>
 
-   
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js">
+    </script>
+
+    <script>
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+
+        $('#listeCommandes').on("click", '.panelCommande button.select', function () {
+            $panel = $(this).parents('.panel');
+            $('input[name="IdCommande"]').val($panel.attr('data-id'));
+            alert($('input[name="IdCommande"]').val());
+            $('#listeCommandes .panel.selected').removeClass('panel-success selected').addClass('panel-info');
+
+            $panel.removeClass('panel-info').addClass('panel-success selected');
+
+
+            var restaurantAdresseCodeCivique = $('input[name="RestaurantAdresse.CodeCivique"]', $panel).val();
+            var restaurantAdresseRue = $('input[name="RestaurantAdresse.Rue"]', $panel).val();
+            var restaurantAdresseCodeCodePostale = $('input[name="RestaurantAdresse.CodePostale"]', $panel).val();
+
+
+            var stringRestaurant = restaurantAdresseCodeCivique + " " + restaurantAdresseRue + " " + restaurantAdresseCodeCodePostale;
+
+            var clientAdresseCodeCivique = $('input[name="ClientAdresse.CodeCivique"]', $panel).val();
+            var clientAdresseRue = $('input[name="ClientAdresse.Rue"]', $panel).val();
+            var clientAdresseCodePostale = $('input[name="ClientAdresse.CodePostale"]', $panel).val();
+
+            var stringClient = clientAdresseCodeCivique + " " + clientAdresseRue + " " + clientAdresseCodePostale;
+            addadresse(stringRestaurant, stringClient);
+
+            return false;
+        });
+
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var mapProp = {
+                center: new google.maps.LatLng(45.495336, -73.563107),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('directionpanel'));
+
+            var control = document.getElementById('control');
+            control.style.display = 'block';
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        function addadresse(client, restaurant) {
+            var start = $('#livreuradresse').val();
+            var restoadresse = restaurant;
+            var end = client;
+            
+            var waypoints = [];
+            waypoints.push({
+                location: restoadresse,
+                stopover: true
+            });
+            var request = {
+                origin: start,
+                waypoints: waypoints,
+                destination: end,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+    </script>
+}
+
+

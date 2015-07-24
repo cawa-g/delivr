@@ -135,6 +135,9 @@
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="ListeLivraisons" xml:space="preserve">
+    <value>Livraisons Disponibles</value>
+  </data>
   <data name="ListeRestaurants" xml:space="preserve">
     <value>Liste des restaurants</value>
   </data>
