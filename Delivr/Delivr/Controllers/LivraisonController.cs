@@ -41,6 +41,10 @@ namespace Delivr.Controllers
         public ActionResult ListeLivraison(ListeLivraisonModel listeLM)
         {
             Commande commande = db.Commandes.Find(listeLM.IdCommande);
+            if (commande.Statut != Commande.StatutCommande.Prete)
+            {
+                return RedirectToAction("Message", "Livraison", new { chaine = "Un autre livreur a déjà accepté la commande sélectionnée" });
+            }
             commande.Statut = Commande.StatutCommande.Livree;
 
             Livraison livraison = new Livraison();
@@ -48,7 +52,14 @@ namespace Delivr.Controllers
             livraison.Date = DateTime.Now;
             db.Livraisons.Add(livraison);
             db.SaveChanges();
-            return View(listeLM);
+            return RedirectToAction("Index");
+        }
+
+        [ValidateInput(false)]
+        public ActionResult Message(string chaine)
+        {
+            ViewBag.Chaine = chaine;
+            return View();
         }
 
         public ActionResult Index()

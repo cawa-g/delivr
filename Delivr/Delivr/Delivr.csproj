@@ -457,6 +457,7 @@
     <Content Include="Views\Livraison\Create.cshtml" />
     <Content Include="Views\Livraison\Edit.cshtml" />
     <Content Include="Views\Livraison\Delete.cshtml" />
+    <Content Include="Views\Livraison\Message.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">

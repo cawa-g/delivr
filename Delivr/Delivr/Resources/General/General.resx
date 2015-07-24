@@ -168,6 +168,9 @@
   <data name="LastName" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <data name="ListeLivraisons" xml:space="preserve">
+    <value>Livraisons Disponibles</value>
+  </data>
   <data name="ListeRestaurants" xml:space="preserve">
     <value>Liste des restaurants</value>
   </data>

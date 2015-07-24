@@ -47,7 +47,7 @@ namespace Delivr.Models
     public class ListeLivraisonModel
     {
         public List<LivraisonModel> Livraisons;
-        public int IdCommande;
+        public int IdCommande{ get; set; }
 
         public ListeLivraisonModel()
         {

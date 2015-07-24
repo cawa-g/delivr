@@ -214,6 +214,15 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Livraisons Disponibles.
+        /// </summary>
+        public static string ListeLivraisons {
+            get {
+                return ResourceManager.GetString("ListeLivraisons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liste des restaurants.
         /// </summary>
         public static string ListeRestaurants {

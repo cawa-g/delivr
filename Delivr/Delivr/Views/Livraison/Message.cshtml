@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron padded">
+    <div class="container">
+        <h2>@Html.Raw(ViewBag.Chaine)</h2>
+    </div>
+    <div class="container">
+        <hr />
+        @Html.ActionLink("Retour aux livraisons", "ListeLivraison")
+    </div>
+</div>

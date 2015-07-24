@@ -1,35 +1,20 @@
 ﻿@model Delivr.Models.LivraisonModel
 
 @{
-    string buttonText;
-    string panelClasses;
-    string buttonClasses;
-    string collapseClasses;
-    buttonText = "Préparer cette commande";
-    panelClasses = "panel-info";
-    buttonClasses = "btn-primary startPrepare";
-    collapseClasses = "";
-
-
     string collapseId = "collapseCommande" + Html.ValueFor(model => model.CommandeId);
 
-    <div class="panel @panelClasses">
+    <div class="panel panel-info" data-id="@Model.CommandeId">
         <div class="panel-heading" role="tab">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" href="#@collapseId" aria-expanded="true" aria-controls="@collapseId">
                     Commande #@Html.ValueFor(model => model.CommandeId)
                 </a>
                 <span>
-                    @Html.ActionLink(buttonText, "Selectionner/", null, new
-                    {
-                        @class = "pull-right btn btn-sm " + buttonClasses,
-                        role = "button",
-                        style = "margin: -6px -11px 0 0"
-                    })
+                    <button class="pull-right btn btn-sm btn-primary select" style="margin: -6px -11px 0 0">Sélectionner</button>
                 </span>
             </h4>
         </div>
-        <div id="@collapseId" class="panel-collapse collapse @collapseClasses" role="tabpanel">
+        <div id="@collapseId" class="panel-collapse collapse " role="tabpanel">
             <div class="panel-body">
                 <ul>
                     <p>
@@ -45,6 +30,9 @@
                         @Html.DisplayFor(model => model.RestaurantAdresse.NumeroCivique)
                         @Html.DisplayFor(model => model.RestaurantAdresse.Rue)
                         @Html.DisplayFor(model => model.RestaurantAdresse.CodePostale)
+                        @Html.HiddenFor(model => model.RestaurantAdresse.CodeCivique)
+                        @Html.HiddenFor(model => model.RestaurantAdresse.Rue)
+                        @Html.HiddenFor(model => model.RestaurantAdresse.CodePostale)
 
                     </p>
                     <p>
@@ -56,6 +44,9 @@
                         @Html.DisplayFor(model => model.ClientAdresse.NumeroCivique)
                         @Html.DisplayFor(model => model.ClientAdresse.Rue)
                         @Html.DisplayFor(model => model.ClientAdresse.CodePostale)
+                        @Html.HiddenFor(model => model.ClientAdresse.CodeCivique)
+                        @Html.HiddenFor(model => model.ClientAdresse.Rue)
+                        @Html.HiddenFor(model => model.ClientAdresse.CodePostale)
                     </p>
                 </ul>
             </div>

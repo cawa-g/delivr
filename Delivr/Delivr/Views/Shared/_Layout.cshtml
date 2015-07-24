@@ -52,7 +52,7 @@
                     }
                     else if (User.IsInRole("Livreur"))
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "ListeLivraison", "Livraison")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeLivraisons, "ListeLivraison", "Livraison")</li>
                     }
                     else if (User.Identity.IsAuthenticated)
                     {
