@@ -49,7 +49,6 @@
         $('#listeCommandes').on("click", '.panelCommande button.select', function () {
             $panel = $(this).parents('.panel');
             $('input[name="IdCommande"]').val($panel.attr('data-id'));
-            alert($('input[name="IdCommande"]').val());
             $('#listeCommandes .panel.selected').removeClass('panel-success selected').addClass('panel-info');
 
             $panel.removeClass('panel-info').addClass('panel-success selected');
