@@ -189,7 +189,7 @@ namespace Delivr.Controllers
             }
             totalString += total.ToString();
             SendMail("Confirmation de commande Delivr (Processing)", 
-                        "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.CodeCivique + " " + 
+                        "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.NumeroCivique + " " + 
                         commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + 
                         commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
 
