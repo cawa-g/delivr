@@ -117,4 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FinishPreparation" xml:space="preserve">
+    <value>Terminer la préparation</value>
+  </data>
+  <data name="PendingOrders" xml:space="preserve">
+    <value>Commandes en cours</value>
+  </data>
+  <data name="PrepareThisOrder" xml:space="preserve">
+    <value>Préparer cette commande</value>
+  </data>
+  <data name="StatusDelivered" xml:space="preserve">
+    <value>Livrée</value>
+  </data>
+  <data name="StatusInDelivery" xml:space="preserve">
+    <value>En livraison</value>
+  </data>
+  <data name="StatusInPreparation" xml:space="preserve">
+    <value>En préparation</value>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>En attente</value>
+  </data>
+  <data name="StatusProcessing" xml:space="preserve">
+    <value>En traitement</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Prête</value>
+  </data>
+  <data name="TotalWithColon" xml:space="preserve">
+    <value>Total :</value>
+  </data>
+  <data name="UnitsLowercase" xml:space="preserve">
+    <value>éléments</value>
+  </data>
 </root>
