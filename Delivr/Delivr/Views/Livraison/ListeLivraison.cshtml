@@ -55,18 +55,18 @@
             $panel.removeClass('panel-info').addClass('panel-success selected');
 
 
-            var restaurantAdresseCodeCivique = $('input[name="RestaurantAdresse.CodeCivique"]', $panel).val();
+            var restaurantAdresseNumeroCivique = $('input[name="RestaurantAdresse.NumeroCivique"]', $panel).val();
             var restaurantAdresseRue = $('input[name="RestaurantAdresse.Rue"]', $panel).val();
             var restaurantAdresseCodeCodePostale = $('input[name="RestaurantAdresse.CodePostale"]', $panel).val();
 
 
-            var stringRestaurant = restaurantAdresseCodeCivique + " " + restaurantAdresseRue + " " + restaurantAdresseCodeCodePostale;
+            var stringRestaurant = restaurantAdresseNumeroCivique + " " + restaurantAdresseRue + " " + restaurantAdresseCodeCodePostale;
 
-            var clientAdresseCodeCivique = $('input[name="ClientAdresse.CodeCivique"]', $panel).val();
+            var clientAdresseNumeroCivique = $('input[name="ClientAdresse.NumeroCivique"]', $panel).val();
             var clientAdresseRue = $('input[name="ClientAdresse.Rue"]', $panel).val();
             var clientAdresseCodePostale = $('input[name="ClientAdresse.CodePostale"]', $panel).val();
 
-            var stringClient = clientAdresseCodeCivique + " " + clientAdresseRue + " " + clientAdresseCodePostale;
+            var stringClient = clientAdresseNumeroCivique + " " + clientAdresseRue + " " + clientAdresseCodePostale;
             addadresse(stringRestaurant, stringClient);
 
             return false;
