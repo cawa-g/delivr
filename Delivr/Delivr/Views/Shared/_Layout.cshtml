@@ -45,7 +45,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Index", "Restaurant")</li>
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "AddRestaurateur", "Account")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "IndexRestaurateur", "Account")</li>
                     }else if(User.IsInRole("Restaurateur"))
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>

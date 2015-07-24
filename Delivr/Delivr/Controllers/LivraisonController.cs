@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using Delivr.Helpers;
 
 namespace Delivr.Controllers
 {
     public class LivraisonController : Controller
     {
         private DelivrContext db = new DelivrContext();
+        private TwilioHelper twilio = new TwilioHelper();
 
         //
         // GET: /Commande/ListeLivraison
@@ -52,6 +54,8 @@ namespace Delivr.Controllers
             livraison.Date = DateTime.Now;
             db.Livraisons.Add(livraison);
             db.SaveChanges();
+            UserProfile user = db.UserProfiles.Find(commande.UserId);
+            twilio.SendSMS("Votre commande #: " + commande.CommandeId + " est maintenant: " + commande.Statut, user.Telephone);
             return RedirectToAction("Index");
         }
 
@@ -164,6 +168,7 @@ namespace Delivr.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

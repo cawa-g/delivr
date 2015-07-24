@@ -9,12 +9,14 @@ using Delivr.Models;
 using WebMatrix.WebData;
 using System.Web.Security;
 using System.Net.Mail;
+using Delivr.Helpers;
 
 namespace Delivr.Controllers
 {
     public class RestaurantController : Controller
     {
         private DelivrContext db = new DelivrContext();
+        private TwilioHelper twilio = new TwilioHelper();
 
         //
         // GET: /Restaurant/
@@ -179,6 +181,7 @@ namespace Delivr.Controllers
                 total = total + c.SousTotal;
             }
             totalString += total.ToString();
+            twilio.SendSMS("Vous avez placé une nouvelle commande! Numéro de confirmation: " + commande.CommandeId + " État: " + commande.Statut, user.Telephone);
             SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.NumeroCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
             return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " +commande.CommandeId });
         }
@@ -392,6 +395,7 @@ namespace Delivr.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
         protected void SendMail(string sujet, string message,string destinataire)
         {
             MailMessage msg = new MailMessage();

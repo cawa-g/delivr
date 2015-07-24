@@ -124,8 +124,9 @@ namespace Delivr.Controllers
 
             var allRoles = roles.GetAllRoles();
             List<UserProfile> restaurateurs = new List<UserProfile>();
+            List<UserProfile> users = db.UserProfiles.ToList();
 
-            foreach (UserProfile r in db.UserProfiles.ToList())
+            foreach (UserProfile r in users)
             {
                 if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
                 {

@@ -67,7 +67,7 @@
             var clientAdresseCodePostale = $('input[name="ClientAdresse.CodePostale"]', $panel).val();
 
             var stringClient = clientAdresseNumeroCivique + " " + clientAdresseRue + " " + clientAdresseCodePostale;
-            addadresse(stringRestaurant, stringClient);
+            addadresse(stringClient, stringRestaurant);
 
             return false;
         });
