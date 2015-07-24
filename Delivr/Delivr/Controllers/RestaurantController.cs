@@ -9,6 +9,9 @@ using Delivr.Models;
 using WebMatrix.WebData;
 using System.Web.Security;
 using System.Net.Mail;
+using System.Net;
+using System.Text;
+using System.IO;
 
 namespace Delivr.Controllers
 {
@@ -119,21 +122,25 @@ namespace Delivr.Controllers
         }
 
         //
-        // POST: /Restaurant/CreateCommande
+        // GET: /Restaurant/CreateCommande
 
         [HttpPost]
         public ActionResult CreateCommande(CreateCommandeModel createCommande)
         {
+            Commande commande;
+
             UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
             MenuItem firstMenuItem = db.MenuItems.Find(createCommande.CommandeItems.First().MenuItemId);
             Menu menu = db.Menus.Find(firstMenuItem.MenuId);
             Restaurant resto = db.Restaurants.Find(menu.RestaurantId);
+
             int AdresseId = createCommande.AdresseId;
             if ((createCommande.NewAdresse.Rue == null || createCommande.NewAdresse.Rue == ""))
             {
                 AdresseId = createCommande.AdresseId;
                 user.AdresseDefaultId = AdresseId;
-            }else
+            }
+            else
             {
                 Adresse add = new Adresse();
                 add.CodeCivique = createCommande.NewAdresse.CodeCivique;
@@ -142,21 +149,22 @@ namespace Delivr.Controllers
                 add.User = user;
                 db.Adresses.Add(add);
                 db.SaveChanges();
-                user.Adresses.Add(add);               
+                user.Adresses.Add(add);
                 AdresseId = add.AdresseId;
                 user.AdresseDefaultId = add.AdresseId;
             }
 
-            
-            Commande commande = new Commande()
-            {  
+
+            commande = new Commande()
+            {
                 AdresseId = AdresseId,
                 RestaurantId = resto.RestaurantId,
                 UserId = user.UserId,
                 Date = createCommande.Date,
-                Statut = Commande.StatutCommande.EnAttente
-
+                Statut = Commande.StatutCommande.EnTraitement, //sera mis a jour sur réception du paiement
+                PaypalTransacId = null //sera inséré par la suite
             };
+
             commande.Adresse = db.Adresses.Find(AdresseId);
             foreach (CommandeItem c in createCommande.CommandeItems)
             {
@@ -166,10 +174,9 @@ namespace Delivr.Controllers
             commande.CommandeItems = createCommande.CommandeItems;
             commande.Adresse = db.Adresses.Find(AdresseId);
             db.Commandes.Add(commande);
-            
-
             db.SaveChanges();
-            string items = Environment.NewLine+"Items: ";
+
+            string items = Environment.NewLine + "Items: ";
             string totalString = "Total: ";
             int total = 0;
             foreach (CommandeItem c in commande.CommandeItems)
@@ -179,10 +186,129 @@ namespace Delivr.Controllers
                 total = total + c.SousTotal;
             }
             totalString += total.ToString();
-            SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.CodeCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
-            return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " +commande.CommandeId });
+            SendMail("Confirmation de commande Delivr (Processing)", 
+                        "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.CodeCivique + " " + 
+                        commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + 
+                        commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
+
+            return Content(commande.CommandeId.ToString());
+
+            //-----------------------------------------------------------------------------------------
         }
 
+        //
+        // GET: /Restaurant/ConfirmationCommande
+
+        public ActionResult ConfirmationCommande()
+        {
+            // Receive IPN request from PayPal and parse all the variables returned
+            var formVals = new Dictionary<string, string>();
+            formVals.Add("cmd", "_notify-synch");
+            formVals.Add("at", "ZjUQz8PtolJAdGtMs2OnKyzlPXJa0-oFywH2fbntTO2SXpVFKFrUl2sRuJC"); //identity-token
+            formVals.Add("tx", Request["tx"].ToUpper());
+
+            //true for sandbox
+            string response = GetPayPalResponse(formVals, true);
+            string[] args = response.Split(new string[] { "\n" }, StringSplitOptions.None);
+            string orderId = args.First(x => x.Contains("custom")).Split('=')[1];
+               
+            Commande order = db.Commandes.Find(Int32.Parse(orderId));
+
+            if (response.Contains("SUCCESS"))
+            {
+                string transactionID = GetPDTValue(response, "txn_id"); // txn_id //d
+                string sAmountPaid = GetPDTValue(response, "mc_gross"); // d
+                string deviceID = GetPDTValue(response, "custom"); // d
+                string payerEmail = GetPDTValue(response, "payer_email"); // d
+                string Item = GetPDTValue(response, "item_name");
+
+                Decimal amountPaid = 0;
+                Decimal.TryParse(sAmountPaid, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out amountPaid);
+
+                if (amountPaid == (decimal)order.Prix/100)  // you might want to have a bigger than or equal to sign here!
+                {
+                    ViewBag.Result = "SUCCESS";
+                    order.PaypalTransacId = transactionID;
+                    order.Statut = Commande.StatutCommande.EnAttente;
+                    TryUpdateModel(order);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.Result = "WRONG_AMOUNT";
+                }
+
+            }
+            else
+            {
+                //Payment failure
+                ViewBag.Result = "PAYMENT_FAILURE";
+            }
+
+            return View(order);
+        }
+
+        //------------------------PAYPAL UTILS----------------------------------------------
+        string GetPayPalResponse(Dictionary<string, string> formVals, bool useSandbox)
+        {
+
+            string paypalUrl = useSandbox ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
+                : "https://www.paypal.com/cgi-bin/webscr";
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(paypalUrl);
+
+            // Set values for the request back
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            byte[] param = Request.BinaryRead(Request.ContentLength);
+            string strRequest = Encoding.ASCII.GetString(param);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(strRequest);
+
+            foreach (string key in formVals.Keys)
+            {
+                sb.AppendFormat("&{0}={1}", key, formVals[key]);
+            }
+            strRequest += sb.ToString();
+            req.ContentLength = strRequest.Length;
+
+            string response = "";
+            using (StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII))
+            {
+
+                streamOut.Write(strRequest);
+                streamOut.Close();
+                using (StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream()))
+                {
+                    response = streamIn.ReadToEnd();
+                }
+            }
+
+            return response;
+        }
+        string GetPDTValue(string pdt, string key)
+        {
+
+            string[] keys = pdt.Split('\n');
+            string thisVal = "";
+            string thisKey = "";
+            foreach (string s in keys)
+            {
+                string[] bits = s.Split('=');
+                if (bits.Length > 1)
+                {
+                    thisVal = bits[1];
+                    thisKey = bits[0];
+                    if (thisKey.Equals(key, StringComparison.InvariantCultureIgnoreCase))
+                        break;
+                }
+            }
+            return thisVal;
+
+        }
+        //--------------------------------------------------------------------------------------------------------
 
         //
         // GET: /Restaurant/

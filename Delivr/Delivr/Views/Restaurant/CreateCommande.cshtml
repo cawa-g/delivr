@@ -8,7 +8,7 @@
     <div class="container">
         <h2>@ViewBag.Title</h2>
         <hr />
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "orderForm" })) //@action = "https://www.sandbox.paypal.com/cgi-bin/webscr", 
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
@@ -132,8 +132,25 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <div class="btn-group btn-group-lg" role="group">
-                            <input type="submit" name="btnsubmit" class="btn btn-primary" value="Payer avec Paypal" />
-                            <a class="btn btn-default" href="/Restaurant/MenuCommande/@(Model.CommandeItems[0].MenuItem.Menu.RestaurantId)">Modifier commande</a>
+                                                        
+                            <input type="hidden" name="cmd" value="_cart"> 
+                            <input type="hidden" name="upload" value="1">
+                            <input type="hidden" name="business" value="test-merchant@delivr.com">
+                            <input type="hidden" name="no_shipping" value="1">
+                            <input type="hidden" name="return" value="@Url.Action("ConfirmationCommande", "Restaurant", routeValues: null /* specify if needed */, protocol: Request.Url.Scheme /* This is the trick */)">
+                            <input type="hidden" name="notify_url" value="@Url.Action("ConfirmationCommande", "Restaurant", routeValues: null /* specify if needed */, protocol: Request.Url.Scheme /* This is the trick */)">
+                            <input type="hidden" name="currency_code" value="CAD" />
+                            <input type="hidden" name="custom" value="" id="orderId"/>
+                            @for (int i = 0; i < Model.CommandeItems.Count; i++)
+                            {
+                                <input type="hidden" name="@("item_name_" + (i + 1).ToString())" value="@(Model.CommandeItems[i].MenuItem.Nom)">
+                                <input type="hidden" name="@("quantity_" + (i + 1).ToString())" value="@(Model.CommandeItems[i].Quantite)">
+                                <input type="hidden" name="@("amount_" + (i + 1).ToString())" value="@((Model.CommandeItems[i].SousTotal/Model.CommandeItems[i].Quantite)/100.00)">
+                            }
+
+                            <div id="confirmationPopup" hidden="hidden"><h4>Votre commande a été confirmée avec succès, il ne vous reste plus qu'à payer!</h4></div>
+                            <input id="confirmationBtn" type="submit" name="btnsubmit" class="btn btn-primary" value="Valider" />
+                            <a class="btn btn-default" href="en/Restaurant/MenuCommande/@(Model.CommandeItems[0].MenuItem.Menu.RestaurantId)">Modifier commande</a>
                         </div>
                     </div>
                 </div>
@@ -155,6 +172,25 @@
                 toolbarPlacement: 'top',
                 format: 'YYYY/MM/DD HH:mm',
                 allowInputToggle: true
+            });
+        });
+        $(function () {
+            $("#confirmationBtn").click(function () {
+                var dataString = $('#orderForm').serialize();
+                //alert (dataString);return false;
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("CreateCommande")",
+                    data: dataString,
+                    success: function (data) {
+                        $('#orderId').prop('value', data)
+                        $('#confirmationPopup').fadeIn();
+                        $('#confirmationBtn').prop('value', 'Payer avec paypal!').addClass('btn-success');
+                        $('#orderForm').prop('action', 'https://www.sandbox.paypal.com/cgi-bin/webscr');
+                        $('#confirmationBtn').unbind();
+                    }
+                });
+                return false;
             });
         });
     </script>

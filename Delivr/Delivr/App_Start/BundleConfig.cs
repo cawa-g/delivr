@@ -33,6 +33,10 @@ namespace Delivr
             bundles.Add(new ScriptBundle("~/bundles/datetimepickerjs").Include(
                         "~/Scripts/bootstrap-datetimepicker.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/paypalBtn").Include(
+                        "~/Scripts/paypal-button.min.js",
+                        "~/Scripts/paypal-button-minicart.min.js"));
+
             // Utilisez la version de développement de Modernizr pour développer et apprendre. Puis, lorsque vous êtes
             // prêt pour la production, utilisez l'outil de génération sur http://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

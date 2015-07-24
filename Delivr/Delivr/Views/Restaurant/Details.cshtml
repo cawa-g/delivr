@@ -56,11 +56,11 @@
 
             if (userIsAdmin)
             {
-                @Html.ActionLink(@Resources.General.Edit, "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info btn-lg" })
+                @Html.ActionLink(@Resources.General.Edit, "Edit", new { id = Model.RestaurantId }, new { @class = "btn btn-info" })
             }
             else if (!userIsRestaurateur)
             {
-                @Html.ActionLink(@Resources.Restaurant.Command, "MenuCommande", new { id = Model.RestaurantId }, new { @class = "btn btn-info btn-lg" })
+                @Html.ActionLink(@Resources.Restaurant.Command, "MenuCommande", new { id = Model.RestaurantId }, new { @class = "btn btn-info" })
             }
             
             <div class="btn-group btn-group-sm" role="group" aria-label="controls">

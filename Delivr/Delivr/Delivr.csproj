@@ -187,7 +187,7 @@
     <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Models\CommandeItemModels.cs" />
     <Compile Include="Models\CommandeModels.cs" />
-    <Compile Include="Models\Paypal.cs" />
+    <Compile Include="Models\LivraisonModels.cs" />
     <Compile Include="Resources\Helper.cs" />
     <Compile Include="Resources\Commande\Commande.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -457,6 +457,7 @@
     <Content Include="Views\Livraison\Create.cshtml" />
     <Content Include="Views\Livraison\Edit.cshtml" />
     <Content Include="Views\Livraison\Delete.cshtml" />
+    <Content Include="Views\Restaurant\ConfirmationCommande.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
