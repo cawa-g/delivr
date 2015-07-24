@@ -21,7 +21,7 @@ namespace Delivr.Helpers
             var anchor = new TagBuilder("a");
 
             string otherLanguage = Resources.Helper.AvailableCultures.First(
-                c => c != Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
+                c => c.Substring(0, 2) != Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
             CultureInfo cultureInfo = new CultureInfo(otherLanguage);
 
             string displayName = null;
