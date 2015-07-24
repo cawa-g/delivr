@@ -21,7 +21,7 @@
         <hr />
         <div class="btn-group" role="group" aria-label="controls">
             <div class="btn-group" role="group">
-                <input type="submit" class="btn btn-primary" value="Sauvegarder" />
+                <input type="submit" form="form-password" class="btn btn-primary" value="Sauvegarder" />
             </div>
             <div class="btn-group" role="group">
                 @(Html.ActionLink("Retour au compte", "Edit", null, new { @class = "btn btn-default" }))
@@ -30,6 +30,3 @@
 
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

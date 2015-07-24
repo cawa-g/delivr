@@ -150,7 +150,7 @@
 
                             <div id="confirmationPopup" hidden="hidden"><h4>Votre commande a été confirmée avec succès, il ne vous reste plus qu'à payer!</h4></div>
                             <input id="confirmationBtn" type="submit" name="btnsubmit" class="btn btn-primary" value="Valider" />
-                            <a class="btn btn-default" href="en/Restaurant/MenuCommande/@(Model.CommandeItems[0].MenuItem.Menu.RestaurantId)">Modifier commande</a>
+                            @Html.ActionLink("Modifier commande", "MenuCommande", "Restaurant", new { id = Model.CommandeItems[0].MenuItem.Menu.RestaurantId }, new { @class = "btn btn-default" })
                         </div>
                     </div>
                 </div>
