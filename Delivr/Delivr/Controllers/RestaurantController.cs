@@ -40,19 +40,21 @@ namespace Delivr.Controllers
         public ActionResult MenuCommande(int id)
         {
             Restaurant resto = db.Restaurants.Find(id);
-            Menu menu;
-            if (db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).FirstOrDefault() != null)
+            List<Menu> menus = new List<Menu>();
+            List<MenuItem> menuItems = new List<MenuItem>();
+            List<CreateCommandeItemModel> createCommandeItems = new List<CreateCommandeItemModel>();
+
+            if (db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).FirstOrDefault() == null)
             {
-                menu = db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).First();
-            } else {
                 return RedirectToAction("MenuNotFound");
             }
-            List<MenuItem> menuItems = db.MenuItems.Where(c => c.MenuId == menu.MenuId).ToList();
-            List<CreateCommandeItemModel> createCommandeItems = new List<CreateCommandeItemModel>();
-            foreach (MenuItem mi in menuItems)
-            { 
-                CreateCommandeItemModel model = new CreateCommandeItemModel(0,mi.MenuItemId,mi.Nom,mi.Prix,id);
-                createCommandeItems.Add(model);
+            foreach (Menu m in db.Menus.Where(c => c.RestaurantId == resto.RestaurantId).ToList())
+            {
+                foreach (MenuItem mi in db.MenuItems.Where(c => c.MenuId == m.MenuId).ToList())
+                {
+                    CreateCommandeItemModel model = new CreateCommandeItemModel(0, mi.MenuItemId, mi.Nom, mi.Prix, id);
+                    createCommandeItems.Add(model);
+                }
             }
 
             return View(createCommandeItems);
@@ -61,19 +63,19 @@ namespace Delivr.Controllers
         [HttpPost]
         public ActionResult MenuCommande(IList<Delivr.Models.CreateCommandeItemModel> createCommandeItems)
         {
-            
+
 
             List<CommandeItem> items = new List<CommandeItem>();
             foreach (CreateCommandeItemModel c in createCommandeItems)
             {
                 if (c.Quantite != 0)
-                { 
+                {
                     CommandeItem cItem = new CommandeItem()
                     {
                         MenuItemId = c.MenuItemId,
                         Quantite = c.Quantite,
-                        SousTotal = c.Quantite*c.Prix
-                        
+                        SousTotal = c.Quantite * c.Prix
+
                     };
 
                     items.Add(cItem);
@@ -90,7 +92,7 @@ namespace Delivr.Controllers
 
         public ActionResult CreateCommande()
         {
-            
+
             var items = TempData["list"] as List<CommandeItem>;
             if (items == null)
                 return RedirectToAction("Liste");
@@ -135,7 +137,8 @@ namespace Delivr.Controllers
             {
                 AdresseId = createCommande.AdresseId;
                 user.AdresseDefaultId = AdresseId;
-            }else
+            }
+            else
             {
                 Adresse add = new Adresse();
                 add.NumeroCivique = createCommande.NewAdresse.NumeroCivique;
@@ -144,14 +147,14 @@ namespace Delivr.Controllers
                 add.User = user;
                 db.Adresses.Add(add);
                 db.SaveChanges();
-                user.Adresses.Add(add);               
+                user.Adresses.Add(add);
                 AdresseId = add.AdresseId;
                 user.AdresseDefaultId = add.AdresseId;
             }
 
-            
+
             Commande commande = new Commande()
-            {  
+            {
                 AdresseId = AdresseId,
                 RestaurantId = resto.RestaurantId,
                 UserId = user.UserId,
@@ -168,10 +171,10 @@ namespace Delivr.Controllers
             commande.CommandeItems = createCommande.CommandeItems;
             commande.Adresse = db.Adresses.Find(AdresseId);
             db.Commandes.Add(commande);
-            
+
 
             db.SaveChanges();
-            string items = Environment.NewLine+"Items: ";
+            string items = Environment.NewLine + "Items: ";
             string totalString = "Total: ";
             int total = 0;
             foreach (CommandeItem c in commande.CommandeItems)
@@ -183,43 +186,43 @@ namespace Delivr.Controllers
             totalString += total.ToString();
             twilio.SendSMS("Vous avez placé une nouvelle commande! Numéro de confirmation: " + commande.CommandeId + " État: " + commande.Statut, user.Telephone);
             SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.NumeroCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
-            return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " +commande.CommandeId });
+            return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " + commande.CommandeId });
         }
 
 
         //
         // GET: /Restaurant/
-         [ActionName("IndexForRestaurateur")]
+        [ActionName("IndexForRestaurateur")]
         public ActionResult Index(int? id)
         {
             List<Restaurant> Restaurants = db.Restaurants.ToList();
             List<Restaurant> RestaurantsToDelete = new List<Restaurant>();
             foreach (Restaurant r in Restaurants)
             {
-                if ( r.UserId != id)
+                if (r.UserId != id)
                 {
                     RestaurantsToDelete.Add(r);
                 }
             }
-             foreach (Restaurant r in RestaurantsToDelete)
+            foreach (Restaurant r in RestaurantsToDelete)
             {
                 Restaurants.Remove(r);
             }
             return View(Restaurants);
         }
 
-         //
-         // GET: /Restaurant/
-         public ActionResult Liste()
-         {
-             List<Restaurant> Restaurants = db.Restaurants.ToList();
-             return View(Restaurants);
-         }
+        //
+        // GET: /Restaurant/
+        public ActionResult Liste()
+        {
+            List<Restaurant> Restaurants = db.Restaurants.ToList();
+            return View(Restaurants);
+        }
 
         //
         // GET: /Restaurant/Details/5
 
-         public ActionResult Details(int? id)
+        public ActionResult Details(int? id)
         {
             Restaurant restaurant = db.Restaurants.Find(id);
             ViewBag.Restaurateur = "";
@@ -227,7 +230,7 @@ namespace Delivr.Controllers
             if (restaurant.UserId != null)
             {
                 email = db.UserProfiles.Find(restaurant.UserId).Email;
-            }         
+            }
             if (email != null)
             {
                 ViewBag.Restaurateur = email;
@@ -248,29 +251,29 @@ namespace Delivr.Controllers
             var roles = (SimpleRoleProvider)Roles.Provider;
 
             var allRoles = roles.GetAllRoles();
-             List<SelectListItem> restaurateurs = new List<SelectListItem>();
-             restaurateurs.Add(new SelectListItem
-             {
-                 Value = null,
-                 Text = "",
-             });
-             foreach (UserProfile r in db.UserProfiles.ToList())
-             {
-                 if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
-                 {
-                     restaurateurs.Add(new SelectListItem
-                     {
-                         Value = r.UserId.ToString(),
-                         Text = r.Nom,
-                     });
-                 }
-             }
-             ViewBag.DropDownRestaurateurs = restaurateurs;
+            List<SelectListItem> restaurateurs = new List<SelectListItem>();
+            restaurateurs.Add(new SelectListItem
+            {
+                Value = null,
+                Text = "",
+            });
+            foreach (UserProfile r in db.UserProfiles.ToList())
+            {
+                if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
+                {
+                    restaurateurs.Add(new SelectListItem
+                    {
+                        Value = r.UserId.ToString(),
+                        Text = r.Nom,
+                    });
+                }
+            }
+            ViewBag.DropDownRestaurateurs = restaurateurs;
 
 
             return View();
 
-           
+
         }
 
         //
@@ -323,12 +326,12 @@ namespace Delivr.Controllers
             foreach (UserProfile r in db.UserProfiles.ToList())
             {
                 if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
-                { 
-                restaurateurs.Add(new SelectListItem
                 {
-                    Value = r.UserId.ToString(),
-                    Text = r.Nom,
-                });
+                    restaurateurs.Add(new SelectListItem
+                    {
+                        Value = r.UserId.ToString(),
+                        Text = r.Nom,
+                    });
                 }
             }
             ViewBag.DropDownRestaurateurs = restaurateurs;
@@ -396,25 +399,25 @@ namespace Delivr.Controllers
             base.Dispose(disposing);
         }
 
-        protected void SendMail(string sujet, string message,string destinataire)
+        protected void SendMail(string sujet, string message, string destinataire)
         {
             MailMessage msg = new MailMessage();
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
 
-                msg.Subject = sujet;
-                msg.Body = message;
-                msg.From = new MailAddress("delivrmail@gmail.com");
-                msg.To.Add(destinataire);//mdp user deliveruser1123
-                msg.IsBodyHtml = true;
-                client.Host = "smtp.gmail.com";
-                System.Net.NetworkCredential basicauthenticationinfo = new System.Net.NetworkCredential("delivrmail@gmail.com", "delivrmail123");
-                client.Port = int.Parse("587");
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = basicauthenticationinfo;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Send(msg);
-            
+            msg.Subject = sujet;
+            msg.Body = message;
+            msg.From = new MailAddress("delivrmail@gmail.com");
+            msg.To.Add(destinataire);//mdp user deliveruser1123
+            msg.IsBodyHtml = true;
+            client.Host = "smtp.gmail.com";
+            System.Net.NetworkCredential basicauthenticationinfo = new System.Net.NetworkCredential("delivrmail@gmail.com", "delivrmail123");
+            client.Port = int.Parse("587");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = basicauthenticationinfo;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Send(msg);
+
 
         }
     }
