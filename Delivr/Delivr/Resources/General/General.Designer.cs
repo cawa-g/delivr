@@ -88,11 +88,74 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date de naissance.
+        /// </summary>
+        public static string BirthDate {
+            get {
+                return ResourceManager.GetString("BirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numéro civique.
+        /// </summary>
+        public static string CivicNumber {
+            get {
+                return ResourceManager.GetString("CivicNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmer le nouveau mot de passe.
+        /// </summary>
+        public static string ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("ConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmer le mot de passe.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le mot de passe et le mot de passe de confirmation ne correspondent pas..
+        /// </summary>
+        public static string ConfirmPasswordMismatch {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mot de passe actuel.
+        /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date invalide. Utilisez le format JJ/MM/AAAA..
+        /// </summary>
+        public static string DateFormatError {
+            get {
+                return ResourceManager.GetString("DateFormatError", resourceCulture);
             }
         }
         
@@ -106,11 +169,47 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adresse courriel.
+        /// </summary>
+        public static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adresse courriel invalide..
+        /// </summary>
+        public static string EmailAddressError {
+            get {
+                return ResourceManager.GetString("EmailAddressError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prénom.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accueil.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -169,6 +268,69 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nouveau mot de passe.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mot de passe.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numéro de téléphone.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numéro de téléphone invalide. Utilisez le format ###-###-####..
+        /// </summary>
+        public static string PhoneNumberFormatError {
+            get {
+                return ResourceManager.GetString("PhoneNumberFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code postal.
+        /// </summary>
+        public static string PostalCode {
+            get {
+                return ResourceManager.GetString("PostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code postale invalide. Utilisez le format A1A 1A1..
+        /// </summary>
+        public static string PostalCodeFormatError {
+            get {
+                return ResourceManager.GetString("PostalCodeFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mémoriser le mot de passe ?.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enregistrer.
         /// </summary>
         public static string Save {
@@ -187,11 +349,29 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rue.
+        /// </summary>
+        public static string StreetName {
+            get {
+                return ResourceManager.GetString("StreetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La chaîne {0} doit comporter entre {2} et {1} caractères..
         /// </summary>
         public static string StringLengthError {
             get {
                 return ResourceManager.GetString("StringLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom d&apos;utilisateur.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

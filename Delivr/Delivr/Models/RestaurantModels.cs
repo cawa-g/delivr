@@ -17,7 +17,7 @@ namespace Delivr.Models
         public int? UserId { get; set; }
         public string Telephone { get; set; }
         public string Rue { get; set; }
-        public int? CodeCivique { get; set; }
+        public int? NumeroCivique { get; set; }
         public string CodePostale { get; set; }
 
         public virtual UserProfile Restaurateur { get; set; }

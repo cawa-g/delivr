@@ -126,6 +126,9 @@
   <data name="DescriptionMissingWarning" xml:space="preserve">
     <value>Aucune description n'a été fournie.</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="MenuDefinitionSuccessMessage" xml:space="preserve">
     <value>Définition du menu complétée avec succès.</value>
   </data>

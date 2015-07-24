@@ -136,7 +136,7 @@ namespace Delivr.Controllers
             }else
             {
                 Adresse add = new Adresse();
-                add.CodeCivique = createCommande.NewAdresse.CodeCivique;
+                add.NumeroCivique = createCommande.NewAdresse.NumeroCivique;
                 add.CodePostale = createCommande.NewAdresse.CodePostale;
                 add.Rue = createCommande.NewAdresse.Rue;
                 add.User = user;
@@ -179,7 +179,7 @@ namespace Delivr.Controllers
                 total = total + c.SousTotal;
             }
             totalString += total.ToString();
-            SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.CodeCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
+            SendMail("Confirmation de commande Delivr", "Numéro de confirmation: " + commande.CommandeId + Environment.NewLine + "Adresse: " + commande.Adresse.NumeroCivique + " " + commande.Adresse.Rue + " " + commande.Adresse.CodePostale + Environment.NewLine + "Date et heure:" + commande.Date.ToString("MM/dd/yyyy HH:mm:ss.fff") + " " + items + totalString, user.UserName);
             return RedirectToAction("Message", "Restaurant", new { chaine = "La commande a été ajouter avec succes! Numéro de confirmation: " +commande.CommandeId });
         }
 

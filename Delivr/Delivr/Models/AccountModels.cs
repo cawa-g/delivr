@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace Delivr.Models
 {
-   
+
 
     [Table("UserProfile")]
     public class UserProfile
@@ -39,7 +39,7 @@ namespace Delivr.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "Nom d'utilisateur")]
+        [Display(ResourceType = typeof(Resources.General), Name = "UserName")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -49,57 +49,57 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe actuel")]
+        [Display(ResourceType = typeof(Resources.General), Name = "CurrentPassword")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
         [DataType(DataType.Password)]
-        [Display(Name = "Nouveau mot de passe")]
+        [Display(ResourceType = typeof(Resources.General), Name = "NewPassword")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le nouveau mot de passe")]
-        [Compare("NewPassword", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Compare("NewPassword", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmNewPassword")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
         [Required]
-        [Display(Name = "Adresse courriel")]
+        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Mémoriser le mot de passe ?")]
+        [Display(ResourceType = typeof(Resources.General), Name = "RememberMe")]
         public bool RememberMe { get; set; }
     }
 
-    public class EditUserModel 
+    public class EditUserModel
     {
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone non valide, utilisez le format xxx-xxx-xxxx")]
-        [Display(Name = "Téléphone")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 3)]
-        [Display(Name = "Rue")]
+        [StringLength(100, MinimumLength = 3, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "StreetName")]
         public string Rue { get; set; }
 
         [Required]
-        [Display(Name = "Code Civique")]
-        public int? CodeCivique { get; set; }
+        [Display(ResourceType = typeof(Resources.General), Name = "CivicNumber")]
+        public int? NumeroCivique { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale non valide, utilisez le format H1H 1H1")]
-        [Display(Name = "Code Postale")]
         [DataType(DataType.PostalCode)]
+        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PostalCodeFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PostalCode")]
         public string CodePostale { get; set; }
 
         public virtual ICollection<Adresse> Adresses { get; set; }
@@ -107,20 +107,19 @@ namespace Delivr.Models
 
     public class AddAdresseModel
     {
-
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 3)]
-        [Display(Name = "Rue")]
+        [StringLength(100, MinimumLength = 3, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "StreetName")]
         public string Rue { get; set; }
 
         [Required]
-        [Display(Name = "Code Civique")]
-        public int? CodeCivique { get; set; }
+        [Display(ResourceType = typeof(Resources.General), Name = "CivicNumber")]
+        public int? NumeroCivique { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale non valide, utilisez le format H1H 1H1")]
-        [Display(Name = "Code Postale")]
         [DataType(DataType.PostalCode)]
+        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PostalCodeFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PostalCode")]
         public string CodePostale { get; set; }
     }
 
@@ -128,54 +127,55 @@ namespace Delivr.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Adresse courriel" )]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage = "Adresse courriel invalide")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le mot de passe ")]
-        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "Prénom")]
+        [Display(ResourceType = typeof(Resources.General), Name = "FirstName")]
         public string Prenom { get; set; }
 
         [Required]
-        [Display(Name = "Nom")]
+        [Display(ResourceType = typeof(Resources.General), Name = "LastName")]
         public string Nom { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone invalide, utilisez le format xxx-xxx-xxxx")]
-        [Display(Name = "Téléphone")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 3)]
-        [Display(Name = "Rue")]
+        [StringLength(100, MinimumLength = 3, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "StreetName")]
         public string Rue { get; set; }
 
         [Required]
-        [Display(Name = "Code Civique")]
-        public int? CodeCivique { get; set; }
+        [Display(ResourceType = typeof(Resources.General), Name = "CivicNumber")]
+        public int? NumeroCivique { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessage = "Code postale invalide, utilisez le format H1H 1H1")]
-        [Display(Name = "Code Postale")]
         [DataType(DataType.PostalCode)]
+        [RegularExpression(@"^[A-Z]\d[A-Z] \d[A-Z]\d$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PostalCodeFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PostalCode")]
         public string CodePostale { get; set; }
 
         [Required]
-        [Display(Name = "Date de naissance")]
-        [DataType(DataType.Date, ErrorMessage = "Date invalide, utilisez le format JJ/MM/AAAA"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "DateFormatError")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(ResourceType = typeof(Resources.General), Name = "BirthDate")]
         public DateTime? DateNaissance { get; set; }
     }
 
@@ -189,36 +189,37 @@ namespace Delivr.Models
     public class RestaurateurModel
     {
         [Required]
-        [Display(Name = "Adresse courriel")]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage = "Adresse courriel invalide")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
+        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le mot de passe ")]
-        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "Prénom")]
+        [Display(ResourceType = typeof(Resources.General), Name = "FirstName")]
         public string Prenom { get; set; }
 
         [Required]
-        [Display(Name = "Nom")]
+        [Display(ResourceType = typeof(Resources.General), Name = "LastName")]
         public string Nom { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Téléphone invalide, utilisez le format xxx-xxx-xxxx")]
-        [Display(Name = "Téléphone")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
+        [Display(ResourceType = typeof(Resources.Restaurant), Name = "Restaurant")]
         public int? restaurantId { get; set; }
     }
 }

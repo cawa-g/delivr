@@ -71,7 +71,7 @@ namespace Delivr.Controllers
             Restaurateur restaurateur = new Restaurateur();
             //if (ModelState.IsValid)
             //{
-                //restaurateur.CodeCivique = model.CodeCivique;
+                //restaurateur.NumeroCivique = model.NumeroCivique;
                 //restaurateur.CodePostale = model.CodePostale;
                 //restaurateur.DateNaissance = model.DateNaissance;
                 //restaurateur.Email = model.Email;

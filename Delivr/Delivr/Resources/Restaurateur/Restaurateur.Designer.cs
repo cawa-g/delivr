@@ -59,5 +59,14 @@ namespace Delivr.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restaurateur.
+        /// </summary>
+        public static string Restaurateur {
+            get {
+                return ResourceManager.GetString("Restaurateur", resourceCulture);
+            }
+        }
     }
 }
