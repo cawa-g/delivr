@@ -39,7 +39,7 @@ namespace Delivr.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "UserName")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "UserName")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -49,33 +49,33 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(Resources.General), Name = "CurrentPassword")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "CurrentPassword")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(Resources.General), Name = "NewPassword")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "NewPassword")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
-        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmNewPassword")]
+        [Compare("NewPassword", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "ConfirmNewPassword")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "Password")]
         public string Password { get; set; }
 
-        [Display(ResourceType = typeof(Resources.General), Name = "RememberMe")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "RememberMe")]
         public bool RememberMe { get; set; }
     }
 
@@ -83,8 +83,8 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
-        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
         [Required]
@@ -128,33 +128,33 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
-        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
+        [Display(ResourceType = typeof(Resources.Account), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
-        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
-        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmPassword")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "FirstName")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "FirstName")]
         public string Prenom { get; set; }
 
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "LastName")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "LastName")]
         public string Nom { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
-        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
         [Required]
@@ -173,9 +173,9 @@ namespace Delivr.Models
         public string CodePostale { get; set; }
 
         [Required]
-        [DataType(DataType.Date, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "DateFormatError")]
+        [DataType(DataType.Date, ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "DateFormatError")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(ResourceType = typeof(Resources.General), Name = "BirthDate")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "BirthDate")]
         public DateTime? DateNaissance { get; set; }
     }
 
@@ -190,36 +190,36 @@ namespace Delivr.Models
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
-        [Display(ResourceType = typeof(Resources.General), Name = "EmailAddress")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "EmailAddressError", ErrorMessage = null)]
+        [Display(ResourceType = typeof(Resources.Account), Name = "EmailAddress")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "StringLengthError")]
-        [Display(ResourceType = typeof(Resources.General), Name = "Password")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
-        [Display(ResourceType = typeof(Resources.General), Name = "ConfirmPassword")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "ConfirmPasswordMismatch")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "FirstName")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "FirstName")]
         public string Prenom { get; set; }
 
         [Required]
-        [Display(ResourceType = typeof(Resources.General), Name = "LastName")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "LastName")]
         public string Nom { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.General), ErrorMessageResourceName = "PhoneNumberFormatError")]
-        [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.Account), ErrorMessageResourceName = "PhoneNumberFormatError")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
-        [Display(ResourceType = typeof(Resources.General), Name = "Restaurant")]
+        [Display(ResourceType = typeof(Resources.Account), Name = "Restaurant")]
         public int? restaurantId { get; set; }
     }
 

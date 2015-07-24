@@ -23,7 +23,7 @@
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.General.LogOff</a>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Account.LogOff</a>
                         }
                     </li>
                 </text>
@@ -31,10 +31,10 @@
             else
             { 
                 <li>
-                    @Html.ActionLink(Resources.General.SignUp, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                    @Html.ActionLink(Resources.Account.SignUp, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
-                    @Html.ActionLink(Resources.General.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    @Html.ActionLink(Resources.Account.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
                 </li>       
             }
         </ul>
