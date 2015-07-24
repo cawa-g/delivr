@@ -1,62 +1,51 @@
-﻿@model Delivr.Models.LoginModel
-
+﻿@using Resources = Delivr.Resources;
+@model Delivr.Models.LoginModel
 @{
-    ViewBag.Title = "Sign in";
+    ViewBag.Title = Resources.Account.LogIn;
 }
 <div class="jumbotron padded">
     <div class="container">
         <h2>@ViewBag.Title</h2>
-
         <section id="loginForm">
-            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-input" })
-                            @Html.ValidationMessageFor(m => m.Email)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-input" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control form-input" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                            </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-9">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-input" })
-                            @Html.ValidationMessageFor(m => m.Password)
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <input type="submit" class="btn btn-success" value="@Resources.Account.LogIn" />
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    @Html.CheckBoxFor(m => m.RememberMe) Remember me
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-10">
-                            <input type="submit" class="btn btn-success" value="Sign in" />
-                        </div>
-                    </div>
-                </form>
+                </div>
             }
         </section>
-        @*<section id="socialLoginForm">
-            <h2>Utilisez un autre service pour vous connecter.</h2>
-            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>*@
     </div>
     <div class="container">
         <hr />
         <p>
-            Not registered ? @Html.ActionLink("Sign up", "Register") now!
+            @Resources.Account.RegistrationIncentive @Html.ActionLink(Resources.Account.RegistrationIncentiveLink, "Register")
         </p>
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
