@@ -86,11 +86,14 @@ namespace Delivr.Controllers
                     WebSecurity.CreateUserAndAccount(
                         model.Email,
                         model.Password,
-                        propertyValues: new { email = model.Email,
-                                              Nom = model.Nom, 
-                                              Prenom = model.Prenom, 
-                                              Telephone = model.Telephone,
-                                              DateNaissance = model.DateNaissance});
+                        propertyValues: new
+                        {
+                            email = model.Email,
+                            Nom = model.Nom,
+                            Prenom = model.Prenom,
+                            Telephone = model.Telephone,
+                            DateNaissance = model.DateNaissance
+                        });
                     Adresse adresse = new Adresse();
                     adresse.NumeroCivique = model.NumeroCivique;
                     adresse.CodePostale = model.CodePostale;
@@ -227,7 +230,7 @@ namespace Delivr.Controllers
                     System.Web.Security.Roles.AddUserToRole(model.Email, "Restaurateur");
                     if (model.restaurantId == null)
                     {
-                        return RedirectToAction("Message", "Restaurateur", new { chaine = "Le restaurateur à été ajouté sans restaurant" });
+                        return RedirectToAction("Message", "Account", new { chaine = "Le restaurateur à été ajouté sans restaurant" });
                     }
                     else
                     {
@@ -244,9 +247,21 @@ namespace Delivr.Controllers
             }
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
-            return View(model);
-           
 
+            List<SelectListItem> restaurants = new List<SelectListItem>();
+            restaurants.Add(new SelectListItem { Value = null, Text = "" });
+            foreach (Restaurant r in db.Restaurants.ToList())
+            {
+                restaurants.Add(new SelectListItem
+                {
+                    Value = r.RestaurantId.ToString(),
+                    Text = r.nom,
+                });
+            }
+
+            ViewBag.DropDownRestaurants = restaurants;
+
+            return View(model);
         }
 
         //
@@ -317,19 +332,19 @@ namespace Delivr.Controllers
         public ActionResult Edit(EditUserModel edit)
         {
             try
-                {
-            UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
-            Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
-            adresse.Rue = edit.Rue;
-            adresse.NumeroCivique = edit.NumeroCivique;
-            adresse.CodePostale = edit.CodePostale;
-            user.Telephone = edit.Telephone;
-            TryUpdateModel(user);
-            TryUpdateModel(adresse);
-            db.SaveChanges();
-            return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> NumeroCivique = " + edit.NumeroCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
-            
-                }
+            {
+                UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+                Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
+                adresse.Rue = edit.Rue;
+                adresse.NumeroCivique = edit.NumeroCivique;
+                adresse.CodePostale = edit.CodePostale;
+                user.Telephone = edit.Telephone;
+                TryUpdateModel(user);
+                TryUpdateModel(adresse);
+                db.SaveChanges();
+                return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> NumeroCivique = " + edit.NumeroCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone + " <p>" });
+
+            }
             catch (MembershipCreateUserException e)
             {
                 ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
@@ -340,7 +355,7 @@ namespace Delivr.Controllers
         //
         // GET: /Account/Message
 
-       
+
         [ValidateInput(false)]
         public ActionResult Message(string chaine)
         {
