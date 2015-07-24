@@ -61,7 +61,43 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Browse our selection.
+        ///   Looks up a localized string similar to Notre histoire a débuté avec un groupe de 4 amis, à la fin 2003. Ensemble, ils ont couvés l&apos;idée qui allait plus tard devenir &lt;strong&gt;Delivr&lt;/strong&gt;..
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une &lt;em&gt;véritable révolution&lt;/em&gt; pour l&apos;industrie de la restauration. &lt;strong&gt;Delivr&lt;/strong&gt; amène un vent de fraîcheur aux communautés partout à travers l&apos;Amérique du Nord..
+        /// </summary>
+        public static string About2 {
+            get {
+                return ResourceManager.GetString("About2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nous visons à fournir des services de livraison et, par conséquent, une facilité d&apos;accès à n&apos;importe quel restaurant dans un rayon de 40 kilomètres de votre domicile..
+        /// </summary>
+        public static string About3 {
+            get {
+                return ResourceManager.GetString("About3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to À propos de nous.
+        /// </summary>
+        public static string AboutUs {
+            get {
+                return ResourceManager.GetString("AboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explorez notre sélection.
         /// </summary>
         public static string Browse {
             get {
@@ -70,7 +106,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose from a huge selection of restaurants.
+        ///   Looks up a localized string similar to Choisissez parmi une vaste sélection de restaurants.
         /// </summary>
         public static string Browse2 {
             get {
@@ -79,7 +115,25 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;Delicious &lt;strong&gt;food&lt;/strong&gt;, delivered right to your &lt;strong&gt;doorstep&lt;/strong&gt;.&lt;/p&gt;.
+        ///   Looks up a localized string similar to Renseignements commerciaux.
+        /// </summary>
+        public static string BusinessInquiries {
+            get {
+                return ResourceManager.GetString("BusinessInquiries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contactez-nous !.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Des repas &lt;strong&gt;délicieux&lt;/strong&gt;, livrés jusqu&apos;au pas de votre&lt;strong&gt;porte&lt;/strong&gt;.&lt;/p&gt;.
         /// </summary>
         public static string DeliveryPromotion {
             get {
@@ -88,8 +142,8 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;All orders are delivered &lt;br /&gt; in &lt;strong&gt;under an hour&lt;/strong&gt;,&lt;br /&gt; Guaranteed!&lt;/p&gt;
-        ///&lt;p&gt;If not, you get your meal at &lt;strong&gt;no charge&lt;/strong&gt;!&lt;/p&gt;.
+        ///   Looks up a localized string similar to &lt;p&gt;Toutes les commandes seront livrées &lt;br /&gt; en dedans d&apos;&lt;strong&gt;une heure&lt;/strong&gt;,&lt;br /&gt; Garanti!&lt;/p&gt;
+        ///&lt;p&gt;Si non, &lt;strong&gt;nous payons&lt;/strong&gt; votre repas!&lt;/p&gt;.
         /// </summary>
         public static string DeliveryTimeGuarantee {
             get {
@@ -107,7 +161,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We hope you enjoy.
+        ///   Looks up a localized string similar to Nous espérons que vous apprécierez.
         /// </summary>
         public static string Enjoy2 {
             get {
@@ -116,7 +170,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How it works:.
+        ///   Looks up a localized string similar to Comment cela fonctionne :.
         /// </summary>
         public static string HowItWorks {
             get {
@@ -125,7 +179,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Join our growing community &lt;br /&gt; and learn to &lt;strong&gt;stop worrying&lt;/strong&gt;.&lt;br /&gt;Sign up &lt;strong&gt;now&lt;/strong&gt;!.
+        ///   Looks up a localized string similar to Joignez notre communauté grandissante&lt;br /&gt;et apprenez à &lt;strong&gt;relaxer&lt;/strong&gt;.&lt;br /&gt;Inscrivez-vous &lt;strong&gt;maintenant&lt;/strong&gt;!.
         /// </summary>
         public static string JoinUs {
             get {
@@ -134,7 +188,16 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pay.
+        ///   Looks up a localized string similar to Notre mission.
+        /// </summary>
+        public static string OurMission {
+            get {
+                return ResourceManager.GetString("OurMission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payez.
         /// </summary>
         public static string Pay {
             get {
@@ -143,7 +206,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Either online or at the door.
+        ///   Looks up a localized string similar to En ligne ou à la porte.
         /// </summary>
         public static string Pay2 {
             get {
@@ -152,7 +215,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At the door.
+        ///   Looks up a localized string similar to À la porte.
         /// </summary>
         public static string PaymentMethodDoor {
             get {
@@ -161,7 +224,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At the door, you&apos;ll be able to use either Visa or MasterCard if you&apos;re paying credit, Interact or good old cash..
+        ///   Looks up a localized string similar to À la porte, vous pourrez payer avec Visa, MasterCard, Interact ainsi que la bonne vieille monnaie..
         /// </summary>
         public static string PaymentMethodDoorDetails {
             get {
@@ -170,7 +233,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Online.
+        ///   Looks up a localized string similar to En ligne.
         /// </summary>
         public static string PaymentMethodOnline {
             get {
@@ -179,7 +242,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We accept Visa, MasterCard, Paypal and Interact as well as any of your favorite crypto currencies..
+        ///   Looks up a localized string similar to Nous acceptions Visa, MasterCard, Paypal et Interact, en plus de de votre devise électronique préférée..
         /// </summary>
         public static string PaymentMethodOnlineDetails {
             get {
@@ -188,7 +251,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Payment methods.
+        ///   Looks up a localized string similar to Méthodes de paiement.
         /// </summary>
         public static string PaymentMethods {
             get {
@@ -197,7 +260,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pick a meal.
+        ///   Looks up a localized string similar to Choisissez-vous un repas.
         /// </summary>
         public static string Pick {
             get {
@@ -206,11 +269,20 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Or more!.
+        ///   Looks up a localized string similar to Ou pourquoi pas 2 !.
         /// </summary>
         public static string Pick2 {
             get {
                 return ResourceManager.GetString("Pick2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string Support {
+            get {
+                return ResourceManager.GetString("Support", resourceCulture);
             }
         }
     }
