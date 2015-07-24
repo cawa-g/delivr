@@ -209,6 +209,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Commande\Commande.en.Designer.cs">
+      <DependentUpon>Commande.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\General\General.en.Designer.cs">
       <DependentUpon>General.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -224,6 +229,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>General.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home\Home.en.Designer.cs">
+      <DependentUpon>Home.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\Home\Home.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -494,6 +504,11 @@
       <LastGenOutput>Account.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Commande\Commande.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Commande.en.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Commande\Commande.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Commande.Designer.cs</LastGenOutput>
@@ -507,6 +522,11 @@
     <EmbeddedResource Include="Resources\General\General.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>General.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Home.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Home.en.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Delivr.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\Home.resx">

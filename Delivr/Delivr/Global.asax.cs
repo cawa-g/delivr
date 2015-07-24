@@ -38,13 +38,16 @@ namespace Delivr
             // one of the languages from the user's list.
             if (!Resources.Helper.AvailableCultures.Contains(requestedLang))
             {
+                requestedLang = String.Empty;
                 if (Request.UserLanguages != null)
                 {
                     foreach (var _lang in Request.UserLanguages)
                     {
-                        if (Resources.Helper.AvailableCultures.Contains(_lang.Substring(0, 2)))
+                        string match = Resources.Helper.AvailableCultures.FirstOrDefault(c => c.Substring(0, 2) == _lang.Substring(0, 2));
+
+                        if (match != null)
                         {
-                            requestedLang = _lang;
+                            requestedLang = match;
                             break;
                         }
                     }
