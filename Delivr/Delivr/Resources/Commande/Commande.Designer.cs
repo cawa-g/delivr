@@ -59,5 +59,104 @@ namespace Delivr.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminer la préparation.
+        /// </summary>
+        public static string FinishPreparation {
+            get {
+                return ResourceManager.GetString("FinishPreparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commandes en cours.
+        /// </summary>
+        public static string PendingOrders {
+            get {
+                return ResourceManager.GetString("PendingOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Préparer cette commande.
+        /// </summary>
+        public static string PrepareThisOrder {
+            get {
+                return ResourceManager.GetString("PrepareThisOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Livrée.
+        /// </summary>
+        public static string StatusDelivered {
+            get {
+                return ResourceManager.GetString("StatusDelivered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En livraison.
+        /// </summary>
+        public static string StatusInDelivery {
+            get {
+                return ResourceManager.GetString("StatusInDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En préparation.
+        /// </summary>
+        public static string StatusInPreparation {
+            get {
+                return ResourceManager.GetString("StatusInPreparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En attente.
+        /// </summary>
+        public static string StatusPending {
+            get {
+                return ResourceManager.GetString("StatusPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to En traitement.
+        /// </summary>
+        public static string StatusProcessing {
+            get {
+                return ResourceManager.GetString("StatusProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prête.
+        /// </summary>
+        public static string StatusReady {
+            get {
+                return ResourceManager.GetString("StatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total :.
+        /// </summary>
+        public static string TotalWithColon {
+            get {
+                return ResourceManager.GetString("TotalWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to éléments.
+        /// </summary>
+        public static string UnitsLowercase {
+            get {
+                return ResourceManager.GetString("UnitsLowercase", resourceCulture);
+            }
+        }
     }
 }

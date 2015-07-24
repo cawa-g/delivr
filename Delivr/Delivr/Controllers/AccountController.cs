@@ -92,7 +92,7 @@ namespace Delivr.Controllers
                                               Telephone = model.Telephone,
                                               DateNaissance = model.DateNaissance});
                     Adresse adresse = new Adresse();
-                    adresse.CodeCivique = model.CodeCivique;
+                    adresse.NumeroCivique = model.NumeroCivique;
                     adresse.CodePostale = model.CodePostale;
                     adresse.Rue = model.Rue;
                     adresse.User = db.UserProfiles.Find(WebSecurity.GetUserId(model.Email));
@@ -105,7 +105,7 @@ namespace Delivr.Controllers
 
                     WebSecurity.Login(model.Email, model.Password);
 
-                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.CodeCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> " + " <p>" });
+                    return RedirectToAction("Message", "Account", new { chaine = "<p> Inscription Réussie ! <br> Email = " + model.Email + " <br> Nom = " + model.Nom + " <br> Prenom = " + model.Prenom + " <br> Rue = " + model.Rue + " <br> Code Civique = " + model.NumeroCivique.ToString() + " <br> Code Postale = " + model.CodePostale + " <br> Telephone = " + model.Telephone + " <br> " + " <p>" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -116,6 +116,65 @@ namespace Delivr.Controllers
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
         }
+
+
+        public ActionResult IndexRestaurateur()
+        {
+            var roles = (SimpleRoleProvider)Roles.Provider;
+
+            var allRoles = roles.GetAllRoles();
+            List<UserProfile> restaurateurs = new List<UserProfile>();
+            List<UserProfile> users = db.UserProfiles.ToList();
+
+            foreach (UserProfile r in users)
+            {
+                if (roles.GetRolesForUser(r.UserName).Contains("Restaurateur"))
+                {
+                    restaurateurs.Add(r);
+                }
+            }
+            return View(restaurateurs);
+        }
+
+        public ActionResult DeleteRestaurateur(int id)
+        {
+            UserProfile u = db.UserProfiles.Find(id);
+            List<Restaurant> restaurants = db.Restaurants.Where(r => r.UserId == u.UserId).ToList();
+
+
+            foreach (Restaurant r in restaurants)
+            {
+                r.UserId = null;
+            }
+            System.Web.Security.Roles.RemoveUserFromRole(u.UserName, "Restaurateur");
+            db.SaveChanges();
+            return RedirectToAction("IndexRestaurateur");
+        }
+
+        public ActionResult EditRestaurateur(int id)
+        {
+            EditRestaurateurModel model = new EditRestaurateurModel();
+            UserProfile u = db.UserProfiles.Find(id);
+            model.Nom = u.Nom;
+            model.Prenom = u.Prenom;
+            model.Telephone = u.Telephone;
+            model.UserId = u.UserId;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditRestaurateur(EditRestaurateurModel model)
+        {
+            UserProfile u = db.UserProfiles.Find(model.UserId);
+            u.Nom = model.Nom;
+            u.Prenom = model.Prenom;
+            u.Telephone = model.Telephone;
+            db.SaveChanges();
+            return RedirectToAction("IndexRestaurateur");
+        }
+
+
 
         //
         // GET: /Restaurateur/Create
@@ -208,7 +267,7 @@ namespace Delivr.Controllers
             if (ModelState.IsValid)
             {
                 Adresse adresse = new Adresse();
-                adresse.CodeCivique = model.CodeCivique;
+                adresse.NumeroCivique = model.NumeroCivique;
                 adresse.CodePostale = model.CodePostale;
                 adresse.Rue = model.Rue;
                 adresse.User = db.UserProfiles.Find(WebSecurity.CurrentUserId);
@@ -239,7 +298,7 @@ namespace Delivr.Controllers
             EditUserModel edit = new EditUserModel();
             Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
             edit.Rue = adresse.Rue;
-            edit.CodeCivique = adresse.CodeCivique;
+            edit.NumeroCivique = adresse.NumeroCivique;
             edit.CodePostale = adresse.CodePostale;
             edit.Telephone = user.Telephone;
             edit.Adresses = db.Adresses.Where(c => c.UserId == id).ToList();
@@ -262,13 +321,13 @@ namespace Delivr.Controllers
             UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
             Adresse adresse = db.Adresses.Find(user.AdresseDefaultId);
             adresse.Rue = edit.Rue;
-            adresse.CodeCivique = edit.CodeCivique;
+            adresse.NumeroCivique = edit.NumeroCivique;
             adresse.CodePostale = edit.CodePostale;
             user.Telephone = edit.Telephone;
             TryUpdateModel(user);
             TryUpdateModel(adresse);
             db.SaveChanges();
-            return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> CodeCivique = " + edit.CodeCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
+            return RedirectToAction("Message", "Account", new { chaine = "<p> Modification Réussie ! <br> Rue = " + edit.Rue + " <br> NumeroCivique = " + edit.NumeroCivique.ToString() + " <br> CodePostale = " + edit.CodePostale + " <br> Telephone = " + edit.Telephone +" <p>" });
             
                 }
             catch (MembershipCreateUserException e)

@@ -70,6 +70,15 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Livraisons disponibles.
+        /// </summary>
+        public static string AvailableDeliveries {
+            get {
+                return ResourceManager.GetString("AvailableDeliveries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retour aux détails.
         /// </summary>
         public static string BackToDetails {
@@ -88,11 +97,29 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numéro civique.
+        /// </summary>
+        public static string CivicNumber {
+            get {
+                return ResourceManager.GetString("CivicNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date invalide. Utilisez le format JJ/MM/AAAA..
+        /// </summary>
+        public static string DateFormatError {
+            get {
+                return ResourceManager.GetString("DateFormatError", resourceCulture);
             }
         }
         
@@ -115,33 +142,6 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Liste des restaurants.
-        /// </summary>
-        public static string ListeRestaurants {
-            get {
-                return ResourceManager.GetString("ListeRestaurants", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connexion.
-        /// </summary>
-        public static string LogIn {
-            get {
-                return ResourceManager.GetString("LogIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Déconnexion.
-        /// </summary>
-        public static string LogOff {
-            get {
-                return ResourceManager.GetString("LogOff", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Gérer.
         /// </summary>
         public static string Manage {
@@ -151,7 +151,7 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestion de restaurants.
+        ///   Looks up a localized string similar to Gestion des restaurants.
         /// </summary>
         public static string ManageRestaurants {
             get {
@@ -160,11 +160,74 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestion de restaurateurs.
+        ///   Looks up a localized string similar to Gestion des restaurateurs.
         /// </summary>
         public static string ManageRestaurateurs {
             get {
                 return ResourceManager.GetString("ManageRestaurateurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commande.
+        /// </summary>
+        public static string Order {
+            get {
+                return ResourceManager.GetString("Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code postal.
+        /// </summary>
+        public static string PostalCode {
+            get {
+                return ResourceManager.GetString("PostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code postale invalide. Utilisez le format A1A 1A1..
+        /// </summary>
+        public static string PostalCodeFormatError {
+            get {
+                return ResourceManager.GetString("PostalCodeFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restaurant.
+        /// </summary>
+        public static string Restaurant {
+            get {
+                return ResourceManager.GetString("Restaurant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restaurants.
+        /// </summary>
+        public static string Restaurants {
+            get {
+                return ResourceManager.GetString("Restaurants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restaurateur.
+        /// </summary>
+        public static string Restaurateur {
+            get {
+                return ResourceManager.GetString("Restaurateur", resourceCulture);
             }
         }
         
@@ -178,11 +241,11 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S&apos;inscrire.
+        ///   Looks up a localized string similar to Rue.
         /// </summary>
-        public static string SignUp {
+        public static string StreetName {
             get {
-                return ResourceManager.GetString("SignUp", resourceCulture);
+                return ResourceManager.GetString("StreetName", resourceCulture);
             }
         }
         

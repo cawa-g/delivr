@@ -9,8 +9,8 @@ namespace Delivr.Resources
     {
         public static readonly ISet<String> AvailableCultures = new HashSet<String>()
         {
-            "fr",
-            "en"
+            "fr-CA",
+            "en-CA"
         };
     }
 }

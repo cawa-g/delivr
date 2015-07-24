@@ -37,7 +37,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="btn-language">@Html.LanguageLink("Français", "fr")</li>
+                    <li class="btn-language">@Html.OtherLanguageLink()</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.Home, "Index", "Home")</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.About, "About", "Home")</li>
                     <li class="btn-custom">@Html.ActionLink(Resources.General.Contact, "Contact", "Home")</li>
@@ -45,18 +45,18 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "Index", "Restaurant")</li>
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "AddRestaurateur", "Account")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurateurs, "IndexRestaurateur", "Account")</li>
                     }else if(User.IsInRole("Restaurateur"))
                     {
                         <li class="btn-custom">@Html.ActionLink(Resources.General.ManageRestaurants, "IndexForRestaurateur", "Restaurant", new { id = WebSecurity.CurrentUserId }, null)</li>
                     }
                     else if (User.IsInRole("Livreur"))
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "ListeLivraison", "Livraison")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.AvailableDeliveries, "ListeLivraison", "Livraison")</li>
                     }
                     else if (User.Identity.IsAuthenticated)
                     {
-                        <li class="btn-custom">@Html.ActionLink(Resources.General.ListeRestaurants, "Liste", "Restaurant")</li>
+                        <li class="btn-custom">@Html.ActionLink(Resources.General.Restaurants, "Liste", "Restaurant")</li>
                     }
                     @Html.Partial("_LoginPartial")
                 </ul>

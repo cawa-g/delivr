@@ -24,7 +24,7 @@ namespace Delivr.Helpers
             // this check ensures that we can link to a specific language when we need to (fe: when picking your language)
             if (!values.ContainsKey("lang"))
             {
-                values["lang"] = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+                values["lang"] = Thread.CurrentThread.CurrentCulture.Name;
             }
 
             return base.GetVirtualPath(requestContext, values);

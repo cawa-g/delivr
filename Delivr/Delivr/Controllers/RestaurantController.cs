@@ -12,12 +12,14 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.IO;
+using Delivr.Helpers;
 
 namespace Delivr.Controllers
 {
     public class RestaurantController : Controller
     {
         private DelivrContext db = new DelivrContext();
+        private TwilioHelper twilio = new TwilioHelper();
 
         //
         // GET: /Restaurant/
@@ -143,20 +145,20 @@ namespace Delivr.Controllers
             else
             {
                 Adresse add = new Adresse();
-                add.CodeCivique = createCommande.NewAdresse.CodeCivique;
+                add.NumeroCivique = createCommande.NewAdresse.NumeroCivique;
                 add.CodePostale = createCommande.NewAdresse.CodePostale;
                 add.Rue = createCommande.NewAdresse.Rue;
                 add.User = user;
                 db.Adresses.Add(add);
                 db.SaveChanges();
-                user.Adresses.Add(add);
+                user.Adresses.Add(add);               
                 AdresseId = add.AdresseId;
                 user.AdresseDefaultId = add.AdresseId;
             }
 
-
+            
             commande = new Commande()
-            {
+            {  
                 AdresseId = AdresseId,
                 RestaurantId = resto.RestaurantId,
                 UserId = user.UserId,
@@ -304,7 +306,7 @@ namespace Delivr.Controllers
                     if (thisKey.Equals(key, StringComparison.InvariantCultureIgnoreCase))
                         break;
                 }
-            }
+        }
             return thisVal;
 
         }
@@ -319,7 +321,7 @@ namespace Delivr.Controllers
             List<Restaurant> RestaurantsToDelete = new List<Restaurant>();
             foreach (Restaurant r in Restaurants)
             {
-                if (r.Restaurateur.UserId != id)
+                if ( r.UserId != id)
                 {
                     RestaurantsToDelete.Add(r);
                 }
@@ -518,6 +520,7 @@ namespace Delivr.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
         protected void SendMail(string sujet, string message,string destinataire)
         {
             MailMessage msg = new MailMessage();

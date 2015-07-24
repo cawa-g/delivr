@@ -7,12 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
 using WebMatrix.WebData;
+using Delivr.Helpers;
 
 namespace Delivr.Controllers
 {
     public class CommandeController : Controller
     {
         private DelivrContext db = new DelivrContext();
+        private TwilioHelper twilio = new TwilioHelper();
 
 
        
@@ -143,21 +145,6 @@ namespace Delivr.Controllers
         }
 
         //
-        // GET: /Commande/Statut/5
-
-        /*public ActionResult Statut(int? id = null)
-        {
-            if (!id.HasValue)
-                return HttpNotFound();
-
-            Commande commande = db.Commandes.Find(id);
-            if (commande == null)
-                return HttpNotFound();
-
-            return PartialView("StatutCommande", commande);
-        }*/
-
-        //
         // POST: /Commande/Statut
 
         public ActionResult Statut(SetStatutCommandeModel model)
@@ -179,6 +166,9 @@ namespace Delivr.Controllers
             commande.Statut = model.Statut;
             db.Entry(commande).State = EntityState.Modified;
             db.SaveChanges();
+
+            UserProfile user = db.UserProfiles.Find(commande.UserId);
+            twilio.SendSMS("Votre commande #: " + commande.CommandeId + " est maintenant: " + commande.Statut, user.Telephone);
 
             return PartialView("StatutCommande", commande);
         }

@@ -49,9 +49,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @(Html.LabelFor(m => m.NewAdresse.CodeCivique, new { @class = "col-sm-3 control-label" }))
+                    @(Html.LabelFor(m => m.NewAdresse.NumeroCivique, new { @class = "col-sm-3 control-label" }))
                     <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.NewAdresse.CodeCivique, new { @class = "form-control form-input" }))
+                        @(Html.TextBoxFor(m => m.NewAdresse.NumeroCivique, new { @class = "form-control form-input" }))
                     </div>
                 </div>
                 <div class="form-group">
@@ -74,14 +74,14 @@
                     adresses.Add(new SelectListItem
                     {
                         Value = Model.AdresseDefault.AdresseId.ToString(),
-                        Text = Model.AdresseDefault.CodeCivique.ToString() + " " + Model.AdresseDefault.Rue.ToString(),
+                        Text = Model.AdresseDefault.NumeroCivique.ToString() + " " + Model.AdresseDefault.Rue.ToString(),
                     });
                     foreach (Delivr.Models.Adresse r in Model.Adresses)
                     {
                         adresses.Add(new SelectListItem
                         {
                             Value = r.AdresseId.ToString(),
-                            Text = r.CodeCivique.ToString() + " " + r.Rue.ToString(),
+                            Text = r.NumeroCivique.ToString() + " " + r.Rue.ToString(),
                         });
                     }
                 }

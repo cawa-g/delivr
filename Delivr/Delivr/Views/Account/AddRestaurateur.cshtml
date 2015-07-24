@@ -1,79 +1,73 @@
-﻿@model Delivr.Models.RestaurateurModel
+﻿@using Resources = Delivr.Resources;
+@model Delivr.Models.RestaurateurModel
 
 @{
-    ViewBag.Title = "Ajouter un restaurateur";
-    ViewBag.Message = "Formulaire d'ajout";
+    ViewBag.Title = Resources.Account.AddRestaurateur;
 }
 <div class="jumbotron padded">
     <div class="container">
         <h2>@ViewBag.Title</h2>
-        <h3>@ViewBag.Message</h3>
         <hr />
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-            <form class="form-horizontal">
-
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Email, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Email)
-                    </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Email, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Email)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.PasswordFor(m => m.Password, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Password)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.PasswordFor(m => m.Password, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Password)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Prenom, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Prenom, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Prenom)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Prenom, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Prenom, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Prenom)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Nom, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Nom, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Nom)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Nom, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Nom, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Nom)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.Telephone, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.Telephone)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.Telephone, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.Telephone)
                 </div>
-                <div class="form-group">
-                    @(Html.LabelFor(m => m.restaurantId, new { @class = "col-sm-3 control-label" }))
-                    <div class="col-sm-9">
-                        @(Html.DropDownListFor(m => m.restaurantId, (List<SelectListItem>)ViewBag.DropDownRestaurants, new { @class = "form-control form-input" }))
-                        @Html.ValidationMessageFor(model => model.restaurantId)
-                    </div>
+            </div>
+            <div class="form-group">
+                @(Html.LabelFor(m => m.restaurantId, new { @class = "col-sm-3 control-label" }))
+                <div class="col-sm-9">
+                    @(Html.DropDownListFor(m => m.restaurantId, (List<SelectListItem>)ViewBag.DropDownRestaurants, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.restaurantId)
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="submit" class="btn btn-primary margin-top" value="Soumettre" />
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="submit" class="btn btn-primary margin-top" value="@Resources.General.Save" />
+                    @Html.ActionLink("Retour", "IndexRestaurateur")
                 </div>
-            </form>
+            </div>
         }
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

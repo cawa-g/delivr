@@ -1,19 +1,17 @@
-﻿@model Delivr.Models.EditUserModel
+﻿@using Resources = Delivr.Resources;
+@model Delivr.Models.EditUserModel
 
 @{
-    ViewBag.Title = "Gérer votre compte";
-    ViewBag.Message = "Informations personnelles";
+    ViewBag.Title = Resources.Account.ManageYourAccount;
 }
 <div class="jumbotron padded">
     <div class="container">
         <h2>@ViewBag.Title</h2>
-        <h2><small>@ViewBag.Message</small></h2>
         <hr />
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
         {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        <form class="form-horizontal">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
             <div class="form-group">
                 @(Html.LabelFor(m => m.Telephone, new { @class = "col-sm-3 control-label" }))
                 <div class="col-sm-9">
@@ -29,10 +27,10 @@
                 </div>
             </div>
             <div class="form-group">
-                @(Html.LabelFor(m => m.CodeCivique, new { @class = "col-sm-3 control-label" }))
+                @(Html.LabelFor(m => m.NumeroCivique, new { @class = "col-sm-3 control-label" }))
                 <div class="col-sm-9">
-                    @(Html.TextBoxFor(m => m.CodeCivique, new { @class = "form-control form-input" }))
-                    @Html.ValidationMessageFor(model => model.CodeCivique)
+                    @(Html.TextBoxFor(m => m.NumeroCivique, new { @class = "form-control form-input" }))
+                    @Html.ValidationMessageFor(model => model.NumeroCivique)
                 </div>
             </div>
             <div class="form-group">
@@ -49,7 +47,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>@(Html.LabelFor(m => m.CodeCivique))</th>
+                            <th>@(Html.LabelFor(m => m.NumeroCivique))</th>
                             <th>@(Html.LabelFor(m => m.Rue))</th>
                             <th>@(Html.LabelFor(m => m.CodePostale))</th>
                         </tr>
@@ -58,7 +56,7 @@
                     {
 
                         <tr>
-                            <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodeCivique)</td>
+                            <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).NumeroCivique)</td>
                             <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).Rue)</td>
                             <td>@Html.DisplayFor(m => Model.Adresses.ElementAt(i).CodePostale)</td>
                         </tr>
@@ -68,20 +66,14 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input type="submit" class="btn btn-primary margin-top" value="Sauvegarder" />
+                    <input type="submit" class="btn btn-primary margin-top" value="@Resources.General.Save" />
                 </div>
             </div>
-        </form>
         }
     </div>
     <div class="container">
         <hr />
-        <h3>@Html.ActionLink("Ajouter une adresse", "AddAdresse", "Account")</h3>
-        <h3>@Html.ActionLink("Modifier votre mot de passe", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Gérer" })</h3>
+        <h3>@Html.ActionLink(Resources.Account.AddAddress, "AddAdresse", "Account")</h3>
+        <h3>@Html.ActionLink(Resources.Account.ChangePassword, "Manage", "Account", null, new { @class = "username", title = Resources.General.Manage })</h3>
     </div>
 </div>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

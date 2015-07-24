@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Delivr.Models;
+using Delivr.Helpers;
 
 namespace Delivr.Controllers
 {
     public class LivraisonController : Controller
     {
         private DelivrContext db = new DelivrContext();
+        private TwilioHelper twilio = new TwilioHelper();
 
         //
         // GET: /Commande/ListeLivraison
@@ -25,7 +27,7 @@ namespace Delivr.Controllers
                 UserProfile u = db.UserProfiles.Find(c.UserId);
                 Adresse clientAdd = db.Adresses.Find(c.AdresseId);
                 Adresse add = new Adresse();
-                add.CodeCivique = r.CodeCivique;
+                add.NumeroCivique = r.NumeroCivique;
                 add.CodePostale = r.CodePostale;
                 add.Rue = r.Rue;
                 LivraisonModel lm = new LivraisonModel(c.Date, add, clientAdd, r.nom, u.Prenom + " " + u.Nom, c.CommandeId);
@@ -41,6 +43,10 @@ namespace Delivr.Controllers
         public ActionResult ListeLivraison(ListeLivraisonModel listeLM)
         {
             Commande commande = db.Commandes.Find(listeLM.IdCommande);
+            if (commande.Statut != Commande.StatutCommande.Prete)
+            {
+                return RedirectToAction("Message", "Livraison", new { chaine = "Un autre livreur a déjà accepté la commande sélectionnée" });
+            }
             commande.Statut = Commande.StatutCommande.Livree;
 
             Livraison livraison = new Livraison();
@@ -48,7 +54,16 @@ namespace Delivr.Controllers
             livraison.Date = DateTime.Now;
             db.Livraisons.Add(livraison);
             db.SaveChanges();
-            return View(listeLM);
+            UserProfile user = db.UserProfiles.Find(commande.UserId);
+            twilio.SendSMS("Votre commande #: " + commande.CommandeId + " est maintenant: " + commande.Statut, user.Telephone);
+            return RedirectToAction("Index");
+        }
+
+        [ValidateInput(false)]
+        public ActionResult Message(string chaine)
+        {
+            ViewBag.Chaine = chaine;
+            return View();
         }
 
         public ActionResult Index()
@@ -153,6 +168,7 @@ namespace Delivr.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

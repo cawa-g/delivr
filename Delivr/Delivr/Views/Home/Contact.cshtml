@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Get in touch with us!";
+﻿@using Resources = Delivr.Resources;
+@{
+    ViewBag.Title = Resources.Home.ContactUs;
 }
 
 <div class="jumbotron padded">
@@ -15,11 +16,11 @@
             </address>
 
             <address>
-                <strong>Business inquiries</strong><br>
+                <strong>@Resources.Home.BusinessInquiries</strong><br>
                 <a href="mailto:#">delivr.business@delivr.com</a>
             </address>
             <address>
-                <strong>Support</strong><br>
+                <strong>@Resources.Home.Support</strong><br>
                 <a href="mailto:#">delivr.support@delivr.com</a>
             </address>
         </section>
