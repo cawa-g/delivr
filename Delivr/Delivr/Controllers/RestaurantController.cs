@@ -238,6 +238,8 @@ namespace Delivr.Controllers
                     order.Statut = Commande.StatutCommande.EnAttente;
                     TryUpdateModel(order);
                     db.SaveChanges();
+                    UserProfile user = db.UserProfiles.Find(order.UserId);
+                    twilio.SendSMS("Votre commande #: " + order.CommandeId + " est maintenant: " + order.Statut, user.Telephone);
                 }
                 else
                 {
