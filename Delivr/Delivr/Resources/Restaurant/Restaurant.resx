@@ -120,7 +120,4 @@
   <data name="Order" xml:space="preserve">
     <value>Commander</value>
   </data>
-  <data name="Restaurant" xml:space="preserve">
-    <value>Restaurant</value>
-  </data>
 </root>

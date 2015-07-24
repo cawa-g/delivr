@@ -189,8 +189,14 @@
   <data name="ManageRestaurateurs" xml:space="preserve">
     <value>Gestion de restaurateurs</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Nouveau mot de passe</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Commande</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
@@ -209,6 +215,12 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Mémoriser le mot de passe ?</value>
+  </data>
+  <data name="Restaurant" xml:space="preserve">
+    <value>Restaurant</value>
+  </data>
+  <data name="Restaurateur" xml:space="preserve">
+    <value>Restaurateur</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>

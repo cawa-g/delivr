@@ -88,15 +88,6 @@ namespace Delivr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Menu.
-        /// </summary>
-        public static string Menu {
-            get {
-                return ResourceManager.GetString("Menu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Définition du menu complétée avec succès..
         /// </summary>
         public static string MenuDefinitionSuccessMessage {

@@ -219,7 +219,7 @@ namespace Delivr.Models
         [Display(ResourceType = typeof(Resources.General), Name = "PhoneNumber")]
         public string Telephone { get; set; }
 
-        [Display(ResourceType = typeof(Resources.Restaurant), Name = "Restaurant")]
+        [Display(ResourceType = typeof(Resources.General), Name = "Restaurant")]
         public int? restaurantId { get; set; }
     }
 }

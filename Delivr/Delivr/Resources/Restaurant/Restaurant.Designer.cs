@@ -68,14 +68,5 @@ namespace Delivr.Resources {
                 return ResourceManager.GetString("Order", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restaurant.
-        /// </summary>
-        public static string Restaurant {
-            get {
-                return ResourceManager.GetString("Restaurant", resourceCulture);
-            }
-        }
     }
 }
