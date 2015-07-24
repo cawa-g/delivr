@@ -15,27 +15,28 @@
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             @if (Request.IsAuthenticated)
             {
-                <text>
+                if (User.Identity.IsAuthenticated && !User.IsInRole("Admin") && !User.IsInRole("Restaurateur") && !User.IsInRole("Livreur"))
+                {
                     <li>
                         @Html.ActionLink(Resources.General.Manage, "Edit", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = Resources.General.Manage })
                     </li>
-                    <li id="logout">
-                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Account.LogOff</a>
-                        }
-                    </li>
-                </text>
+                }
+                <li id="logout">
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Account.LogOff</a>
+                    }
+                </li>
             }
             else
-            { 
+            {
                 <li>
                     @Html.ActionLink(Resources.Account.SignUp, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
                     @Html.ActionLink(Resources.Account.LogIn, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                </li>       
+                </li>
             }
         </ul>
     </div>
